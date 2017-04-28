@@ -1,4 +1,5 @@
 {% load static %}
+{% load has_attr %}
 <header class="header">
   {% include '_navbar.html' with user=user %}
 
@@ -11,11 +12,12 @@
         <a class="header__tab {% if current == 'report' %}is-current{% endif %}" href="{% url 'plan_report' pk=plano.id %}">Análise</a>
         <a class="header__tab {% if current == 'view' %}is-current{% endif %}" href="{% url 'plan_view' pk=plano.id %}">Indicadores</a>
       </div>
-
-      {% if user.is_authenticated and plano.dono == user %}
-      <div class="header__tabsGroup">
-        <a class="header__tab {% if current == 'edit' %}is-current{% endif %}" href="{% url 'plan_edit' pk=plano.id %}">Editar</a>
-      </div>
+      {% if user.is_authenticated %}
+        {% if user|getattribute:"dono" or user|getattribute:"gestor" %}
+          <div class="header__tabsGroup">
+            <a class="header__tab {% if current == 'edit' %}is-current{% endif %}" href="{% url 'plan_edit' pk=plano.id %}">Editar</a>
+          </div>
+        {% endif %}
       {% endif %}
     </nav>
   </div>

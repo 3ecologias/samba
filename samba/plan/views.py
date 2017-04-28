@@ -10,7 +10,7 @@ from .forms import PlanoForm, AquisicaoForm
 def plan_list(request):
     return render(request, 'plan/plan_list.html', {
       'user': request.user,
-      'planos': Plano.objects.filter(dono=request.user)
+      'planos': Plano.objects.filter(dono=request.user.dono)
     })
 
 
@@ -21,7 +21,7 @@ def plan_create(request):
 
         if form.is_valid():
             plano = form.save(commit=False)
-            plano.dono = request.user
+            plano.dono = request.user.dono
             plano.save()
             return redirect('plan_view', pk=plano.id)
     else:
@@ -40,6 +40,7 @@ def plan_view(request, pk):
     return render(request, 'plan/plan_view.html', {
         'user': request.user,
         'plano': plano,
+        'gestores': plano.gestores_set.all(),
         'plugins': plugins
     })
 
@@ -49,7 +50,7 @@ def plan_edit(request, pk):
     plano = get_object_or_404(Plano, pk=pk)
     plugins = get_plano_plugins(plano)
 
-    if plano.dono != request.user:
+    if plano.dono.user != request.user and not plano.gestores_set.filter(user_id=request.user.id).exists():
         # TODO: Informar que o usuário não possui
         # permisão suficiente para editar o plano
         return redirect('/')
@@ -128,7 +129,7 @@ def plugin_list(request):
 @login_required
 def plugin_buy(request, slug):
     plugin = get_plugin_or_404(slug)
-    queryset = Plano.objects.filter(dono=request.user) \
+    queryset = Plano.objects.filter(dono=request.user.dono) \
                             .exclude(aquisicao__plugin=slug)
 
     if request.method == 'POST':

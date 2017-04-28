@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Aquisicao, Indicador, Plano
+from .models import Aquisicao, Indicador, Plano, Gestor
 
 
 class AquisicaoInline(admin.TabularInline):
@@ -10,9 +10,12 @@ class AquisicaoInline(admin.TabularInline):
 class IndicadorInline(admin.StackedInline):
     model = Indicador
 
+class GestoresInline(admin.TabularInline):
+    model = Gestor
+
 
 class PlanoAdmin(admin.ModelAdmin):
-    inlines = [IndicadorInline, AquisicaoInline]
+    inlines = [IndicadorInline, AquisicaoInline, GestoresInline]
 
 
 admin.site.register(Plano, PlanoAdmin)

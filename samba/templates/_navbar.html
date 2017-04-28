@@ -1,5 +1,8 @@
 {% load static %}
 {% load staticfiles %}
+{% load has_attr %}
+{% load plan_tags %}
+
 <div class="container">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -18,8 +21,13 @@
       <ul class="nav navbar-nav">
 
         {% if user.is_authenticated %}
-        <li><a class="" href="{% url 'plan_list' %}">Planos</a></li>
-        <li><a class="" href="{% url 'plugin_list' %}">APPs</a></li>
+          {% if user|getattribute:"dono" %}
+            <li><a class="" href="{% url 'plan_list' %}">Planos</a></li>
+            <li><a class="" href="{% url 'plugin_list' %}">APPs</a></li>
+          {% else %}
+            {% get_plan_pk_by_gestor user as pk_plan %}
+            <li><a class="" href="{% url 'plan_view' pk_plan %}">Plano</a></li>
+          {% endif %}
         {% else %}
         <li><a class="" href="{% url 'index' %}#features">Vantagens</a></li>
         <li><a class="" href="{% url 'index' %}#details">Sobre</a></li>

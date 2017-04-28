@@ -354,6 +354,7 @@
 
 <!-- chart js scripts -->
 <script>
+{% if indicadores.UA2 and indicadores.UA2 and indicadores.UA1 %}
 var ctx = document.getElementById("graph__abastecimento").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -369,7 +370,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
+{% if indicadores.UE2 and indicadores.UE1 and indicadores.UA1 %}
 var ctx = document.getElementById("graph__esgotamento").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -385,7 +388,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
+{% if indicadores.UR1 and indicadores.UR2 %}
 var ctx = document.getElementById("graph__residuo").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -401,7 +406,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
+{% if indicadores.UD1 %}
 var ctx = document.getElementById("graph__aguas-pluv").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -416,7 +423,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
+{% if indicadores.QA1 and indicadores.QA2 %}
 var ctx = document.getElementById("graph__cloro").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -431,7 +440,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
+{% if indicadores.QA3 %}
 var ctx = document.getElementById("graph__turbidez").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -446,6 +457,9 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
+
+{% if indicadores.QA5 and indicadores.QA6 %}
 
 var ctx = document.getElementById("graph__coliformes").getContext("2d");
 var chart = new Chart(ctx, {
@@ -461,6 +475,7 @@ var chart = new Chart(ctx, {
         }]
     }
 });
+{% endif %}
 
 
 </script>
