@@ -1,0 +1,26 @@
+{% extends 'accounts/_form.html' %}
+{% load static %}
+{% block title %}Entrar - Samba{% endblock %}
+
+{% block form_header %}
+  <h3>Entrar</h3>
+
+  {% if form.errors %}
+    <div class="auth__error">
+      Usuário ou senha incorretos.
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block form_fields %}
+  {{ form.username.label_tag }}
+  {{ form.username }}
+  {{ form.password.label_tag }}
+  {{ form.password }}
+  <input type="submit" value="Entrar" />
+{% endblock %}
+
+{% block form_footer %}
+  <a href="{% url 'password_reset' %}">Esqueceu sua senha?</a>
+  <a href="{% url 'index' %}">Voltar para página inicial</a>
+{% endblock %}

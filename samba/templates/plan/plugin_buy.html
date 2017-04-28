@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block title %}Aquisição de plugin - Samba{% endblock %}
+
+{% block body %}
+  <header class="header">
+    {% include '_navbar.html' with user=user %}
+  </header>
+
+<div class="container">
+  <div class="row">
+    <div class="pluginDetails mt-5 pb-5 col-sm-7">
+      <h3>Você está adquirindo o seguinte plugin:</h3>
+
+      <div class="pluginDetails__header">
+        {% if plugin.icone_loja %}
+          <img class="pluginDetails__icon" alt="{{ plugin.nome }}" src="{{ MEDIA_PREFIX }}{{ plugin.icone_loja }}">
+        {% endif %}
+
+        <div class="pluginDetails__details">
+          <h2 class="pluginDetails__name">{{ plugin.nome }}</h2>
+          <p class="pluginDetails__description">{{ plugin.descricao }}</p>
+        </div>
+      </div>
+
+      <p class="mt-5">Selecione o municipio:</p>
+
+      <form class="pluginDetails__buy" method="POST">
+        {% csrf_token %}
+
+        {% if plugin.preco %}
+          {# TODO: Se o plugin for pago, colocar os campos de pagamento #}
+        {% else %}
+
+          {{ form.plano.label }}
+          {{ form.plano }}
+        {% endif %}
+
+        <input type="submit" value="{% if plugin.preco %}Comprar{% else %}Adicionar ao plano{% endif %}">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

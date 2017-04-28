@@ -1,0 +1,10 @@
+.features {
+  @include constrained-container;
+  padding: 1rem;
+  position: relative;
+
+  @media (min-width: 1180px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

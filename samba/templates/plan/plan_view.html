@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+
+{% block body %}
+{% include 'plan/_header.html' with current='view' user=user plano=plano %}
+<div class="mapreport">
+    <div id="mapreport"></div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="report pt-5 pb-5 col-sm-7">
+      {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
+    <div class="tab-content clearfix mt-5">
+      {% for plugin in plugins %}
+      {% if plugin.indicadores %}
+        <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
+          <h2>{{ plugin.nome }}</h2>
+          <p>{{ plugin.descricao }}</p>
+          <table class="indicators__items">
+            <thead>
+              <tr>
+                <th>Sigla</th>
+                <th>Indicador</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for indicador in plugin.indicadores %}
+              <tr>
+                <td>
+                  <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.sigla }} </a>
+                </td>
+                <td>
+                  <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.nome }} </a>
+                </td>
+                <td>
+                  {% if indicador.valor %}
+                  {{ indicador.valor }}
+                  {% if indicador.unidade %}
+                  {{ indicador.unidade }}
+                  {% endif %}
+                  {% if indicador.descricao%}
+                  <br> <b>Descrição :</b> {{ indicador.descricao }}
+                  {% endif %}
+                  {% else %}
+                  n/a
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+          {% endif %}
+          {% empty %}
+          <div class="indicators__empty">
+            <h2>O plano não possui nenhum conjunto de indicadores.</h2>
+            {% if user.is_authenticated %}
+            <h3><a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.</h3>
+            {% endif %}
+          </div>
+
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- mapbox js -->
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
+var mapreport = new mapboxgl.Map({
+    container: 'mapreport',
+    center: town,
+    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+    minZoom: 12,
+    maxZoom: 15,
+    hash: true,
+    scrollZoom: true
+});
+</script>
+<!-- end mapbox js -->
+{% endblock %}

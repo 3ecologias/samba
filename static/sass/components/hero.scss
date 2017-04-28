@@ -1,0 +1,23 @@
+.hero {
+  @include constrained-container;
+  position: absolute;
+  bottom: 10vh;
+  display: inline-block;
+  color: white;
+
+  @media (min-width: 600px) {
+  }
+
+  @media (min-width: 840px) {
+  }
+}
+
+.hero__title {
+  font-size: 5em;
+  @media (max-width: 420px) {
+    font-size: 4em;
+  }
+}
+.hero__text {
+  font-weight: normal;
+}

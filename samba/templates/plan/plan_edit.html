@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Editar plano {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+
+{% block body %}
+  {% include 'plan/_header.html' with current='edit' user=user plano=plano %}
+  <div class="mapreport">
+      <div id="mapreport"></div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="report pt-5 pb-5 col-sm-7">
+        {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
+
+        <div class="tab-content clearfix mt-5">
+
+            {% for plugin in plugins %}
+            {% if plugin.indicadores %}
+            <div class="tab-pane indicators__group {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
+              <h2>{{ plugin.nome }}</h2>
+              <p>{{ plugin.descricao }}</p>
+
+              <form method="POST">
+                {% csrf_token %}
+              <div class="indicators__form">
+
+                {% for indicador in plugin.indicadores %}
+                {% if not indicador.calculado %}
+                <label class="indicador__label" for="{{ indicador.sigla }}">
+                  ({{ indicador.sigla }}) {{ indicador.nome }}   {% if indicador.fonte %} [fonte: {{ indicador.fonte }}] {% endif %}:
+                </label>
+
+                <div class="indicador__input">
+                  {% if indicador.escolhas %}
+                  {% if indicador.multipla_escolha %}
+                  {% for escolha in indicador.escolhas %}
+                  <div>
+                    <input type="checkbox" id="{{ indicador.sigla }}_{{ escolha|slugify }}" name="{{ indicador.sigla }}" value="{{ escolha }}" {% if escolha in indicador.valores %}checked{% endif %}>
+                    <label for="{{ indicador.sigla }}_{{ escolha|slugify }}">{{ escolha }}</label>
+                  </div>
+                  {% endfor %}
+                  {% else %}
+                  <select id="{{ indicador.sigla }}" name="{{ indicador.sigla }}">
+                    {% for escolha in indicador.escolhas %}
+                    <option value="{{ escolha }}" {% if escolha == indicador.valor %}selected{% endif %}>{{ escolha }}</option>
+                    {% endfor %}
+                  </select>
+                  {% endif %}
+                  {% else %}
+                  {% if indicador.paragrafo %}
+                  <textarea id="{{ indicador.sigla }}" name="{{ indicador.sigla }}">{{ indicador.valor }}</textarea>
+                  {% else %}
+                  <input type="text" id="{{ indicador.sigla }}" name="{{ indicador.sigla }}" value="{{ indicador.valor }}">
+                  {% endif %}
+                  {% endif %}
+                </div>
+
+                {% if indicador.exige_descricao %}
+                <label class="indicador__label" for="{{ indicador.sigla }}_descricao">
+                  Descreva:
+                </label>
+
+                <div class="indicador__input">
+                  <textarea id="{{ indicador.sigla }}_descricao" name="{{ indicador.sigla }}_descricao">{% if indicador.descricao == None %}{% else %} {{ indicador.descricao }} {% endif %}</textarea>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </div>
+              <div class="indicator__input">
+                <input type="submit" value="Salvar">
+              </div>
+            </table>
+          </div>
+          {% endif %}
+          {% empty %}
+          <div class="indicators__empty">
+            O plano não possui nenhum conjunto de indicadores. <a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.
+          </div>
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- mapbox js -->
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+var town = [-39.3379, -14.6436];
+var mapreport = new mapboxgl.Map({
+    container: 'mapreport',
+    center: town,
+    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+    minZoom: 12,
+    maxZoom: 15,
+    hash: true,
+    scrollZoom: true
+});
+</script>
+<!-- end mapbox js -->
+{% endblock %}

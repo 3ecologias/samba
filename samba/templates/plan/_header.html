@@ -1,0 +1,22 @@
+{% load static %}
+<header class="header">
+  {% include '_navbar.html' with user=user %}
+
+  <div class="header__contents">
+    <h2 class="header__title">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h2>
+    <div class="header__meta">Elaborado em {{ plano.ano }}</div>
+
+    <nav class="header__tabs">
+      <div class="header__tabsGroup">
+        <a class="header__tab {% if current == 'report' %}is-current{% endif %}" href="{% url 'plan_report' pk=plano.id %}">Análise</a>
+        <a class="header__tab {% if current == 'view' %}is-current{% endif %}" href="{% url 'plan_view' pk=plano.id %}">Indicadores</a>
+      </div>
+
+      {% if user.is_authenticated and plano.dono == user %}
+      <div class="header__tabsGroup">
+        <a class="header__tab {% if current == 'edit' %}is-current{% endif %}" href="{% url 'plan_edit' pk=plano.id %}">Editar</a>
+      </div>
+      {% endif %}
+    </nav>
+  </div>
+</header>

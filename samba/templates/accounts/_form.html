@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+{% block body %}
+<main class="auth">
+  <form class="auth__form" method="POST" autocomplete="false">
+    {% csrf_token %}
+
+    <div class="auth__header">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'images/logo-colorido.png' %}" alt="Samba">
+      </a>
+
+      {% block form_header %}{% endblock %}
+    </div>
+
+    <div class="auth__fields">
+      {% block form_fields %}{% endblock %}
+    </div>
+
+    <div class="auth__footer">
+      {% block form_footer %}{% endblock %}
+    </div>
+  </form>
+</main>
+{% endblock %}

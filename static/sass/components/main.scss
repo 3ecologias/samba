@@ -1,0 +1,42 @@
+.main {
+  @include constrained-container;
+  padding: 1rem;
+  position: relative;
+
+  @media (min-width: 1180px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.main__form {
+  width: 100%;
+  display: inline-flex;
+  flex-flow: column;
+
+  label {
+    margin-bottom: .5rem;
+  }
+
+  input,
+  select,
+  button,
+  textarea {
+    margin-bottom: 1rem;
+  }
+}
+
+.main__formError {
+  padding: 1rem;
+  border: 1px solid mix(white, crimson, 40%);
+  border-radius: 4px;
+  background: mix(white, crimson, 80%);
+  color: mix(white, crimson, 20%);
+  margin-bottom: 1rem;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

@@ -1,0 +1,17 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% if plugins %}
+  <ul class="nav nav-pills">
+    {% for plugin in plugins %}
+    <li class="{% if forloop.first %} active{% endif %}">
+      <a href="#{{ plugin.slug }}" class="sidebar__item" data-toggle="tab">
+        {% if plugin.icone_sidebar %}
+          <img class="sidebar_itemIcon" src="{{ MEDIA_PREFIX }}{{ plugin.icone_sidebar }}">
+        {% endif %}
+        <span class="sidebar__itemTitle">{{ plugin.nome }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}

@@ -1,0 +1,40 @@
+{% load static %}
+{% load staticfiles %}
+<div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'images/logo-branco.svg' %}" alt="Samba">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        {% if user.is_authenticated %}
+        <li><a class="" href="{% url 'plan_list' %}">Planos</a></li>
+        <li><a class="" href="{% url 'plugin_list' %}">APPs</a></li>
+        {% else %}
+        <li><a class="" href="{% url 'index' %}#features">Vantagens</a></li>
+        <li><a class="" href="{% url 'index' %}#details">Sobre</a></li>
+        <li><a class="" href="{% url 'index' %}#tool-map">Acesse a ferramenta</a></li>
+        <li><a class="" href="{% url 'signup' %}">Preços</a></li>
+        <li><a class="" href="{% url 'index' %}#contact">Fale Conosco</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li><a class="" href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a class="" href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</div>

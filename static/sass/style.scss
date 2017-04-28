@@ -1,0 +1,29 @@
+// Bootstrap
+@import 'bootstrap/stylesheets/_bootstrap';
+// Folhas de estilo de suporte
+@import 'base/reset';
+@import 'base/fonts';
+@import 'base/colors';
+@import 'base/mixins';
+@import 'base/defaults';
+
+// Componentes da interface
+// Mantenha essa lista em ordem alfabética.
+@import 'components/auth';
+@import 'components/header';
+@import 'components/hero';
+@import 'components/indicators';
+@import 'components/main';
+@import 'components/navbar';
+@import 'components/plan-list';
+@import 'components/plugin-details';
+@import 'components/plugin-list';
+@import 'components/product-highlight';
+@import 'components/report';
+@import 'components/sidebar';
+@import 'components/slideshow';
+@import 'components/features';
+@import 'components/detail';
+@import 'components/mapbox';
+@import 'components/contact';
+@import 'components/signup';

@@ -1,0 +1,199 @@
+html {
+  font-size: 14px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: white;
+  color: black;
+  font: 1em 'Aller', sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  font-family: 'Aller', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: $samba-blue;
+
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    text-decoration: none;
+    color: $samba-yellow;
+  }
+}
+
+p {
+  font-family: 'Aller', sans-serif;
+  line-height: 1.5;
+}
+
+input,
+select,
+textarea,
+button {
+  display: inline-block;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+select,
+textarea {
+  padding: .5rem;
+  border: 1px solid rgba(0,0,0,.1);
+  transition: border-color .3s;
+  background-color: white;
+
+  &:hover {
+    border-color: rgba(0,0,0,.25);
+  }
+
+  &:focus {
+    border-color: mix(white, $samba-blue, 25%);
+  }
+
+  &:disabled {
+    background: #eee;
+  }
+}
+
+label {
+  margin-bottom: .5rem;
+}
+
+button,
+input[type='submit'] {
+  cursor: pointer;
+  padding: .75rem 1.5rem;
+  border-radius: 4px;
+  background: $samba-blue;
+  color: white;
+  border: transparent;
+  transition: background;
+
+  &:hover,
+  &:focus {
+    background: mix(white, $samba-blue, 10%);
+  }
+
+  &:disabled {
+    background: mix(white, $samba-blue, 75%);
+  }
+}
+
+// Remove o brilho vermelho que o Firefox (Gecko) coloca
+// nos formulários e campos inválidos
+:-moz-ui-invalid,
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+
+// Efeito na imagem
+.blue-glass {
+  background: $samba-blue-glass;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #00C9FF, $samba-blue-glass);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #00C9FF, $samba-blue-glass); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+// Color-my-text
+.text-white {
+  color:white;
+}
+
+//spaces
+
+.mt-5{
+  margin-top: 5vh;
+}
+.mt-10{
+  margin-top: 10vh;
+}
+
+.mt-15{
+  margin-top: 15vh;
+}
+.mb-10{
+  margin-bottom: 10vh;
+}
+.mb-5{
+  margin-bottom: 5vh;
+}
+
+.mb-2{
+  margin-bottom: 2vh;
+}
+
+.pt-10 {
+  padding-top: 10vh;
+}
+.pb-10 {
+  padding-bottom: 10vh;
+}
+.pt-5 {
+  padding-top: 5vh;
+}
+.pb-5 {
+  padding-bottom: 5vh;
+}
+.pb-2 {
+  padding-bottom: 2vh;
+}

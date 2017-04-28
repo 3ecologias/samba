@@ -1,0 +1,37 @@
+.sidebar {
+  display: none;
+
+  @media (min-width: 840px) {
+    position: absolute;
+    display: block;
+    width: 100%;
+    top: 0;
+    left: 0;
+    width: 300px;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.sidebar__item {
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+
+  &:hover {
+    background: rgba(0,0,0,.1);
+  }
+
+  &.is-current {
+    background: rgba(0,0,0,.1);
+  }
+}
+
+.sidebar__itemIcon {
+  display: inline-block;
+  margin-left: .5rem;
+  margin-right: 1rem;
+  width: 24px;
+  height: 24px;
+}

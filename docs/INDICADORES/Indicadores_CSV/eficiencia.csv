@@ -1,0 +1,32 @@
+CÓDIGO,NOME,DEFINIÇÃO,UNIDADE,FONTE
+FC1,Consumo total de energia elétrica em sistemas de abastecimento de água,Consumo de energia elétrica pelas maquinas e equipamentos do sistema de abastecimento de água e esgotamento sanitário.,Kw/h,SNIS
+FV1,Volume de água (Produzido + Tratado Importado),"Volume de água disponível para consumo, compreendendo a água captada pelo prestador de serviços e a água importada bruta, ambas tratadas na(s) unidade(s) de tratamento do prestador de serviços, medido ou estimado na(s) saída(s) da(s) ETA(s) ou Unidade(s) de Tratamento Simplificado (UTS). Inclui também os volumes de água captada pelo prestador de serviços que sejam disponibilizados para consumo sem tratamento, medidos na(s) entrada(s) do sistema de distribuição.",m3,SNIS
+FE1,Quantidade de Economias Ativas (Água + Esgoto),Quantidade de economias residenciais ativas de água e esgoto que contribuíram para o faturamento no último mês do ano.,Economias,SNIS
+FE2,"Quantidade total de empregados próprios
+",-,Empregados,SNIS
+FE3,Quantidade de empregados para funcionamento do SAA,"Quantidade de empregados, próprios ou terceirizados, necessários para o funcionamento do Sistema de Abatecimento de Água",Habitantes,Prestador de Serviço
+FE4,Quantidade de empregados para funcionamento do SES,"Quantidade de empregados, próprios ou terceirizados, necessários para o funcionamento do Sistema de Esgotamento Sanitário",Habitantes,Prestador de Serviço
+FE5,Quantidade de empregados para funcionamento do SDU,"Quantidade de empregados, próprios ou terceirizados, necessários para o funcionamento do Sistema de Drenagem Urbana",Habitantes,Prestador de Serviço
+FE6,Quantidade de empregados no manejo de RS,"Quantidade de empregados, próprios ou terceirizados, necessários para o manejo de Resíduos Sólidos do Sistema de Drenagem Urbana",Habitantes,Prestador de Serviço
+FD1,Despesas com Pessoal Próprio + Despesas com Serviços de Terceiros,-,R$/ano,SNIS
+FD2,Despesas totais com serviço,"Valor anual total do conjunto de despesas realizadas para a prestação dos serviços. Inclui Despesas de Exploração (DEX); Juros e Encargos do Serviço da Dívida; Depreciação, Amortização e Provisão para Devedores Duvidosos; Despesas Capitalizáveis;
+Despesas Fiscais ou Tributárias Incidentes na DTS; além de outras Despesas com os Serviços.",R$/ano,SNIS
+FV2,Volume de Água Faturado,"Volume de água debitado ao total de economias (medidas e não medidas), para fins de faturamento. Inclui o volume de água tratada exportado.",m3/ano,SNIS
+FV3,Volume de água (Produzido + Tratado Importado - de Serviço),Volume de água tratada disponibilizado para consumo.,m3,SNIS
+"
+FH1",Residência com Hidrômetro Instalado,"Quantidade de economias ativas de água, cujas respectivas ligações são providas de aparelho de medição. (hidrômetro) em
+funcionamento regular, que contribuíram para o faturamento no
+último mês do ano",Economias,SNIS
+FR1,Quantidade de Economias Residenciais Ativas de Água,Quantidade de economias residenciais ativas de água que contribuíram para o faturamento no último mês do ano.,Economias,SNIS
+FV4,Volume de Água Consumido,"Volume de água consumido por todos os usuários, compreendendo o volume micromedido, o volume estimado para as ligações desprovidas de aparelho de medição (hidrômetro) e o volume de água tratada exportado.",m3,SNIS
+FV5,Volume de Esgoto Coletado,Quantidade de esgoto direcionado ao sistema coletor de esgoto,m³,Prestador de serviço
+FV6,Volume de Esgoto Coletado Tratado ,Quantidade de esgoto direcionado ao sistema coletor de esgoto e recebe tratamento,m³,Prestador de serviço
+FQ1,Vazão de Água Tratada,Vazão de água tratada em cada estação de tratamento disponibilizada para o consumo.,m³/s,Prestador de serviço
+FQ2,Vazão de Esgoto Tratado,Vazão de esgoto tratado em cada estação ETE.,m³/,Prestador de serviço
+FQ3,Vazão Nominal de Projeto da ETA,"Vazão, em condições normais de funcionamento, para a qual a ETA é projetada.",m³/ano,Prestador de serviço
+FQ4,Vazão Nominal de Projeto da ETE,"Vazão, em condições normais de funcionamento, para a qual a ETE é projetada.",m³/ano,Prestador de serviço
+FP1,População Atingida ,"População atingida por inundações,  deslizamento de solos, alagamentos, enxurradas, etc.",Habitantes,Defesa Civil
+FP2,População Atingida nos Anos Anteriores ,"População atingida por inundações,  deslizamento de solos, alagamentos e enxurradas em anos anterios.",Habitantes,Defesa Civil
+FM1,Quantidade Total de Resíduos Coletados ,"Massa total de resíduos coletados, sendo eles de origem doméstico ou público.",Toneladas,Prestador de serviço /SNIS
+FM2,Quantidade de Materiais Recicláveis  Recuperados,"Massa coletada de recicláveis recuperados, excetos os de origem doméstica e rejeitos.",Toneladas,Prestador de serviço/ SNIS
+FM3,Quantidade de RCC coletado,Massa coletada de resíduos da construção civil (RCC),Toneladas,Prestador de serviço/ SNIS

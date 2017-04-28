@@ -1,0 +1,31 @@
+.pluginDetails {
+
+}
+
+.pluginDetails__header {
+  display: flex;
+  flex-wrap: nowrap;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  background-color: $samba-blue;
+  color: white;
+  padding: 1rem;
+}
+
+.pluginDetails__icon {
+  margin-right: 1rem;
+  width: 64px;
+  height: 64px;
+}
+
+.pluginDetails__buy {
+  display: flex;
+  flex-flow: column wrap;
+
+  input,
+  label,
+  select,
+  textarea {
+    margin-bottom: 1rem;
+  }
+}

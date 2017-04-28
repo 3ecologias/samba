@@ -1,0 +1,36 @@
+{% load static %}
+{% load staticfiles %}
+<nav class="navbar navbar-fixed-top {% if transparent %}is-transparent{% endif %}">
+  <div class="navbar__items">
+    <div class="navbar__itemGroup">
+      <a class="navbar__logo" href="{% url 'index' %}">
+        {% if transparent %}
+          <img src="{% static 'images/logo-branco.svg' %}" alt="Samba">
+        {% else %}
+          <img src="{% static 'images/logo-branco.svg' %}" alt="Samba">
+        {% endif %}
+      </a>
+
+      <div class="navbar__itemGroup is-menu-items">
+        {% if user.is_authenticated %}
+          <a class="navbar__item" href="{% url 'plan_list' %}">Planos</a>
+          <a class="navbar__item" href="{% url 'plugin_list' %}">APPs</a>
+        {% else %}
+          <a class="navbar__item" href="#features">Vantagens</a>
+          <a class="navbar__item" href="#details">Sobre</a>
+          <a class="navbar__item" href="#tool-map">Acesse a ferramenta</a>
+          <a class="navbar__item" href="#contact">Fale Conosco</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="navbar__itemGroup is-menu-items">
+      {% if user.is_authenticated %}
+        <a class="navbar__item" href="{% url 'logout' %}">Sair</a>
+      {% else %}
+        <a class="navbar__item" href="{% url 'login' %}">Login</a>
+        <a class="navbar__item" href="{% url 'signup' %}">Preços</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

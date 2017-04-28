@@ -1,0 +1,49 @@
+{% load compress %}
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <!-- meta & seo -->
+  <title>{% block title %}Samba - Saneamento Básico do Brasil{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="tags" content="saneamento básico, saneamento básico municipal, plataforma">
+  <meta name="description" content="Samba é uma plataforma para criação de planos de saneamento básico">
+
+  <!-- external stylesheets -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' />
+  <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' /> -->
+
+  <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js'></script> -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js'></script>
+
+  <!-- Chart js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+  <!-- our sheets -->
+  {% compress css %}
+  <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/style.scss' %}" />
+  {% endcompress %}
+</head>
+<body>
+  {% block body %}{% endblock %}
+</body>
+
+<!-- external sources -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
+
+
+<!-- our js -->
+{% compress js %}
+<script src="{% static 'js/javascripts/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/samba-init.js' %}"></script>
+{% endcompress %}
+
+
+</html>

@@ -1,0 +1,59 @@
+.pluginList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pluginList__plugin {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  width: 100%;
+  transition: border-color .3s;
+
+  &:hover {
+    border-color: $samba-blue;
+  }
+
+  @media (min-width: 600px) {
+    width: 45%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 30%;
+  }
+}
+
+.pluginList__pluginIcon {
+  width: 64px;
+  height: 64px;
+  margin-right: 1rem;
+}
+
+.pluginList__pluginDescription {
+  color: mix(black, $samba-gray, 50%);
+}
+
+.pluginList__pluginPrice {
+  display: inline-block;
+  padding: .5rem 1rem;
+  font-size: .8125rem;
+  border-radius: 1rem;
+  border: 1px solid $samba-blue;
+  color: white;
+  background-color: $samba-blue;
+}
+
+.pluginList__empty {
+  color: $samba-gray;
+  padding: 10% 0;
+  text-align: center;
+
+  a {
+    color: $samba-blue;
+    text-decoration: underline;
+  }
+}

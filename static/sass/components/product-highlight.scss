@@ -1,0 +1,22 @@
+.productHighlight {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+}
+
+.productHighlight__item {
+  text-align: center;
+  margin: 2rem 1rem;
+
+  @media (min-width: 600px) {
+    width: 45%;
+  }
+
+  @media (min-width: 840px) {
+    width: 20%;
+  }
+}
+
+.productHighlight__itemImage {
+  display: inline-block;
+}

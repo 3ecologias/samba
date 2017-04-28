@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+{% block body %}
+<header class="header is-home">
+  {% include '_navbar.html' with transparent=False %}
+</header>
+<div class="map">
+    <div id="map"></div>
+</div>
+<section class="signup">
+  {% include '_plans_buy.html' %}
+</section>
+<section class="footer">
+  {% include '_footer.html' %}
+</section>
+
+
+<!-- mapbox js -->
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [-50.498024, -14.756375],
+  style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+  minZoom: 4,
+  maxZoom: 20,
+  hash: true,
+  scrollZoom: false,
+});
+
+// create the popup
+var popup = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Uruçuca/BA</h4> <br> <p> Em desenvolvimento, <a href="/planos/2">veja os detalhes.</a></p>');
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+
+// create the marker
+new mapboxgl.Marker(el, {offset:[-25, -25]})
+.setLngLat(urucuca)
+.setPopup(popup) // sets a popup on this marker
+.addTo(map);
+
+map.addControl(new mapboxgl.NavigationControl());
+</script>
+<!-- end mapbox js -->
+{% endblock %}

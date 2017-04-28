@@ -1,0 +1,53 @@
+.planList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.planList__plan {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 2px;
+  width: 100%;
+  transition: border-color .3s;
+
+  &:hover {
+    border-color: $samba-blue;
+  }
+
+  @media (min-width: 600px) {
+    width: 45%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 30%;
+  }
+}
+
+.planList__planCity {
+  width: 100%;
+}
+
+.planList__planYear {
+  display: inline-block;
+  padding: .5rem 1rem;
+  font-size: .8125rem;
+  border-radius: 1rem;
+  border: 1px solid $samba-blue;
+  color: white;
+  background-color: $samba-blue;
+}
+
+.planList__empty {
+  color: $samba-gray;
+  padding: 10% 0;
+  text-align: center;
+
+  a {
+    color: $samba-blue;
+    text-decoration: underline;
+  }
+}

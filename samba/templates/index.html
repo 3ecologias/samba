@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+{% block body %}
+<header class="header is-home">
+  {% include '_navbar.html' with transparent=False %}
+</header>
+
+<section class="slideshow">
+  {% include '_slideshow.html' %}
+  <div class="blue-glass"></div>
+  <div class="container hero">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+        <h1 class="hero__title">Auxílio à tomada de decisão em saneamento</h1>
+        <h4 class="hero__text">
+          Gestão integrada de informações para elaboração e monitoramento de planos de saneamento municipais.
+        </h4>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="features" id="features">
+  <center class="logo-feature mt-10 mb-10">
+    <img class="img-responsive" src="{% static 'images/logo-color.svg' %}">
+  </center>
+  {% include '_features.html' %}
+</section>
+
+<section class="detail" id="details">
+  <div class="container">
+    <center class="detail-title text-white mb-10">
+      <h1> Dificuldades na gestão de planos de saneamnto? </h1>
+    </center>
+    <div class="row detail-text mb-5 text-white">
+      <div class="col-sm-5 col-sm-offset-1">
+        <p>O Samba é uma ferramenta que propõe simplicidade e agilidade na elaboração de um diagnóstico profundo e representativo da situação atual dos serviços de saneamento básico oferecidos em uma cidade. </p>
+        <p>Facilita o trabalho de gestores municipais que precisam implementar ou administrar um Plano de Saneamento Ambiental.   Ideal para pesquisadores, empresas e profissionais que lidam com gestão ambiental.</p>
+      </div>
+      <div class="col-sm-5">
+        <p>Por meio das funcionalidades do Samba é possível fazer um levantamento apurado da qualidade dos serviços públicos de saneamento como: abastecimento de água potável, esgotamento sanitário, drenagem urbana e manejo de resíduos sólidos urbanos (coleta e disposição final do lixo urbano), além de acelerar os processos de tomada de decisão.</p>
+      </div>
+    </div>
+  </div>
+  <center class="text-white pb-5 mt-5">
+    <h3><strong>Faça parte dessa plataforma!</strong></h3>
+  </center>
+</section>
+<section class="tool-map" id="tool-map">
+  <div id="map"></div>
+</section>
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="row pb-10 pt-10">
+      <div class="col-sm-5 col-sm-offset-1 mb-5">
+        <h1>Diagnóstico completo</h1>
+        <p>Um apurado panorama acerca do saneamento básico da cidade é possível por meio do levantamento dos indicadores, gerando um relatório completo que irá orientar a implementação das políticas e investimentos para o setor.</p>
+        <p>Com este diagnóstico em mãos é possível identificar oportunidades de implantação e fortalecimento do sistema, e ainda gerir melhor os recursos humanos e financeiros, que poderão ser direcionados para as áreas que realmente carecem de acompanhamento.</p>
+        <h1>Consultoria</h1>
+        <p>Deseja o diagnóstico de saneamento básico da sua cidade mas não possui equipe ou precisa de acompanhamento no levantamento das informações? Entre em contato conosco. Temos profissionais qualificados para conduzir o seu projeto.</p>
+      </div>
+      <div class="col-sm-5">
+        <h1>Fale conosco</h1>
+        <form method="POST">
+          {% csrf_token %}
+
+          {{ form.name }}
+          {{ form.email }}
+          {{ form.message }}
+
+          <input type="submit" name="contact" class="bot-send pull-right btn main-button" value="Enviar">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="footer">
+  {% include '_footer.html' %}
+</section>
+<!-- mapbox js -->
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+var urucuca = [-39.28444, -14.59306];
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [-50.498024, -14.756375],
+  style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+  minZoom: 4,
+  maxZoom: 20,
+  hash: false,
+  scrollZoom: false,
+});
+
+// create the popup
+var popup = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Uruçuca/BA</h4> <br> <p><a href="/planos/2">veja os detalhes</a></p>');
+
+// create DOM element for the marker
+var el = document.createElement('div');
+el.id = 'marker';
+
+// create the marker
+new mapboxgl.Marker(el, {offset:[-25, -25]})
+.setLngLat(urucuca)
+.setPopup(popup) // sets a popup on this marker
+.addTo(map);
+
+map.addControl(new mapboxgl.NavigationControl());
+</script>
+<!-- end mapbox js -->
+{% endblock %}
