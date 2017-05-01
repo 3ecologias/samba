@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Projetos de saneamento - Samba{% endblock %}
+
+{% block body %}
+  <header class="header">
+    {% include '_navbar.html' with user=user %}
+    <div class="header__contents">
+      <h2 class="header__title">Projetos de saneamento</h2>
+        <div class="header__buttons">
+          <a class="header__button" href="{% url 'plan_list' %}">Meus projetos</a>
+        </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="planList">
+      <div class="planList__empty">
+        O seu plano de adesão é do tipo {{tipo}} e só permite a criação de
+        {% if tipo == 'basico' %}
+          1
+        {% elif tipo == 'premium' %}
+          5
+        {% else %}
+          10
+        {% endif %}
+        projetos. Entre em contato com nossa equipe caso deseje criar novos projetos.
+      </div>
+
+    </div>
+  </main>
+{% endblock %}

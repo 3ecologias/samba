@@ -9,4 +9,5 @@ class PlanoInline(admin.TabularInline):
 class DonoAdmin(admin.ModelAdmin):
     inlines = [PlanoInline,]
 
-admin.site.register(Dono, DonoAdmin)
+# admin.site.register(Dono, DonoAdmin)
+admin.site.register(Dono)

@@ -16,6 +16,9 @@
         {% if user|getattribute:"dono" or user|getattribute:"gestor" %}
           <div class="header__tabsGroup">
             <a class="header__tab {% if current == 'edit' %}is-current{% endif %}" href="{% url 'plan_edit' pk=plano.id %}">Editar</a>
+            {% if user|getattribute:"dono" %}
+              <a class="header__tab {% if current == 'gestor' %}is-current{% endif %}" href={% url 'gestor_list' pk=plano.id %}>Gestores</a>
+            {% endif %}
           </div>
         {% endif %}
       {% endif %}

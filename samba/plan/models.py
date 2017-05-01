@@ -86,10 +86,12 @@ class Gestor(models.Model):
         verbose_name_plural = _('Gestores')
 
     #sub-donos do projeto. Podem editar os campos.
-    plano = models.ForeignKey(Plano,  verbose_name=_('gestores'), related_name='gestores_set')
+    plano = models.ForeignKey(Plano,  verbose_name=_('gestores'), related_name='gestores_set', on_delete=models.CASCADE)
 
     # usuario associado ao gestor
-    user = models.OneToOneField(User, models.CASCADE, verbose_name=_("Usuário no sistema"), related_name='gestor')
+    user = models.OneToOneField(User, verbose_name=_("Usuário no sistema"), related_name='gestor', on_delete=models.CASCADE,)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.first_name
