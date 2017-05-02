@@ -13,7 +13,7 @@
 
       <div class="navbar__itemGroup is-menu-items">
         {% if user.is_authenticated %}
-          <a class="navbar__item" href="{% url 'plan_list' %}">Planos</a>
+          <a class="navbar__item" href="{% url 'plan_list' %}">Projetos</a>
           <a class="navbar__item" href="{% url 'plugin_list' %}">APPs</a>
         {% else %}
           <a class="navbar__item" href="#features">Vantagens</a>

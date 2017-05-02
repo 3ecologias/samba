@@ -6,6 +6,7 @@ from .models import Plano, Indicador, Gestor
 from samba.accounts.models import Dono
 from .plugins import get_plugin_or_404, get_all_plugins, get_plano_plugins
 from .forms import PlanoForm, AquisicaoForm, GestorForm, GestorEditForm
+from django.http import HttpResponseForbidden
 
 
 @login_required
@@ -22,6 +23,18 @@ def plan_upgrade(request):
       'user': request.user,
       'tipo': dono.tipo_conta
     })
+
+#funcao auxiliar para checar se pode ou nao criar novos planos baseado no tipo de conta
+def plan_create_check(dono):
+    num_planos = dono.planos.count()
+    if dono.tipo_conta == 'basico' and num_planos == 0:
+        return True
+    elif dono.tipo_conta == 'premium' and num_planos < 5:
+        return True
+    elif dono.tipo_conta == 'enterprise' and num_planos < 10:
+        return True
+    else:
+        return False
 
 @login_required
 def plan_create(request):
@@ -47,19 +60,6 @@ def plan_create(request):
         return redirect('plan_upgrade')
 
 
-@login_required
-def plan_create_check(dono):
-    num_planos = dono.planos.count()
-    if dono.tipo_conta == 'basico' and num_planos == 0:
-        return True
-    elif dono.tipo_conta == 'premium' and num_planos < 5:
-        return True
-    elif dono.tipo_conta == 'enterprise' and num_planos < 10:
-        return True
-    else:
-        return False
-
-
 def plan_view(request, pk):
     plano = get_object_or_404(Plano, pk=pk)
     plugins = get_plano_plugins(plano)
@@ -78,9 +78,8 @@ def plan_edit(request, pk):
     plugins = get_plano_plugins(plano)
 
     if plano.dono.user != request.user and not plano.gestores_set.filter(user_id=request.user.id).exists():
-        # TODO: Informar que o usuário não possui
-        # permisão suficiente para editar o plano
-        return redirect('/')
+        # Não permitido pois nao tem permissao nem de gestor nem de dono do plano
+        return HttpResponseForbidden()
 
     if request.method == 'POST':
         for plugin in plugins:
@@ -216,9 +215,8 @@ def gestor_edit(request, pk, gestor_pk):
     gestor = get_object_or_404(Gestor, pk=gestor_pk)
 
     if plano.dono.user != request.user:
-        # TODO: Informar que o usuário não possui
-        # permisão suficiente para editar o plano
-        return redirect('/')
+        # Não permitido, nao e o dono do projeto
+        return HttpResponseForbidden()
 
     if request.method == 'POST':
         form = GestorEditForm(data=request.POST, instance=gestor.user)
@@ -245,9 +243,8 @@ def gestor_edit(request, pk, gestor_pk):
     gestor = get_object_or_404(Gestor, pk=gestor_pk)
 
     if plano.dono.user != request.user:
-        # TODO: Informar que o usuário não possui
-        # permisão suficiente para editar o plano
-        return redirect('/')
+        # Não permitido, nao e o dono do projeto
+        return HttpResponseForbidden()
 
     if request.method == 'POST':
         form = GestorEditForm(data=request.POST, instance=gestor.user)
@@ -273,6 +270,10 @@ def gestor_delete(request, pk, gestor_pk):
     plano = get_object_or_404(Plano, pk=pk)
     gestor = get_object_or_404(Gestor, pk=gestor_pk)
     user = get_object_or_404(User, pk=gestor.user.id)
+
+    if plano.dono.user != request.user:
+        # Não permitido, nao e o dono do projeto
+        return HttpResponseForbidden()
 
     if request.method == 'POST':
         if 'sim' in request.POST:

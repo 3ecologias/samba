@@ -31,10 +31,9 @@
       A partir dos dados disponibilizados pelo gestor dos serviços de saneamento básico, é possível afirmar que atualmente dos serviços encontram-se no nível de cobertura apresentada a seguir:
     </p>
 
-    {# TODO: Gráfico de pizza de cobertura #}
-
-    <canvas id="graph__abastecimento"></canvas>
-
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__abastecimento"></canvas>
+    </div>
 
     <p>
       O abastecimento de água contempla {{ indicadores.UA1 }}% dos moradores do município, Na zona urbana, este índice é de {{ indicadores.UA2 }}%, enquanto na zona rural é de {{ indicadores.UA1|sub:indicadores.UA2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UA1 }}% da população a ser atendida para se alcançar universalização deste serviço.
@@ -58,9 +57,9 @@
     {% if indicadores.UE1 and indicadores.UE2 and indicadores.UE3 and indicadores.UE4 %}
     <h3>Esgotamento Sanitário</h3>
 
-    {# TODO: Gráfico de Pizza de esgotamento #}
-
-    <canvas id="graph__esgotamento"></canvas>
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__esgotamento"></canvas>
+    </div>
 
     <p>
       O índice de atendimento de esgoto por rede de esgotamento sanitário no município é de {{ indicadores.UE1 }}%, sendo este índice de {{ indicadores.UE2 }}% na zona urbana e {{ indicadores.UE1|sub:indicadores.UE2 }}% na zona rural. Assim, existe um montante de {{ 100|sub:indicadores.UA1 }}% da população a ser atendida para se alcançar universalização deste serviço. Outras formas de esgotamento são utilizadas além da rede, como fossa séptica, fossa rudimentar entre outros. As soluções individualizadas somam {{ indicadores.UE3 }}%, sendo {{ indicadores.UE4 }}% referentes à população urbana.
@@ -84,7 +83,9 @@
     {% if indicadores.UR1 and indicadores.UR2 %}
     <h3>Resíduos Sólidos</h3>
 
-    <canvas id="graph__residuo"></canvas>
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__residuo"></canvas>
+    </div>
 
     <p>
       O índice de cobertura do serviço de coleta de resíduos sólidos no município é de {{ indicadores.UR1 }}%. Para a zona urbana, esta porcentagem é de {{ indicadores.UR2 }}%, sendo para a zona rural de {{ indicadores.UR1|sub:indicadores.UR2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UR1 }}% da população a ser atendida para se alcançar universalização deste serviço.
@@ -103,7 +104,9 @@
     {% if indicadores.UD1 %}
     <h3>Manejo de Águas Pluviais</h3>
 
-    <canvas id="graph__aguas-pluv"></canvas>
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__aguas-pluv"></canvas>
+    </div>
 
     <p>
       O índice de atendimento de drenagem urbana no município é de {{ indicadores.UD1 }}%, restando ainda cerca de {{ 100|sub:indicadores.UD1 }}% das vias e ruas para serem atendidas com esse serviço, ação necessária à universalização do acesso.
@@ -226,7 +229,9 @@
       CLORO RESIDUAL
     </p>
 
-    <canvas id="graph__cloro"></canvas>
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__cloro"></canvas>
+    </div>
 
     <p>
       O índice de conformidade da quantidade de amostra para cloro residual ficou em {{ indicadores.QA1 }}%, sendo, portanto, a incidência das análises fora do padrão de {{ indicadores.QA2 }}%.
@@ -245,7 +250,9 @@
       TURBIDEZ
     </p>
 
-    <canvas id="graph__turbidez"></canvas>
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__turbidez"></canvas>
+  </div>
 
     <p>
       Para turbidez, o índice de conformidade foi de {{ indicadores.QA3 }}%, estando {{ indicadores.QA4 }}% das amostras fora do padrão.
@@ -263,7 +270,11 @@
     <p>
       COLIFORMES TOTAIS
     </p>
-    <canvas id="graph__coliformes"></canvas>
+
+    <div class="chart_box mt-5 mb-5">
+      <canvas id="graph__coliformes"></canvas>
+    </div>
+
     <p>
       Já para coliformes totais, este índice de conformidade foi de {{ indicadores.QA5 }}% no  período, enquanto a incidência das análises fora do padrão registrou {{ indicadores.QA6 }}%.
     </p>
@@ -354,7 +365,7 @@
 
 <!-- chart js scripts -->
 <script>
-{% if indicadores.UA2 and indicadores.UA2 and indicadores.UA1 %}
+{% if indicadores.UA2 and indicadores.UA1 %}
 var ctx = document.getElementById("graph__abastecimento").getContext("2d");
 var chart = new Chart(ctx, {
     type: 'pie',
@@ -363,9 +374,9 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.UA2|stringformat:"f" }}, {{ indicadores.UA1|sub:indicadores.UA2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)',
+              'rgba(189,188,188,0.3)'
           ]
         }]
     }
@@ -381,9 +392,9 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.UE2|stringformat:"f" }}, {{ indicadores.UE1|sub:indicadores.UE2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)',
+              'rgba(189,188,188,0.3)'
           ]
         }]
     }
@@ -399,9 +410,9 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.UR1|stringformat:"f" }}, {{ indicadores.UR2|stringformat:"f" }}, {{ indicadores.UR1|sub:indicadores.UR2|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)',
+              'rgba(189,188,188,0.3)'
           ]
         }]
     }
@@ -417,8 +428,8 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.UD1|stringformat:"f" }}, {{ 100|sub:indicadores.UD1|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)'
           ]
         }]
     }
@@ -434,8 +445,8 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.QA1|stringformat:"f" }}, {{ indicadores.QA2|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)'
           ]
         }]
     }
@@ -451,8 +462,8 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.QA3|stringformat:"f" }}, {{  indicadores.QA4|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)'
           ]
         }]
     }
@@ -469,8 +480,8 @@ var chart = new Chart(ctx, {
         datasets: [{
             data: [{{ indicadores.QA5|stringformat:"f" }}, {{  indicadores.QA6|stringformat:"f" }}],
             backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
+              'rgba(222,220,0,0.3)',
+              'rgba(65,192,240,0.3)'
           ]
         }]
     }

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Editar plano {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+{% block title %}Editar projeto {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
 
 {% block body %}
   {% include 'plan/_header.html' with current='edit' user=user plano=plano %}
@@ -76,7 +76,7 @@
           {% endif %}
           {% empty %}
           <div class="indicators__empty">
-            O plano não possui nenhum conjunto de indicadores. <a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.
+            O projeto não possui nenhum conjunto de indicadores. <a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.
           </div>
           {% endfor %}
         </form>

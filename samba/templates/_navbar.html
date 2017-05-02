@@ -22,11 +22,13 @@
 
         {% if user.is_authenticated %}
           {% if user|getattribute:"dono" %}
-            <li><a class="" href="{% url 'plan_list' %}">Planos</a></li>
+            <li><a class="" href="{% url 'plan_list' %}">Projetos</a></li>
             <li><a class="" href="{% url 'plugin_list' %}">APPs</a></li>
-          {% else %}
-            {% get_plan_pk_by_gestor user as pk_plan %}
-            <li><a class="" href="{% url 'plan_view' pk_plan %}">Plano</a></li>
+          {% elif user|getattribute:"gestor" %}
+            {% get_plan_pk_by_gestor user as plan %}
+            {% if plan %}
+              <li><a class="" href="{% url 'plan_view' plan.id %}">Projeto</a></li>
+            {% endif %}
           {% endif %}
         {% else %}
         <li><a class="" href="{% url 'index' %}#features">Vantagens</a></li>
