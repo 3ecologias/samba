@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from samba.plan import views
+from .autocomplete import MunicipioAutocomplete
 
 urlpatterns = [
     url(r'^planos$', views.plan_list, name='plan_list'),
@@ -15,5 +16,7 @@ urlpatterns = [
     url(r'^gestores/(?P<pk>[0-9]+)/editar/(?P<gestor_pk>[0-9]+)$', views.gestor_edit, name='gestor_edit'),
     url(r'^gestores/(?P<pk>[0-9]+)/apagar/(?P<gestor_pk>[0-9]+)$', views.gestor_delete, name='gestor_delete'),
     url(r'^loja$', views.plugin_list, name='plugin_list'),
-    url(r'^loja/(?P<slug>[a-z\-]+)$', views.plugin_buy, name='plugin_buy')
+    url(r'^loja/(?P<slug>[a-z\-]+)$', views.plugin_buy, name='plugin_buy'),
+
+    url(r'^municipio-autocomplete/$', MunicipioAutocomplete.as_view(), name='municipio_autocomplete')
 ]
