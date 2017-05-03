@@ -6,11 +6,13 @@
 {% block body %}
   <header class="header">
     {% include '_navbar.html' with user=user %}
+  </header>
 
-    <div class="header__contents">
+  <div class="container mt-10 pt-5">
+    <div class="row">
       <h2 class="header__title">Novo Projeto</h2>
     </div>
-  </header>
+  </div>
 
   <main class="main">
     <form class="main__form" method="POST">
@@ -18,7 +20,7 @@
 
       {% for field in form %}
         {{ field.label_tag }}
-        {{ field }}
+        {{ field }}<br>
 
         {% if field.errors %}
           <div class="main__formError">

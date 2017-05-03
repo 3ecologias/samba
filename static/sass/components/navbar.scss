@@ -1,19 +1,21 @@
-.navbar {
+#main-nav {
   background: black;
   padding: 1em;
   margin-bottom: 0;
+  &.navbar-default .navbar-nav > li > a  {
+    height: 56px;
+    line-height: 56px;
+    color: $samba-blue;
+  }
 }
 
 
 .navbar-default .navbar-nav > li > a  {
-  height: 56px;
-  color: $samba-blue;
   text-transform: uppercase;
   font-weight: bold;
   text-decoration: none;
   transition: background .3s;
   padding: 0 16px;
-  line-height: 56px;
 
   &:hover {
     background: rgba(255,255,255,1);

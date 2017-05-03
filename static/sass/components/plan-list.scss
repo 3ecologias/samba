@@ -1,30 +1,17 @@
-.planList {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 
 .planList__plan {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1rem;
-  margin-right: 1rem;
+  padding: 2rem;
   margin-bottom: 1rem;
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 2px;
-  width: 100%;
   transition: border-color .3s;
+  text-align: center;
 
   &:hover {
     border-color: $samba-blue;
   }
 
-  @media (min-width: 600px) {
-    width: 45%;
-  }
-
-  @media (min-width: 1024px) {
-    width: 30%;
-  }
 }
 
 .planList__planCity {

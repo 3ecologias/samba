@@ -1,90 +1,29 @@
-.header {
-  background-size: cover;
-  background-image: url('/static/images/fundo-azul.png');
-  margin-top: 6em;
+#subnav{
+  background: $samba-yellow;
+  margin-bottom: 0;
 
-  &.is-home {
-  background:none;
-  margin-top: 0;
+  &.navbar-default .navbar-nav > li > a  {
+    height: 2em;
+    line-height: 2em;
+    color: #000;
+    padding: 1em;
+
+    &:hover {
+      background: $samba-blue;
+      color: white;
+      text-decoration: none;
+      height: 3.1em;
+      line-height: 1.5em;
+      padding: 1em;
+    }
   }
 }
 
-.header__contents {
-  @include constrained-container;
-  color: white;
-  text-align: center;
-
-  @media only screen and (max-width: 1180px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+.navbar-brand h3{
+    color: #000;
+    margin-top: 0;
 }
 
-.header__title {
-  padding: 2rem 0 1rem;
-  margin: 0;
-
-  &:last-child {
-    padding-bottom: 2rem;
-  }
-}
-
-.header__meta {
-  padding-bottom: 2rem;
-}
-
-.header__buttons {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  padding-bottom: 1rem;
-}
-
-.header__button {
-  border: 1px solid white;
-  padding: .5rem 1rem;
-  border-radius: 4px;
-  margin: 0 .5rem;
-  color: white;
-  background-color: $samba-gray;
-
-  &:hover {
-    color: mix(white, black, 25%);
-    background-color: $samba-blue;
-  }
-
-  &:first-child {
-    margin-left: 0;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.header__tabs {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header__tabsGroup {
-  display: flex;
-}
-
-.header__tab {
-  padding: .75rem 1rem;
-  color: rgba(255,255,255,.75);
-  border: 1px solid white;
-  margin-right: 0.5em;
-  transition: background .3s, color .3s;
-
-  &:hover {
-    background: rgba(255,255,255,.1);
-    color: white;
-  }
-
-  &.is-current {
-    color: white;
-    border-bottom: 3px solid white;
-  }
+.year {
+  padding-left: 1em;
 }
