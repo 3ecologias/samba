@@ -18,8 +18,8 @@ Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobr
 
 Para aproveitar todas as funcionalidades de Samba, é necessario ter um usuário e se logar no site.
 
-* [Como criar um novo projeto?](projeto)
-* [Como adicionar um novo gestor para o projeto?](addGestor)
-* [Como adicionar um plugin ao projeto?](addPlugin)
-* [Como editar um plugin?](editPlugin)
-* [Como acessar ao relatorio do projeto?](goToAnalise)
+[Como criar um novo projeto?](projeto)
+[Como adicionar um novo gestor para o projeto?](addGestor)
+[Como adicionar um plugin ao projeto?](addPlugin)
+[Como editar um plugin?](editPlugin)
+[Como acessar ao relatorio do projeto?](goToAnalise)
