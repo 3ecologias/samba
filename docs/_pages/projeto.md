@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## Apresentação
+## Como criar um novo projeto?
 
 O Sistema de Informação para auxílio à tomada de decisão aqui apresentado tem como função permitir o acompanhamento e a avaliação da implantação do Plano Municipal de Saneamento Básico (PMSB) no município. Assim, trata-se de um sistema digital capaz de armazenar dados e processá-los com o objetivo de produzir informações.
 O papel primordial desse sistema é monitorar a situação real do saneamento municipal, possibilitando a intervenção no ambiente e auxiliando o processo de tomada de decisões.
