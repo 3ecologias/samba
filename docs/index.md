@@ -16,8 +16,6 @@ Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobr
 * * *
 ## Passo a passo temático
 
-Para aproveitar todas as funcionalidades de Samba, é necessario ter um usuário e se logar no site.
-
 [Como criar um novo projeto?](projeto)
 
 [Como adicionar um novo gestor para o projeto?](addGestor)
