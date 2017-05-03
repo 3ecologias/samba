@@ -20,6 +20,6 @@ Escolher o ano do projeto. Essa informação permite montar um historíco do mun
 
 ![](_images/passo5.png)
 
-Para concluir a criação, salvar o projeto.
+Para concluir a criação, **salvar** o projeto.
 
 
