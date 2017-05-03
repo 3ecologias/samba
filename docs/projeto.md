@@ -6,7 +6,7 @@ layout: default
 
 Para criar um novo projeto e consultar os que já foram criados é necessario fazer seu login no site.
 
-![](_images/passo2.jpg)
+![](_images/passo2.png)
 
 Ir na aba **Projetos** do Menu preto e appertar o botão **Novo Projeto**.
 
