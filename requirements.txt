@@ -6,3 +6,4 @@ six==1.10.0
 django-compressor
 django-libsass
 sendgrid-django
+django-autocomplete-light
