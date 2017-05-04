@@ -25,3 +25,5 @@ Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobr
 [Como editar um plugin?](editPlugin)
 
 [Como acessar ao relatorio do projeto?](goToAnalise)
+
+[Como obter um suporte técnico?](suporteTecnico)
