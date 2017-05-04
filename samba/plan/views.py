@@ -131,9 +131,11 @@ def plan_report(request, pk):
             continue
 
         for indicador in plugin.indicadores:
+            if not indicador.valor:
+                continue
             indicadores[indicador.sigla] = indicador.valor
             descricao[indicador.sigla] = indicador.descricao
-
+            
     return render(request, 'plan/plan_report.html', {
         'user': request.user,
         'plano': plano,
