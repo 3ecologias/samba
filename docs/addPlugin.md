@@ -5,7 +5,7 @@ layout: default
 ## Como adicionar um novo plugin?
 
 Os plugins permitem armazenar as informações relativas aos serviços públicos de saneamento básico. Cada plugin contem varios indicadores a completar para criar o relatorio final. 
-A partir da pagina inicial do projeto, visitar a loja de *plugins* para adicionar um.
+A partir da pagina inicial do projeto, visitar a **loja de plugins** para adicionar um.
 
 ![](_images/passo10.png)
 
