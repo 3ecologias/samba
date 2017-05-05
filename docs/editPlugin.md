@@ -4,7 +4,7 @@ layout: default
 
 ## Como editar um plugin?
 
-Para editar um ou varios plugins já adicionados ao projeto e preencher os dados corespondentes, clicar no butão _Editar_. Aparece a pagina com os campos dos indicadores a preencher. 
+Para editar um ou varios plugins já adicionados ao projeto e preencher os dados corespondentes, clicar no butão _Editar_. Aparece a pagina com os campos dos indicadores a preencher. **Salvar** as informações.
 
 ![](_images/passo125.png)
 ![](_images/passo13.png)
