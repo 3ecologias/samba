@@ -16,7 +16,7 @@ Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobr
 
 [Como criar um novo projeto?](projeto)
 
-[Como adicionar um novo gestor para o projeto?](addGestor)
+[Como adicionar um novo gestor no projeto?](addGestor)
 
 [Como adicionar um plugin ao projeto?](addPlugin)
 
