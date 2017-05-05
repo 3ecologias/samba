@@ -16,7 +16,7 @@ Escolher o município dentro da lista. Pode pesquisar o nome do munícipio escre
 
 ![](_images/passo1.png)
 
-Escolher o ano do projeto. Essa informação permite montar um historíco do municipío com os dados preenchidos.
+Escolher o ano do projeto. Essa informação permite montar um histórico do município com os dados preenchidos.
 
 ![](_images/passo5.png)
 
