@@ -82,7 +82,19 @@
 <!-- mapbox js -->
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
-var urucuca = [-39.28444, -14.59306];
+var urucuca_ba = [-39.28444, -14.59306];
+var juazeiro_ba = [-40.5138648, -9.4430087];
+var jandaira_ba = [-37.7354417, -11.6119686];
+var pintadas_ba = [-39.9100821, -11.8127723];
+var riodecontas_ba = [-41.8695791,-13.6287091];
+var rioantonio_ba = [-42.2014269, -14.3400693];
+var ibiassuce_ba = [-42.3784305, -14.2739353];
+var camaca_ba = [-39.5015261, -15.4182649];
+var firminoalves_ba = [-39.9913786, -14.918927];
+var planalto_ba = [-40.4905647, -14.6702913];
+var pocoes_ba = [-40.5533835, -14.5646739];
+var boanova_ba = [-40.2097746, -14.3655932];
+var coaraci_ba = [-39.6885132, -14.6774616];
 var map = new mapboxgl.Map({
   container: 'map',
   center: [-50.498024, -14.756375],
@@ -94,17 +106,136 @@ var map = new mapboxgl.Map({
 });
 
 // create the popup
-var popup = new mapboxgl.Popup({offset: 25})
+var p_urucuca_ba = new mapboxgl.Popup({offset: 25})
 .setHTML('<h4>Uruçuca/BA</h4> <br> <p><a href="/planos/2">veja os detalhes</a></p>');
+
+var p_juazeiro_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Juazeiro/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_jandaira_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Jandaíra/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_pintadas_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Pintadas/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_riodecontas_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Rio de Contas/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_rioantonio_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Rio Antõnio/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_ibiassuce_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Ibiassucê/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_camaca_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Camacã/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_firminoalves_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Firmino Alves/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_planalto_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Planalto/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_pocoes_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Poções/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_boanova_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Boa Nova/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
+
+var p_coaraci_ba = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Coaraci/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
 
 // create DOM element for the marker
 var el = document.createElement('div');
+var el1 = document.createElement('div');
+var el2 = document.createElement('div');
+var el3 = document.createElement('div');
+var el4 = document.createElement('div');
+var el5 = document.createElement('div');
+var el6 = document.createElement('div');
+var el7 = document.createElement('div');
+var el8 = document.createElement('div');
+var el9 = document.createElement('div');
+var el10 = document.createElement('div');
+var el11 = document.createElement('div');
+var el12 = document.createElement('div');
 el.id = 'marker';
-
+el1.id = 'marker';
+el2.id = 'marker';
+el3.id = 'marker';
+el4.id = 'marker';
+el5.id = 'marker';
+el6.id = 'marker';
+el7.id = 'marker';
+el8.id = 'marker';
+el9.id = 'marker';
+el10.id = 'marker';
+el11.id = 'marker';
+el12.id = 'marker';
 // create the marker
 new mapboxgl.Marker(el, {offset:[-25, -25]})
-.setLngLat(urucuca)
-.setPopup(popup) // sets a popup on this marker
+.setLngLat(juazeiro_ba)
+.setPopup(p_juazeiro_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el1, {offset:[-25, -25]})
+.setLngLat(urucuca_ba)
+.setPopup(p_urucuca_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el2, {offset:[-25, -25]})
+.setLngLat(jandaira_ba)
+.setPopup(p_jandaira_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el3, {offset:[-25, -25]})
+.setLngLat(pintadas_ba)
+.setPopup(p_pintadas_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el4, {offset:[-25, -25]})
+.setLngLat(riodecontas_ba)
+.setPopup(p_riodecontas_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el5, {offset:[-25, -25]})
+.setLngLat(rioantonio_ba)
+.setPopup(p_rioantonio_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el6, {offset:[-25, -25]})
+.setLngLat(ibiassuce_ba)
+.setPopup(p_ibiassuce_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el7, {offset:[-25, -25]})
+.setLngLat(camaca_ba)
+.setPopup(p_camaca_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el8, {offset:[-25, -25]})
+.setLngLat(firminoalves_ba)
+.setPopup(p_firminoalves_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el9, {offset:[-25, -25]})
+.setLngLat(planalto_ba)
+.setPopup(p_planalto_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el10, {offset:[-25, -25]})
+.setLngLat(pocoes_ba)
+.setPopup(p_pocoes_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el11, {offset:[-25, -25]})
+.setLngLat(boanova_ba)
+.setPopup(p_boanova_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el12, {offset:[-25, -25]})
+.setLngLat(coaraci_ba)
+.setPopup(p_coaraci_ba) // sets a popup on this marker
 .addTo(map);
 
 map.addControl(new mapboxgl.NavigationControl());
