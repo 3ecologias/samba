@@ -25,9 +25,14 @@ $( document ).ready(function() {
     pause: "false"
   });
 
-  $('.nav a').on('click', function(){
-
+  $('.navbar-nav a').on('click', function(){
     $('.navbar-toggle').click() //bootstrap 3.x by Richard
   });
 
 });
+
+//pre-Loader
+$(window).on('load', (function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	}));

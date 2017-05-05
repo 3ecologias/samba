@@ -2,460 +2,555 @@
 {% load static %}
 {% load mathfilters %}
 
-{% block title %}Relatório do plano {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+{% block title %}Relatório {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
 
 {% block body %}
 {% include 'plan/_header.html' with current='report' user=user plano=plano %}
 
 <div class="mapreport">
-    <div id="mapreport"></div>
+  <div id="mapreport"></div>
 </div>
 <div class="container">
-<div class="row">
-  <div class="report pt-5 pb-5 col-sm-7">
-    <h1>Panorama do Saneamento básico</h1>
+  <div class="row">
+    <div class="report mt-15 pb-10 pt-5 col-sm-8">
+      <h1>Panorama do saneamento básico</h1>
+      {% if indicadores %}
+        {% if indicadores.UA1 and indicadores.UA2 and indicadores.UA3 %}
+          {# Universalização do acesso#}
+          <h2 class="mt-5">Universalização do Acesso</h2>
+          <p>
+            Segundo a Lei no 11.445/2007, universalização é a “ampliação progressiva do acesso de todos os domicílios ocupados ao saneamento básico” (BRASIL, 2007).
+          </p>
+          <p>
+            Para a análise do princípio da universalidade, os indicadores trazem, de uma maneira geral, um panorama da cobertura dos serviços de saneamento no município. Assim, demonstram o desempenho destes serviços (abastecimento de água, esgotamento sanitário, manejo de resíduos sólidos e manejo de águas pluviais) no que diz respeito à cobertura ao longo do tempo. Portanto, a partir dos indicadores, pode-se visualizar a proximidade do município em alcançar a universalização do acesso aos serviços, ou seja, atingir 100% de cobertura para os indicadores.
+          </p>
+          <p>
+            A partir dos dados disponibilizados pelo gestor dos serviços de saneamento básico, é possível afirmar que atualmente dos serviços encontram-se no nível de cobertura apresentada a seguir:
+          </p>
 
-    <p>
-      Município: {{ plano.municipio.nome }}/{{ plano.municipio.UF.sigla }}
-    </p>
-    {% if indicadores.UA1 and indicadores.UA2 and indicadores.UA3 %}
-    {# Universalização do acesso#}
-    <h2>Universalização do Acesso</h2>
-    <p>
-      Segundo a Lei no 11.445/2007, universalização é a “ampliação progressiva do acesso de todos os domicílios ocupados ao saneamento básico” (BRASIL, 2007).
-    </p>
-    <p>
-      Para a análise do princípio da universalidade, os indicadores trazem, de uma maneira geral, um panorama da cobertura dos serviços de saneamento no município. Assim, demonstram o desempenho destes serviços (abastecimento de água, esgotamento sanitário, manejo de resíduos sólidos e manejo de águas pluviais) no que diz respeito à cobertura ao longo do tempo. Portanto, a partir dos indicadores, pode-se visualizar a proximidade do município em alcançar a universalização do acesso aos serviços, ou seja, atingir 100% de cobertura para os indicadores.
-    </p>
-    <p>
-      A partir dos dados disponibilizados pelo gestor dos serviços de saneamento básico, é possível afirmar que atualmente dos serviços encontram-se no nível de cobertura apresentada a seguir:
-    </p>
+          <div class="chart_box mt-5 mb-5">
+            <canvas id="graph__abastecimento"></canvas>
+          </div>
 
-    {# TODO: Gráfico de pizza de cobertura #}
+          <p>
+            O abastecimento de água contempla {{ indicadores.UA1|floatformat:2 }}% dos moradores do município, Na zona urbana, este índice é de {{ indicadores.UA2|floatformat:2 }}%, enquanto na zona rural é de {{ indicadores.UA1|sub:indicadores.UA2|floatformat:2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UA1|floatformat:2 }}% da população a ser atendida para se alcançar universalização deste serviço.
+          </p>
 
-    <canvas id="graph__abastecimento"></canvas>
+          <p>
+            Alternativas de abastecimento como poço e nascente são até hoje utilizadas em algumas localidades da zona rural, suprindo as necessidades de consumo da população. As soluções individualizadas representam {{ indicadores.UA3|floatformat:2 }}% deste total.
+          </p>
 
+          {% if indicadores.UA1 < 100 %}
+            <p>
+              A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura do abastecimento por água potável, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal à água potável. Nesse sentido, o município deve considerar o mais adequado modelo de prestação de serviço, a importância da proteção dos mananciais, tomando partido de diferentes modelos tecnológicos.
+            </p>
+          {% else %}
+            <p>
+              A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura do abastecimento por água potável e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional.
+            </p>
+          {% endif %}
+        {% endif %}
 
-    <p>
-      O abastecimento de água contempla {{ indicadores.UA1 }}% dos moradores do município, Na zona urbana, este índice é de {{ indicadores.UA2 }}%, enquanto na zona rural é de {{ indicadores.UA1|sub:indicadores.UA2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UA1 }}% da população a ser atendida para se alcançar universalização deste serviço.
-    </p>
+        {% if indicadores.UE1 and indicadores.UE2 and indicadores.UE3 and indicadores.UE4 %}
+          <h3 class="mt-5">Esgotamento Sanitário</h3>
 
-    <p>
-      Alternativas de abastecimento como poço e nascente são até hoje utilizadas em algumas localidades da zona rural, suprindo as necessidades de consumo da população. As soluções individualizadas representam {{ indicadores.UA3 }}% deste total.
-    </p>
+          <div class="chart_box mt-5 mb-5">
+            <canvas id="graph__esgotamento"></canvas>
+          </div>
 
-    {% if indicadores.UA1 < 100 %}
-    <p>
-      A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura do abastecimento por água potável, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal à água potável. Nesse sentido, o município deve considerar o mais adequado modelo de prestação de serviço, a importância da proteção dos mananciais, tomando partido de diferentes modelos tecnológicos.
-    </p>
-    {% else %}
-    <p>
-      A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura do abastecimento por água potável e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional.
-    </p>
-    {% endif %}
-    {% endif %}
+          <p>
+            O índice de atendimento de esgoto por rede de esgotamento sanitário no município é de {{ indicadores.UE1|floatformat:2 }}%, sendo este índice de {{ indicadores.UE2|floatformat:2 }}% na zona urbana e {{ indicadores.UE1|sub:indicadores.UE2|floatformat:2 }}% na zona rural. Assim, existe um montante de {{ 100|sub:indicadores.UA1|floatformat:2 }}% da população a ser atendida para se alcançar universalização deste serviço. Outras formas de esgotamento são utilizadas além da rede, como fossa séptica, fossa rudimentar entre outros. As soluções individualizadas somam {{ indicadores.UE3|floatformat:2 }}%, sendo {{ indicadores.UE4|floatformat:2 }}% referentes à população urbana.
+          </p>
 
-    {% if indicadores.UE1 and indicadores.UE2 and indicadores.UE3 and indicadores.UE4 %}
-    <h3>Esgotamento Sanitário</h3>
+          <p>
+            O maior desafio para essa componente do saneamento é garantir que toda a população tenha acesso a uma solução adequada para a destinação das excretas e das águas servidas. Assim, a universalização dos banheiros e sanitários deve seguir simultânea às intervenções necessárias à retirada de lançamento de esgotos não tratados nos corpos hídricos e o lançamento a céu aberto das águas servidas. Para tanto, é necessário observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal dessa componente do saneamento básico.
+          </p>
 
-    {# TODO: Gráfico de Pizza de esgotamento #}
+          {% if indicadores.UE1 < 100 %}
+            <p>
+              A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura da coleta de esgotos sanitários, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal. Nesse sentido, o município deve considerar o mais adequado modelo de prestação de serviço, a importância do uso de modelos tecnológicos adequados, bem como nas oportunidades que podem surgir com o reuso dos efluentes.
+            </p>
+          {% else %}
+            <p>
+              A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura do esgotamento sanitário e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional.
+            </p>
+          {% endif %}
+        {% endif %}
 
-    <canvas id="graph__esgotamento"></canvas>
+        {% if indicadores.UR1 and indicadores.UR2 %}
+          <h3 class="mt-5">Resíduos Sólidos</h3>
 
-    <p>
-      O índice de atendimento de esgoto por rede de esgotamento sanitário no município é de {{ indicadores.UE1 }}%, sendo este índice de {{ indicadores.UE2 }}% na zona urbana e {{ indicadores.UE1|sub:indicadores.UE2 }}% na zona rural. Assim, existe um montante de {{ 100|sub:indicadores.UA1 }}% da população a ser atendida para se alcançar universalização deste serviço. Outras formas de esgotamento são utilizadas além da rede, como fossa séptica, fossa rudimentar entre outros. As soluções individualizadas somam {{ indicadores.UE3 }}%, sendo {{ indicadores.UE4 }}% referentes à população urbana.
-    </p>
+          <div class="chart_box mt-5 mb-5">
+            <canvas id="graph__residuo"></canvas>
+          </div>
 
-    <p>
-      O maior desafio para essa componente do saneamento é garantir que toda a população tenha acesso a uma solução adequada para a destinação das excretas e das águas servidas. Assim, a universalização dos banheiros e sanitários deve seguir simultânea às intervenções necessárias à retirada de lançamento de esgotos não tratados nos corpos hídricos e o lançamento a céu aberto das águas servidas. Para tanto, é necessário observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal dessa componente do saneamento básico.
-    </p>
+          <p>
+            O índice de cobertura do serviço de coleta de resíduos sólidos no município é de {{ indicadores.UR1|floatformat:2 }}%. Para a zona urbana, esta porcentagem é de {{ indicadores.UR2|floatformat:2 }}%, sendo para a zona rural de {{ indicadores.UR1|sub:indicadores.UR2|floatformat:2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UR1|floatformat:2 }}% da população a ser atendida para se alcançar universalização deste serviço.
+          </p>
 
-    {% if indicadores.UE1 < 100 %}
-    <p>
-      A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura da coleta de esgotos sanitários, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal. Nesse sentido, o município deve considerar o mais adequado modelo de prestação de serviço, a importância do uso de modelos tecnológicos adequados, bem como nas oportunidades que podem surgir com o reuso dos efluentes.
-    </p>
-    {% else %}
-    <p>
-      A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura do esgotamento sanitário e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional.
-    </p>
-    {% endif %}
-    {% endif %}
+          {% if indicadores.UR1 < 100 %}
+            <p>
+              A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura da coleta de resíduos sólidos, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal. Nesse sentido, para a melhoria da qualidade dos serviços e para que se consiga satisfazer ao preconizado na Política Nacional de Resíduos Sólidos, tão importante quanto diversificar estratégias de coleta e estabelecer uma destinação final adequada para os resíduos, é estabelecer um programa de educação ambiental e sanitária onde tais estratégias sejam apresentadas à população usuária do serviço de maneira que esta seja informada da importância da mudança de comportamento e dos benefícios correspondentes, que dependerá tanto da ação do poder público como da população usuária dos serviços.
+            </p>
+          {% else %}
+            <p>
+              A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura da coleta de resíduos sólidos e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional, bem como garantir a destinação final adequada e a continua manutenção de uma cultura da minimização da geração de resíduos.
+            </p>
+          {% endif %}
 
-    {% if indicadores.UR1 and indicadores.UR2 %}
-    <h3>Resíduos Sólidos</h3>
+          {% if indicadores.UD1 %}
+            <h3 class="mt-5">Manejo de Águas Pluviais</h3>
 
-    <canvas id="graph__residuo"></canvas>
+            <div class="chart_box mt-5 mb-5">
+              <canvas id="graph__aguas-pluv"></canvas>
+            </div>
 
-    <p>
-      O índice de cobertura do serviço de coleta de resíduos sólidos no município é de {{ indicadores.UR1 }}%. Para a zona urbana, esta porcentagem é de {{ indicadores.UR2 }}%, sendo para a zona rural de {{ indicadores.UR1|sub:indicadores.UR2 }}%. Assim, existe um montante de {{ 100|sub:indicadores.UR1 }}% da população a ser atendida para se alcançar universalização deste serviço.
-    </p>
+            <p>
+              O índice de atendimento de drenagem urbana no município é de {{ indicadores.UD1|floatformat:2 }}%, restando ainda cerca de {{ 100|sub:indicadores.UD1|floatformat:2 }}% das vias e ruas para serem atendidas com esse serviço, ação necessária à universalização do acesso.
+            </p>
 
-    {% if indicadores.UR1 < 100 %}
-    <p>
-      A partir desses dados, demonstra-se que o município terá que investir na ampliação da cobertura da coleta de resíduos sólidos, devendo, para tanto, observar o PMSB com seus programas, projetos e ações, a fim de atingir o acesso universal. Nesse sentido, para a melhoria da qualidade dos serviços e para que se consiga satisfazer ao preconizado na Política Nacional de Resíduos Sólidos, tão importante quanto diversificar estratégias de coleta e estabelecer uma destinação final adequada para os resíduos, é estabelecer um programa de educação ambiental e sanitária onde tais estratégias sejam apresentadas à população usuária do serviço de maneira que esta seja informada da importância da mudança de comportamento e dos benefícios correspondentes, que dependerá tanto da ação do poder público como da população usuária dos serviços.
-    </p>
-    {% else %}
-    <p>
-      A partir desses dados, demonstra-se que o município conseguiu investir na ampliação da cobertura da coleta de resíduos sólidos e, portanto, alcançar a universalização do acesso. Porém, sempre se deve acompanhar o PMSB a fim de ampliar a oferta desse serviço simultâneo à dinâmica populacional, bem como garantir a destinação final adequada e a continua manutenção de uma cultura da minimização da geração de resíduos.
-    </p>
-    {% endif %}
+            <p>
+              Além da infraestrutura de micro e macrodrenagem o gerenciamento da água de chuva que escoa no meio urbano com soluções de prevenção é importante para minimizar os riscos associados à urbanização desordenada, permitindo um maior avanço na direção de um serviço que possibilita o desenvolvimento urbano de forma harmônica, articulada e sustentável.
+            </p>
+          {% endif %}
+        {% endif %}
 
-    {% if indicadores.UD1 %}
-    <h3>Manejo de Águas Pluviais</h3>
-
-    <canvas id="graph__aguas-pluv"></canvas>
-
-    <p>
-      O índice de atendimento de drenagem urbana no município é de {{ indicadores.UD1 }}%, restando ainda cerca de {{ 100|sub:indicadores.UD1 }}% das vias e ruas para serem atendidas com esse serviço, ação necessária à universalização do acesso.
-    </p>
-
-    <p>
-      Além da infraestrutura de micro e macrodrenagem o gerenciamento da água de chuva que escoa no meio urbano com soluções de prevenção é importante para minimizar os riscos associados à urbanização desordenada, permitindo um maior avanço na direção de um serviço que possibilita o desenvolvimento urbano de forma harmônica, articulada e sustentável.
-    </p>
-    {% endif %}
-    {% endif %}
-
-    {# Tecnologia Apropriada#}
-    <h2>Tecnologia Apropriada</h2>
-
-    <p>
-      Segundo os princípios fundamentais, constantes nos incisos V e VIII do art. 2º da Lei Nacional do Saneamento Básico, os métodos, as técnicas e os processos, entendidos aqui como tecnologias apropriadas, devem considerar as peculiaridades locais e regionais e a capacidade de pagamento dos usuários (Plansab, 2011).
-    </p>
-    <p>
-      Tecnologia apropriada é uma tecnologia baseada em conhecimentos técnicos e experiências práticas, visando trabalhar com a realidade local e de preferência com os materiais que mais facilmente se obtenha, sempre em busca de aperfeiçoamento para melhor atender às comunidades e aos objetivos de promoção da saúde pública e proteção ambiental.
-    </p>
-    <p>
-      Além das características acima, para considerar-se uma tecnologia apropriada deve-se observar ainda: baixo investimento por posto de trabalho, baixo capital investido por unidade produzida, potencial de geração de empregos, simplicidade organizacional, pequena escala de produção, alto grau de adaptabilidade ao ambiente sociocultural, auto-suficiência local e regional, economia no uso de recursos naturais, preferência pelo uso de recursos renováveis e controle social (RODRIGUES; BARBIERI, 2008).
-    </p>
-    <p>
-      Assim, para análise desta categoria se utiliza a dimensão qualitativa, onde se avalia a solução adotada em cada região do município a fim de verificar se a tecnologia adotada é a adequada para a realidade vivenciada pelos usuários.
-    </p>
-
-
-    {% if indicadores.TA1 %}
-    <h3>Abastecimento de Água</h3>
-    <p>
-      Um Sistema de Abastecimento de Água pode ser concebido e projetado para atender a pequenos povoados ou a grandes cidades, variando nas características e no porte de suas instalações.
-    </p>
-    <p>
-      As soluções individuais de abastecimento são mais comumente usadas em locais onde a população vive dispersa no território. Nesse caso, normalmente se utiliza mananciais subterrâneos (com bombeamento) e/ou água de chuva (armazenamento em cisternas), fontes de água onde a potabilidade é mais segura. No caso da utilização de mananciais superficiais para soluções individuais o controle da qualidade do manancial e o uso de técnicas caseiras de tratamento são fundamentais para a prevenção de doenças.
-    </p>
-    <p>
-      Além disso, as soluções individuais podem ser utilizadas como forma de complementação do uso da água em diferentes atividades, a exemplo de jardinagem, lavagem de áreas, entre outros, diminuindo a utilização de água tratada para usos que exigem menor potabilidade.
-    </p>
-    <p>
-      A(s) solução(ões) de abastecimento de água adotada(s) no município é (são): {{ indicadores.TA1 }}.
-    </p>
-    {% endif %}
-
-    {% if indicadores.TE1 %}
-    <h3>Esgotamento Sanitário</h3>
-    <p>
-      Um Sistema de Esgotamento Sanitário pode ser concebido e projetado para atender a pequenos povoados ou a grandes cidades, variando nas características e no porte de suas instalações.
-    </p>
-    <p>
-      As soluções individuais de esgotamento são mais comumente usadas em locais onde a população vive dispersa no território, ou quando o subsolo do território tem características que privilegiam esse tipo de solução. Ainda, em se tratando de soluções individuais de esgotamento sanitário, além das variações entre uso da água para transporte das excretas ou não, no caso dos sanitários secos, a segregação entre as águas cinzas e as águas do vaso sanitário e a integração dessas soluções com atividades de reuso em agricultura são fundamentais para a colaboração com a sustentabilidade ambiental no saneamento.
-    </p>
-    <p>
-      Nesse caso, a prática do reuso na agricultura pode e deve ser replicada para os sistemas coletivos também, que com esse objetivo, não poderão receber efluentes industriais, já que esses, normalmente, trazem substâncias que exigem um maior rigor na destinação do efluente para atividades agrícolas, o que pode tornar a prática de reuso agrícola inviável economicamente.
-    </p>
-    <p>
-      A(s) solução(ões) de esgotamento sanitário adotada(s) no município é (são): {{ indicadores.TE1 }}
-    </p>
-    {% endif %}
-
-    {% if indicadores.TR1 and indicadores.TR2 %}
-    <h3>Resíduos Sólidos</h3>
-    <p>
-      Os resíduos sólidos constituem problema sanitário de importância, quando não recebem o manejo adequado. No caso da componente de resíduos sólidos o uso de tecnologias apropriadas se relaciona às diferentes etapas do serviço. Deve-se desde a concepção planejar as melhores estratégias para cada região do município, como os equipamentos de coleta (carroças, carro de mão, caminhões, pontos de coleta voluntária, etc). Implantação de coleta seletiva, implantação de soluções de disposição final ambientalmente adequadas, inserção de cooperativas de catadores de materiais reaproveitáveis de baixa renda, entre outros.
-    </p>
-    <p>
-      Assim, as estratégias adotadas para a prestação desse serviço é de extrema importância para um futuro mais voltado às questões socioambientais no saneamento.
-    </p>
-    <p>
-      A(s) solução(ões) para manejo de resíduos sólidos adotada(s) no município é (são): {{ indicadores.TR1 }}.
-    </p>
+        {% if indicadores.TA1 or indicadores.TE1 or indicadores.TR1 or indicadores.TR2 or indicadores.TD1 or indicadores.TD2 %}
+          <h2 class="mt-5">Tecnologia Apropriada</h2>
+          <p>
+            Segundo os princípios fundamentais, constantes nos incisos V e VIII do art. 2º da Lei Nacional do Saneamento Básico, os métodos, as técnicas e os processos, entendidos aqui como tecnologias apropriadas, devem considerar as peculiaridades locais e regionais e a capacidade de pagamento dos usuários (Plansab, 2011).
+          </p>
+          <p>
+            Tecnologia apropriada é uma tecnologia baseada em conhecimentos técnicos e experiências práticas, visando trabalhar com a realidade local e de preferência com os materiais que mais facilmente se obtenha, sempre em busca de aperfeiçoamento para melhor atender às comunidades e aos objetivos de promoção da saúde pública e proteção ambiental.
+          </p>
+          <p>
+            Além das características acima, para considerar-se uma tecnologia apropriada deve-se observar ainda: baixo investimento por posto de trabalho, baixo capital investido por unidade produzida, potencial de geração de empregos, simplicidade organizacional, pequena escala de produção, alto grau de adaptabilidade ao ambiente sociocultural, auto-suficiência local e regional, economia no uso de recursos naturais, preferência pelo uso de recursos renováveis e controle social (RODRIGUES; BARBIERI, 2008).
+          </p>
+          <p>
+            Assim, para análise desta categoria se utiliza a dimensão qualitativa, onde se avalia a solução adotada em cada região do município a fim de verificar se a tecnologia adotada é a adequada para a realidade vivenciada pelos usuários.
+          </p>
 
 
-    {% if indicadores.TR2 == 'Sim' %}
-    <p>
-      No município, existe coleta seletiva do lixo.
-    </p>
-    {% else %}
-    <p>
-      No município, não existe coleta seletiva do lixo.
-    </p>
-    {% endif %}
-    {% endif %}
+          {% if indicadores.TA1 %}
+            <h3 class="mt-5">Abastecimento de Água</h3>
+            <p>
+              Um Sistema de Abastecimento de Água pode ser concebido e projetado para atender a pequenos povoados ou a grandes cidades, variando nas características e no porte de suas instalações.
+            </p>
+            <p>
+              As soluções individuais de abastecimento são mais comumente usadas em locais onde a população vive dispersa no território. Nesse caso, normalmente se utiliza mananciais subterrâneos (com bombeamento) e/ou água de chuva (armazenamento em cisternas), fontes de água onde a potabilidade é mais segura. No caso da utilização de mananciais superficiais para soluções individuais o controle da qualidade do manancial e o uso de técnicas caseiras de tratamento são fundamentais para a prevenção de doenças.
+            </p>
+            <p>
+              Além disso, as soluções individuais podem ser utilizadas como forma de complementação do uso da água em diferentes atividades, a exemplo de jardinagem, lavagem de áreas, entre outros, diminuindo a utilização de água tratada para usos que exigem menor potabilidade.
+            </p>
+            <p>
+              A(s) solução(ões) de abastecimento de água adotada(s) no município é (são):
+            </p>
+            <p>
+              {{ indicadores.TA1 }}.
+            </p>
+            {% if descricao.TA1 %}
+              <blockquote>
+                <p>{{ descricao.TA1 }}</p>
+                <footer><cite title="Source Title">Descrição da solução</cite></footer>
+              </blockquote>
+            {% endif %}
+          {% endif %}
 
-    {% if indicadores.TD1 and indicadores.TD2 %}
-    <h3>Manejo de Águas Pluviais</h3>
-    <p>
-      O uso de tecnologias apropriadas no manejo das águas de chuva e drenagem urbana tem relação direta com a utilização de medidas preventivas de detenção e/ou retenção de escoamentos. Essas medidas devem ser implantadas tanto nas áreas particulares (lotes que sofrem modificações a partir da construção de edificações) quanto nas áreas públicas (praças, vias públicas, leitos de rios, lagoas, edificações públicas). Nesse sentido, as medidas preventivas devem estar associadas aos sistemas públicas de microdrenagem - sistema de escoamento das águas pluviais pelas vias das áreas urbanizadas -, e de macrodrenagem - sistema natural de drenagem, ou seja, os cursos de água estruturados pela natureza nos pontos mais baixos dos terrenos-, dessa maneira é possível evoluir na implantação de um sistema ancorado na lógica do desenvolvimento sustentável e da tecnologia apropriada.
-    </p>
-    <p>
-      No município, existe(m) a(s) seguinte(s) infraestrutura(s) básica(s) de sistema de drenagem: {{ indicadores.TD1 }}
-    </p>
-    <p>
-      Com relação a soluções sustentáveis de prevenção, no município, encontramos as seguintes: {{ indicadores.TD2 }}
-    </p>
-    {% endif %}
+          {% if indicadores.TE1 %}
+            <h3 class="mt-5">Esgotamento Sanitário</h3>
+            <p>
+              Um Sistema de Esgotamento Sanitário pode ser concebido e projetado para atender a pequenos povoados ou a grandes cidades, variando nas características e no porte de suas instalações.
+            </p>
+            <p>
+              As soluções individuais de esgotamento são mais comumente usadas em locais onde a população vive dispersa no território, ou quando o subsolo do território tem características que privilegiam esse tipo de solução. Ainda, em se tratando de soluções individuais de esgotamento sanitário, além das variações entre uso da água para transporte das excretas ou não, no caso dos sanitários secos, a segregação entre as águas cinzas e as águas do vaso sanitário e a integração dessas soluções com atividades de reuso em agricultura são fundamentais para a colaboração com a sustentabilidade ambiental no saneamento.
+            </p>
+            <p>
+              Nesse caso, a prática do reuso na agricultura pode e deve ser replicada para os sistemas coletivos também, que com esse objetivo, não poderão receber efluentes industriais, já que esses, normalmente, trazem substâncias que exigem um maior rigor na destinação do efluente para atividades agrícolas, o que pode tornar a prática de reuso agrícola inviável economicamente.
+            </p>
+            <p>
+              A(s) solução(ões) de esgotamento sanitário adotada(s) no município é (são):
+            </p>
+            <p>
+              {{ indicadores.TE1 }}.
+            </p>
+            {% if indicadores.TE1 %}
+              <blockquote>
+                <p>{{ descricao.TE1 }}</p>
+                <footer><cite title="Source Title">Descrição da solução</cite></footer>
+              </blockquote>
+            {% endif %}
+          {% endif %}
+
+          {% if indicadores.TR1 and indicadores.TR2 %}
+            <h3 class="mt-5">Resíduos Sólidos</h3>
+            <p>
+              Os resíduos sólidos constituem problema sanitário de importância, quando não recebem o manejo adequado. No caso da componente de resíduos sólidos o uso de tecnologias apropriadas se relaciona às diferentes etapas do serviço. Deve-se desde a concepção planejar as melhores estratégias para cada região do município, como os equipamentos de coleta (carroças, carro de mão, caminhões, pontos de coleta voluntária, etc). Implantação de coleta seletiva, implantação de soluções de disposição final ambientalmente adequadas, inserção de cooperativas de catadores de materiais reaproveitáveis de baixa renda, entre outros.
+            </p>
+            <p>
+              Assim, as estratégias adotadas para a prestação desse serviço é de extrema importância para um futuro mais voltado às questões socioambientais no saneamento.
+            </p>
+            <p>
+              A(s) solução(ões) para manejo de resíduos sólidos adotada(s) no município é (são):
+            </p>
+            <p>
+               {{ indicadores.TR1 }}.
+            </p>
+            <blockquote>
+              <p>{{ descricao.TR1 }}</p>
+              <footer><cite title="Source Title">Descrição da solução</cite></footer>
+            </blockquote>
+
+            {% if indicadores.TR2 == 'Sim' %}
+              <p>
+                No município, existe coleta seletiva do lixo.
+              </p>
+            {% else %}
+              <p>
+                No município, não existe coleta seletiva do lixo.
+              </p>
+            {% endif %}
+            {% if indicadores.TR2 %}
+              <blockquote>
+                <p>{{ descricao.TR2 }}</p>
+                <footer><cite title="Source Title">Descrição da solução</cite></footer>
+              </blockquote>
+            {% endif %}
+          {% endif %}
+
+          {% if indicadores.TD1 and indicadores.TD2 %}
+            <h3 class="mt-5">Manejo de Águas Pluviais</h3>
+            <p>
+              O uso de tecnologias apropriadas no manejo das águas de chuva e drenagem urbana tem relação direta com a utilização de medidas preventivas de detenção e/ou retenção de escoamentos. Essas medidas devem ser implantadas tanto nas áreas particulares (lotes que sofrem modificações a partir da construção de edificações) quanto nas áreas públicas (praças, vias públicas, leitos de rios, lagoas, edificações públicas). Nesse sentido, as medidas preventivas devem estar associadas aos sistemas públicas de microdrenagem - sistema de escoamento das águas pluviais pelas vias das áreas urbanizadas -, e de macrodrenagem - sistema natural de drenagem, ou seja, os cursos de água estruturados pela natureza nos pontos mais baixos dos terrenos-, dessa maneira é possível evoluir na implantação de um sistema ancorado na lógica do desenvolvimento sustentável e da tecnologia apropriada.
+            </p>
+            <p>
+              No município, existe(m) a(s) seguinte(s) infraestrutura(s) básica(s) de sistema de drenagem:
+            </p>
+            <p>
+               {{ indicadores.TD1 }}.
+            </p>
+            <blockquote>
+              <p>{{ descricao.TD1 }}</p>
+              <footer><cite title="Source Title">Descrição da solução</cite></footer>
+            </blockquote>
+            <p>
+              Com relação a soluções sustentáveis de prevenção, no município, encontramos as seguintes:
+            </p>
+            <p>
+               {{ indicadores.TD2 }}.
+            </p>
+            {% if indicadores.TD2 %}
+              <blockquote>
+                <p>{{ descricao.TD2 }}</p>
+                <footer><cite title="Source Title">Descrição da solução</cite></footer>
+              </blockquote>
+            {% endif %}
+          {% endif %}
+        {% endif %}{# fim Tecnologia Apropriada #}
 
 
-    {# QUALIDADE DOS SERVIÇOS PRESTADOS#}
-    <h2>Qualidade dos serviços prestados</h2>
+        {# QUALIDADE DOS SERVIÇOS PRESTADOS#}
+        {# verifica se algum indicador foi preenchido antes de mostrar a introduçao#}
+        {% if indicadores.SQ1 or indicadores.SQ2 or indicadores.SQ3 or indicadores.SQ4 or indicadores.SQ5 or indicadores.SQ6 or indicadores.SQ7 or indicadores.SQ8 or indicadores.SQ9 or indicadores.SC1 or indicadores.SC2 or indicadores.SC3 or indicadores.SC4 or indicadores.SC5 or indicadores.SC6 or indicadores.SC7 or indicadores.SH1 or indicadores.SH2 or indicadores.SN1 or indicadores.SN2 or indicadores.SN3 or indicadores.SN4 or indicadores.SN5 or indicadores.SN6 or indicadores.SN7 or indicadores.SN8 or indicadores.SN9 or indicadores.SN10 or indicadores.SN11 or indicadores.SN12 or indicadores.SN13 or indicadores.SN14 or indicadores.SN15 or indicadores.SE1 or indicadores.SE2 or indicadores.SE3 or indicadores.SE4 or indicadores.SV1 or indicadores.SS1 or indicadores.ST4 or indicadores.ST5 or indicadores.QA1 or indicadores.QA2 or indicadores.QA3 or indicadores.QA4 or indicadores.QA5 or indicadores.QA6 or indicadores.QC1 or indicadores.QC2 or indicadores.QC3 or indicadores.QC4 or indicadores.QR1 or indicadores.QR2 or indicadores.QR3 or indicadores.QR4 or indicadores.QR5 or indicadores.QR6 or indicadores.QR7 or indicadores.QS1 or indicadores.QS2 or indicadores.QS3 or indicadores.QT1 or indicadores.QT2 or indicadores.QT3 or indicadores.QT4 or indicadores.QT5 or indicadores.QT6 or indicadores.QT7 or indicadores.QT8 or indicadores.QT9 or indicadores.QT10 or indicadores.QT11 or indicadores.QT12 or indicadores.QT13 or indicadores.QT14 or indicadores.QT15 or indicadores.QM1 or indicadores.QM2 or indicadores.QM3 %}
+        {# é realmente grande #}
+          <h2 class="mt-5">Qualidade dos serviços prestados</h2>
 
-    <p>
-      A qualidade da solução ou dos serviços públicos de saneamento básico é aquela adequada ao atendimento das suas funções no ponto de vista sanitário e ambiental (PLANSAB, 2011).
-    </p>
-    <p>
-      O artigo 43 da Lei nº. 11.445/2007 traz como condições mínimas de qualidade na prestação dos serviços públicos de saneamento básico: a regularidade, a continuidade, os aspectos relativos aos produtos oferecidos, o atendimento dos usuários e os relativos às condições operacionais e de manutenção dos sistemas, de acordo com as normas regulamentares e contratuais (PLANSAB, 2011). Assim, os indicadores dessa categoria pretendem analisar as condições de qualidade na prestação dos serviços de saneamento.
-    </p>
+          <p>
+            A qualidade da solução ou dos serviços públicos de saneamento básico é aquela adequada ao atendimento das suas funções no ponto de vista sanitário e ambiental (PLANSAB, 2011).
+          </p>
+          <p>
+            O artigo 43 da Lei nº. 11.445/2007 traz como condições mínimas de qualidade na prestação dos serviços públicos de saneamento básico: a regularidade, a continuidade, os aspectos relativos aos produtos oferecidos, o atendimento dos usuários e os relativos às condições operacionais e de manutenção dos sistemas, de acordo com as normas regulamentares e contratuais (PLANSAB, 2011). Assim, os indicadores dessa categoria pretendem analisar as condições de qualidade na prestação dos serviços de saneamento.
+          </p>
 
-    {% if indicadores.QA1 and indicadores.QA2 or indicadores.QA3 and indicadores.QA4 or indicadores.QA5 and indicadores.QA6 %}
-    <h3>Qualidade da água</h3>
-    <p>
-      Para análise da qualidade da água de sistemas e soluções coletivos de abastecimento se utiliza como referência a Portaria MS nº 2914/ 2011, onde são estabelecidos os padrões de potabilidade e valores máximos e mínimos para os diferentes parâmetros.
-    </p>
-    <p>
-      Em relação à conformidade das amostras da água coletadas para os parâmetros de cloro residual, turbidez e coliforme totais, tem-se:
-    </p>
+          {% if indicadores.QA1 and indicadores.QA2 or indicadores.QA3 and indicadores.QA4 or indicadores.QA5 and indicadores.QA6 %}
+            <h3 class="mt-5">Qualidade da água</h3>
+            <p>
+              Para análise da qualidade da água de sistemas e soluções coletivos de abastecimento se utiliza como referência a Portaria MS nº 2914/ 2011, onde são estabelecidos os padrões de potabilidade e valores máximos e mínimos para os diferentes parâmetros.
+            </p>
+            <p>
+              Em relação à conformidade das amostras da água coletadas para os parâmetros de cloro residual, turbidez e coliforme totais, tem-se:
+            </p>
 
-    {% if indicadores.QA1 and indicadores.QA2 %}
-    <p>
-      CLORO RESIDUAL
-    </p>
+            {% if indicadores.QA1 and indicadores.QA2 %}
+              <h4 class="mt-5">
+                CLORO RESIDUAL
+              </h4>
 
-    <canvas id="graph__cloro"></canvas>
+              <div class="chart_box mt-5 mb-5">
+                <canvas id="graph__cloro"></canvas>
+              </div>
 
-    <p>
-      O índice de conformidade da quantidade de amostra para cloro residual ficou em {{ indicadores.QA1 }}%, sendo, portanto, a incidência das análises fora do padrão de {{ indicadores.QA2 }}%.
-    </p>
-    <p>
-      {% if indicadores.QA1 < 95 %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
+              <p>
+                O índice de conformidade da quantidade de amostra para cloro residual ficou em {{ indicadores.QA1|floatformat:2 }}%, sendo, portanto, a incidência das análises fora do padrão de {{ indicadores.QA2|floatformat:2 }}%.
+              </p>
+              <p>
+                {% if indicadores.QA1 < 95 %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
+                {% else %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
+                {% endif %}
+              </p>
+            {% endif %}
+
+            {%if indicadores.QA3 and indicadores.QA4 %}
+              <h4 class="mt-5">
+                TURBIDEZ
+              </h4>
+
+              <div class="chart_box mt-5 mb-5">
+                <canvas id="graph__turbidez"></canvas>
+              </div>
+
+              <p>
+                Para turbidez, o índice de conformidade foi de {{ indicadores.QA3|floatformat:2 }}%, estando {{ indicadores.QA4|floatformat:2 }}% das amostras fora do padrão.
+              </p>
+              <p>
+                {% if indicadores.QA3 < 95 %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
+                {% else %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
+                {% endif %}
+              </p>
+            {% endif %}
+
+            {% if indicadores.QA5 and indicadores.QA6 %}
+              <h4 class="mt-5">
+                COLIFORMES TOTAIS
+              </h4>
+
+              <div class="chart_box mt-5 mb-5">
+                <canvas id="graph__coliformes"></canvas>
+              </div>
+
+              <p>
+                Já para coliformes totais, este índice de conformidade foi de {{ indicadores.QA5|floatformat:2 }}% no  período, enquanto a incidência das análises fora do padrão registrou {{ indicadores.QA6|floatformat:2 }}%.
+              </p>
+              <p>
+                {% if indicadores.QA5 < 95 %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
+                {% else %}
+                  Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
+                {% endif %}
+              </p>
+            {% endif %}
+          {% endif %}
+          {% if indicadores.QC1 or indicadores.QC2 %}
+            <h3 class="mt-5"> Cortesia no atendimento ao usuário </h3>
+            {% if indicadores.QC1 %}
+              <p>
+                Foram registradas pela prestadora dos serviços, no período, {{ indicadores.QC1 }} para os serviços de abastecimento de água. O que indica que a prestação do serviço de abastecimento de água está :
+                {% if indicadores.QC1 > 150 %}
+                  Ruim.
+                {% elif indicadores.QC1 > 100 %}
+                  Mediano.
+                {% elif indicadores.QC1 > 50 %}
+                  Bom.
+                {% else %}
+                  Excelente.
+                {% endif %}
+              </p>
+            {% endif %}
+            {% if indicadores.QC2 %}
+              <p>
+                Para os serviços de esgotamento sanitário foram registrados no período, {{ indicadores.QC2 }} pela prestadora dos serviços, O que indica que a prestação do serviço de esgotamento sanitário está :
+                {% if indicadores.QC2 > 150 %}
+                  Ruim.
+                {% elif indicadores.QC2 > 100 %}
+                  Mediano.
+                {% elif indicadores.QC2 > 50 %}
+                  Bom.
+                {% else %}
+                  Excelente.
+                {% endif %}
+              </p>
+            {% endif %}
+          {% endif %}
+
+          {% if indicadores.QR1 and indicadores.QR2 and indicadores.QR3 and indicadores.QR4 %}
+            <h3 class="mt-5"> Regularidade / Continuidade </h3>
+            <p>
+              A duração média das paralisações foi de {{ indicadores.QR1 }} horas/paralisação, enquanto que a duração média das intermitências foi de {{ indicadores.QR2 }} horas/interrupção.
+              A duração média dos reparos de extravasamentos de esgotos foi de {{ indicadores.QR3 }} horas/extravasamento, e houve {{ indicadores.QR4 }} extravasamento/km por extensão de rede.
+            </p>
+          {% endif %}
+
+          {% if indicadores.QS1 or indicadores.QS2 %}
+            <h3 class="mt-5"> Segurança </h3>
+            {% if indicadores.QS1 %}
+              <p>
+                O nível de segurança contra contaminação dos mananciais aquíferos (superficial e subterrâneo) foi de {{ indicadores.QS1|floatformat:2 }}%.
+              </p>
+              <p>
+                {% if indicadores.QS1 == 100 %}
+                  O indicador aponta para a prática de uma política de proteção de mananciais ampla e com amplitude adequada, já que, é ideal para a perpétua melhoria do abastecimento que os mananciais utilizados para abastecimento humano sempre sejam protegidos pelo prestador do serviço bem como pelo poder concedente do serviço.
+                {% elif indicadores.QS1 < 100 %}
+                  O indicador aponta para a prática de uma política de proteção de mananciais ainda deficiente, já que a amplitude ideal para a perpétua melhoria do abastecimento é que os mananciais utilizados para abastecimento humano sempre sejam protegidos quer seja por ações do prestador do serviço bem como do poder concedente do serviço.
+                {% endif %}
+              </p>
+            {% endif %}
+            {% if indicadores.QS2 %}
+              <p>
+                {{ indicadores.QS2 }} ocorrências/mês foram registradas quanto a vandalismo, roubo/furto e depredações.
+              </p>
+            {% endif %}
+          {% endif %}
+
+          {% if indicadores.QT1 and indicadores.QT2 and indicadores.QT3 and indicadores.QT4 and indicadores.QT5 and indicadores.QT6 and indicadores.QT7 and indicadores.QT8 and indicadores.QT9 and indicadores.QT10 and indicadores.QT11 %}
+            <h3 class="mt-5"> Condições técnico-operacionais e de manutenção </h3>
+            <p>
+              O cadastro técnico atualizado da rede de abastecimento de água é de {{ indicadores.QT1|floatformat:2 }}% do total, sendo este valor de {{ indicadores.QT2|floatformat:2 }}% para esgotamento, de {{ indicadores.QT3|floatformat:2 }}% para cadastro do sistema de drenagem e de {{ indicadores.QT4|floatformat:2 }} % para o cadastro da rota de coleta de resíduo sólido.
+            </p>
+            <p>
+              O grau de qualificação técnica dos profissionais envolvidos é de {{ indicadores.QT5 }} funcionários de nível superior, {{ indicadores.QT6 }} funcionários de (nível técnico), e {{ indicadores.QT7 }} funcionários que receberam alguma qualificação de saneamento e meio ambiente.
+            </p>
+            {% if indicadores.QT8 %}
+              <p>
+                Em relação à monitorização dos serviços, foi informado pelo gestor que
+                {% if indicadores.QT8 == 'Sim' %}
+                  são
+                {% else %}
+                  não são
+                {% endif %}
+                empregadas técnicas de monitorização das unidades de tratamento.
+              </p>
+            {% endif %}
+            {% if indicadores.QT8 == 'Sim' %}<p>Essas técnicas de monitorização constituem de:</p>
+              <blockquote>
+                <p>{{ descricao.QT8 }}</p>
+                <footer><cite title="Source Title">Tratamento da água</cite></footer>
+              </blockquote>
+              {% if indicadores.QT9 == 'Sim' %}
+              <blockquote>
+                <p>{{ descricao.QT9 }}</p>
+                <footer><cite title="Source Title">Tratamento de esgoto</cite></footer>
+              </blockquote>
+              {% endif %}
+            {% else %}
+              <p>As unidades de tratamento possuem {{ indicadores.QT10 }} de uso dos recursos hídricos em vigência.</p>
+            {% endif %}
+
+            <p>A regularidade na manutenção dos sistemas é de:</p>
+            <ul>
+              {% if indicadores.QT11 %}<li>Abastecimento de água: {{ indicadores.QT11 }} dias</li>{% endif %}
+              {% if indicadores.QT12 %}<li>Esgotamento sanitário: {{ indicadores.QT12 }} dias</li>{% endif %}
+            </ul>
+
+
+          {# to be continued #}
+          {% endif %}
+        {% endif %}
       {% else %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
+        <p>
+          Ainda não foram fornecidos dados aos indicadores deste projeto.
+        </p>
       {% endif %}
-    </p>
-    {% endif %}
-
-    {%if indicadores.QA3 and indicadores.QA4 %}
-    <p>
-      TURBIDEZ
-    </p>
-
-    <canvas id="graph__turbidez"></canvas>
-
-    <p>
-      Para turbidez, o índice de conformidade foi de {{ indicadores.QA3 }}%, estando {{ indicadores.QA4 }}% das amostras fora do padrão.
-    </p>
-    <p>
-      {% if indicadores.QA3 < 95 %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
-      {% else %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
-      {% endif %}
-    </p>
-    {% endif %}
-
-    {% if indicadores.QA5 and indicadores.QA6 %}
-    <p>
-      COLIFORMES TOTAIS
-    </p>
-    <canvas id="graph__coliformes"></canvas>
-    <p>
-      Já para coliformes totais, este índice de conformidade foi de {{ indicadores.QA5 }}% no  período, enquanto a incidência das análises fora do padrão registrou {{ indicadores.QA6 }}%.
-    </p>
-    <p>
-      {% if indicadores.QA5 < 95 %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está apontando para um valor de inconformidade maior que o permitido pela Portaria MS 2914/2011, devendo, portanto, se fazer um levantamento sobre as possíveis causas dessas alterações.
-      {% else %}
-      Portanto, nesse ano o padrão de potabilidade verificado pelos valores das amostras coletadas pelo prestador de serviço está dentro do que preconiza a Portaria MS 2914/2011.
-      {% endif %}
-    </p>
-    {% endif %}
-    {% endif %}
-
-    <h3> Cortesia no atendimento ao usuário </h3>
-
-    <p>
-      Foram registradas pela prestadora dos serviços, no período, {{ indicadores.QC1 }} para os serviços de abastecimento de água. O que indica que a prestação do serviço de abastecimento de água está :
-      {% if indicadores.QC1 > 150 %}
-      Ruim.
-      {% elif indicadores.QC1 > 100 %}
-      Mediano.
-      {% elif indicadores.QC1 > 50 %}
-      Bom.
-      {% else %}
-      Excelente.
-      {% endif %}
-    </p>
-    <p>
-      Para os serviços de esgotamento sanitário foram registrados no período, {{ indicadores.QC2 }} pela prestadora dos serviços, O que indica que a prestação do serviço de esgotamento sanitário está :
-      {% if indicadores.QC2 > 150 %}
-      Ruim.
-      {% elif indicadores.QC2 > 100 %}
-      Mediano.
-      {% elif indicadores.QC2 > 50 %}
-      Bom.
-      {% else %}
-      Excelente.
-      {% endif %}
-    </p>
-
-    {% if indicadores.QR1 and indicadores.QR2 and indicadores.QR3 and indicadores.QR4 %}
-    <h3> Regularidade / Continuidade </h3>
-    <p>
-      A duração média das paralisações foi de {{ indicadores.QR1 }} horas/paralisação, enquanto que a duração média das intermitências foi de {{ indicadores.QR2 }} horas/interrupção.
-      A duração média dos reparos de extravasamentos de esgotos foi de {{ indicadores.QR3 }} horas/extravasamento, e houve {{ indicadores.QR4 }} extravasamento/km por extensão de rede.
-    </p>
-    {% endif %}
-
-    {% if indicadores.QS1 and indicadores.QS2 %}
-    <h3> Segurança </h3>
-    <p>
-      O nível de segurança contra contaminação dos mananciais aquíferos (superficial e subterrâneo) foi de {{ indicadores.QS1 }}%.
-    </p>
-    <p>
-      {% if indicadores.QS1 == 100 %}
-      O indicador aponta para a prática de uma política de proteção de mananciais ampla e com amplitude adequada, já que, é ideal para a perpétua melhoria do abastecimento que os mananciais utilizados para abastecimento humano sempre sejam protegidos pelo prestador do serviço bem como pelo poder concedente do serviço.
-      {% elif indicadores.QS1 < 100 %}
-      O indicador aponta para a prática de uma política de proteção de mananciais ainda deficiente, já que a amplitude ideal para a perpétua melhoria do abastecimento é que os mananciais utilizados para abastecimento humano sempre sejam protegidos quer seja por ações do prestador do serviço bem como do poder concedente do serviço.
-      {% endif %}
-    </p>
-    <p>
-      {{ indicadores.QS2 }} ocorrências/mês foram registradas quanto a vandalismo, roubo/furto e depredações.
-    </p>
-    {% endif %}
-
-    {% if indicadores.QT1 and indicadores.QT2 and indicadores.QT3 and indicadores.QT4 and indicadores.QT5 and indicadores.QT6 and indicadores.QT7 and indicadores.QT8 and indicadores.QT9 and indicadores.QT10 and indicadores.QT11 %}
-    <h3> Condições técnico-operacionais e de manutenção </h3>
-    <p>
-      O cadastro técnico atualizado da rede de abastecimento de água é de {{ indicadores.QT1 }}% do total, sendo este valor de {{ indicadores.QT2 }}% para esgotamento, de {{ indicadores.QT3 }}% para cadastro do sistema de drenagem e de {{ indicadores.QT4 }} % para o cadastro da rota de coleta de resíduo sólido.
-    </p>
-    <p>
-      O grau de qualificação técnica dos profissionais envolvidos é de {{ indicadores.QT5 }} funcionários de nível superior, {{ indicadores.QT6 }} funcionários de (nível técnico), e {{ indicadores.QT7 }} funcionários que receberam alguma qualificação de saneamento e meio ambiente.
-    </p>
-    <p>
-      Em relação à monitorização dos serviços, foi informado pelo gestor que {% if indicadores.QT8 == 'Sim' %} são {% else %} não são {% endif %} empregadas técnicas de monitorização das unidades de tratamento.
-    </p>
-    <p>
-      {% if indicadores.QT8 == 'Sim' %}Essas técnicas de monitorização constituem de: {{ indicadores.QT8 }}. {% else %} {% if indicadores.QT9 == 'Sim' %} As unidades de tratamento possuem de uso dos recursos hídricos em vigência. {{ descricao.QT9 }} {% else %}{% endif %} {% endif %}
-    </p>
-
-    {# to be continued #}
-
-    {% endif %}
-
+    </div>
   </div>
-</div>
 </div>
 
 <!-- chart js scripts -->
 <script>
-{% if indicadores.UA2 and indicadores.UA2 and indicadores.UA1 %}
+{% if indicadores.UA2 and indicadores.UA1 %}
 var ctx = document.getElementById("graph__abastecimento").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.UA2|stringformat:"f" }}, {{ indicadores.UA1|sub:indicadores.UA2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.UA2|stringformat:"f" }}, {{ indicadores.UA1|sub:indicadores.UA2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)',
+        'rgba(189,188,188,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
 {% if indicadores.UE2 and indicadores.UE1 and indicadores.UA1 %}
 var ctx = document.getElementById("graph__esgotamento").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.UE2|stringformat:"f" }}, {{ indicadores.UE1|sub:indicadores.UE2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.UE2|stringformat:"f" }}, {{ indicadores.UE1|sub:indicadores.UE2|stringformat:"f" }}, {{ 100|sub:indicadores.UA1|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)',
+        'rgba(189,188,188,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
 {% if indicadores.UR1 and indicadores.UR2 %}
 var ctx = document.getElementById("graph__residuo").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.UR1|stringformat:"f" }}, {{ indicadores.UR2|stringformat:"f" }}, {{ indicadores.UR1|sub:indicadores.UR2|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)',
-              'rgba(189,188,188,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Zona Urbana", "Zona Rural", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.UR1|stringformat:"f" }}, {{ indicadores.UR2|stringformat:"f" }}, {{ indicadores.UR1|sub:indicadores.UR2|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)',
+        'rgba(189,188,188,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
 {% if indicadores.UD1 %}
 var ctx = document.getElementById("graph__aguas-pluv").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Vias Totais", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.UD1|stringformat:"f" }}, {{ 100|sub:indicadores.UD1|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Vias Totais", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.UD1|stringformat:"f" }}, {{ 100|sub:indicadores.UD1|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
 {% if indicadores.QA1 and indicadores.QA2 %}
 var ctx = document.getElementById("graph__cloro").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Vias Totais", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.QA1|stringformat:"f" }}, {{ indicadores.QA2|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Vias Totais", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.QA1|stringformat:"f" }}, {{ indicadores.QA2|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
 {% if indicadores.QA3 %}
 var ctx = document.getElementById("graph__turbidez").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Vias Totais", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.QA3|stringformat:"f" }}, {{  indicadores.QA4|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Vias Totais", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.QA3|stringformat:"f" }}, {{  indicadores.QA4|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
@@ -463,17 +558,17 @@ var chart = new Chart(ctx, {
 
 var ctx = document.getElementById("graph__coliformes").getContext("2d");
 var chart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ["Vias Totais", "Não Atendidas"],
-        datasets: [{
-            data: [{{ indicadores.QA5|stringformat:"f" }}, {{  indicadores.QA6|stringformat:"f" }}],
-            backgroundColor: [
-              'rgba(222,220,0,0.2)',
-              'rgba(65,192,240,0.2)'
-          ]
-        }]
-    }
+  type: 'pie',
+  data: {
+    labels: ["Vias Totais", "Não Atendidas"],
+    datasets: [{
+      data: [{{ indicadores.QA5|stringformat:"f" }}, {{  indicadores.QA6|stringformat:"f" }}],
+      backgroundColor: [
+        'rgba(222,220,0,0.3)',
+        'rgba(65,192,240,0.3)'
+      ]
+    }]
+  }
 });
 {% endif %}
 
@@ -484,13 +579,13 @@ var chart = new Chart(ctx, {
 mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
 var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
 var mapreport = new mapboxgl.Map({
-    container: 'mapreport',
-    center: town,
-    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
-    minZoom: 12,
-    maxZoom: 15,
-    hash: true,
-    scrollZoom: true
+  container: 'mapreport',
+  center: town,
+  style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+  minZoom: 12,
+  maxZoom: 15,
+  hash: true,
+  scrollZoom: true
 });
 </script>
 <!-- end mapbox js -->

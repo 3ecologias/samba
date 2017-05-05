@@ -19,6 +19,9 @@ DEBUG = env.bool('SAMBA_DEBUG')
 ALLOWED_HOSTS = env.list('SAMBA_ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -108,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'America/Recife'
 

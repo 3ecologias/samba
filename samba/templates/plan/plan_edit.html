@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Editar plano {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+{% block title %}Editar projeto {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
 
 {% block body %}
   {% include 'plan/_header.html' with current='edit' user=user plano=plano %}
@@ -8,10 +8,12 @@
       <div id="mapreport"></div>
   </div>
 
-  <div class="container">
+  <div class="container mt-15 pt-5 pb-10 ">
     <div class="row">
-      <div class="report pt-5 pb-5 col-sm-7">
+      <div class="report col-sm-3">
         {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
+      </div>
+      <div class="report col-sm-7 col-xs-12 pb-5">
 
         <div class="tab-content clearfix mt-5">
 
@@ -27,9 +29,9 @@
 
                 {% for indicador in plugin.indicadores %}
                 {% if not indicador.calculado %}
-                <label class="indicador__label" for="{{ indicador.sigla }}">
+                <label class="indicador__label pt-5" for="{{ indicador.sigla }}">
                   ({{ indicador.sigla }}) {{ indicador.nome }}   {% if indicador.fonte %} [fonte: {{ indicador.fonte }}] {% endif %}:
-                </label>
+                </label><small>{{ indicador.definicao }}</small>
 
                 <div class="indicador__input">
                   {% if indicador.escolhas %}
@@ -76,7 +78,7 @@
           {% endif %}
           {% empty %}
           <div class="indicators__empty">
-            O plano não possui nenhum conjunto de indicadores. <a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.
+            O projeto não possui nenhum conjunto de indicadores. <a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.
           </div>
           {% endfor %}
         </form>

@@ -5,15 +5,17 @@
 {% block body %}
 {% include 'plan/_header.html' with current='view' user=user plano=plano %}
 <div class="mapreport">
-    <div id="mapreport"></div>
+  <div id="mapreport"></div>
 </div>
-<div class="container">
+<div class="container pt-5 mt-15 pb-10 ">
   <div class="row">
-    <div class="report pt-5 pb-5 col-sm-7">
+    <div class="report col-sm-3">
       {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
-    <div class="tab-content clearfix mt-5">
-      {% for plugin in plugins %}
-      {% if plugin.indicadores %}
+    </div>
+    <div class="report col-sm-7 col-xs-12 pb-5">
+      <div class="tab-content clearfix mt-5">
+        {% for plugin in plugins %}
+        {% if plugin.indicadores %}
         <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
           <h2>{{ plugin.nome }}</h2>
           <p>{{ plugin.descricao }}</p>
@@ -52,16 +54,16 @@
             </tbody>
           </table>
         </div>
+        {% endif %}
+        {% empty %}
+        <div class="indicators__empty">
+          <h2>O projeto não possui nenhum conjunto de indicadores.</h2>
+          {% if user.is_authenticated %}
+          <h3><a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.</h3>
           {% endif %}
-          {% empty %}
-          <div class="indicators__empty">
-            <h2>O plano não possui nenhum conjunto de indicadores.</h2>
-            {% if user.is_authenticated %}
-            <h3><a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.</h3>
-            {% endif %}
-          </div>
+        </div>
 
-          {% endfor %}
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -71,13 +73,13 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
 var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
 var mapreport = new mapboxgl.Map({
-    container: 'mapreport',
-    center: town,
-    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
-    minZoom: 12,
-    maxZoom: 15,
-    hash: true,
-    scrollZoom: true
+  container: 'mapreport',
+  center: town,
+  style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+  minZoom: 12,
+  maxZoom: 15,
+  hash: true,
+  scrollZoom: true
 });
 </script>
 <!-- end mapbox js -->

@@ -9,7 +9,7 @@
   <title>{% block title %}Samba - Saneamento Básico do Brasil{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="tags" content="saneamento básico, saneamento básico municipal, plataforma">
-  <meta name="description" content="Samba é uma plataforma para criação de planos de saneamento básico">
+  <meta name="description" content="Samba é uma plataforma focada em projetos de saneamento básico">
 
   <!-- external stylesheets -->
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
@@ -30,12 +30,14 @@
   {% endcompress %}
 </head>
 <body>
+  <div class="se-pre-con"></div>
   {% block body %}{% endblock %}
 </body>
 
 <!-- external sources -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
 
 
@@ -44,6 +46,8 @@
 <script src="{% static 'js/javascripts/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/samba-init.js' %}"></script>
 {% endcompress %}
+{% block extrascripts %}
+{% endblock %}
 
 
 </html>
