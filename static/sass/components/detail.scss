@@ -2,3 +2,9 @@
   background-color: $samba-gray;
   padding-top: 10vh;
 }
+
+.detail-text {
+  @media (max-width: 420px) {
+    text-align: center;
+  }
+}

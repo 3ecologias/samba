@@ -26,12 +26,12 @@ class GestorForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ("username","email","first_name", "last_name")
         help_texts = {
-            'username': _("O nome de usuário será composto pelo nome do usuário digitado abaixo + nome do município. Ex: mariaRecife, joãoPaudalho, etc..")
+            'username': _("Crie um usuário com nomeSobrenome. ex: mariaSilva")
         }
 
 class GestorEditForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         fields = ("username", "email", "first_name", "last_name", "password")
         help_texts = {
-            'username': _("O nome de usuário será composto pelo nome do usuário digitado abaixo + nome do município. Ex: mariaRecife, joãoPaudalho, etc..")
+            'username': _("Crie um usuário com nomeSobrenome. ex: mariaSilva")
         }

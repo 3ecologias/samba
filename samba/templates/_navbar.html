@@ -3,26 +3,26 @@
 {% load has_attr %}
 {% load plan_tags %}
 
-<div class="container">
-<nav class="navbar navbar-default navbar-fixed-top" id="main-nav">
+<div class="container" data-target=".navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" id="main-nav" role="navigation">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle nav-toggle-navbar collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1"  aria-expanded="true">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'index' %}">
+      <a class="navbar-brand page-scroll" href="{% url 'index' %}">
         <img src="{% static 'images/logo-branco.svg' %}" alt="Samba">
       </a>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="collapse-1">
       <ul class="nav navbar-nav">
 
         {% if user.is_authenticated %}
           {% if user|getattribute:"dono" %}
-            <li><a class="" href="{% url 'plan_list' %}">Projetos</a></li>
+            <li><a class="" href="{% url 'plan_list' %}">Gerenciar</a></li>
             <li><a class="" href="{% url 'plugin_list' %}">Plugins</a></li>
           {% elif user|getattribute:"gestor" %}
             {% get_plan_pk_by_gestor user as plan %}
@@ -31,11 +31,11 @@
             {% endif %}
           {% endif %}
         {% else %}
-        <li><a class="" href="{% url 'index' %}#features">Vantagens</a></li>
-        <li><a class="" href="{% url 'index' %}#details">Sobre</a></li>
-        <li><a class="" href="{% url 'index' %}#tool-map">Acesse a ferramenta</a></li>
+        <li><a class="page-scroll" href="#features">Vantagens</a></li>
+        <li><a class="page-scroll" href="#details">Sobre</a></li>
+        <li><a class="page-scroll" href="#tool-map">Mapa</a></li>
+        <li><a class="page-scroll" href="#contact">Fale Conosco</a></li>
         <li><a class="" href="{% url 'signup' %}">Preços</a></li>
-        <li><a class="" href="{% url 'index' %}#contact">Fale Conosco</a></li>
         {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">

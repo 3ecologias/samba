@@ -29,15 +29,15 @@
               {% if user|getattribute:"dono" %}
               {% is_plan_owner user plano.id as is_owner %}
               {% if is_owner %}
-              <li><a href="{% url 'plan_edit' pk=plano.id %}">Editar</a></li>
               <li><a href="{% url 'gestor_list' pk=plano.id %}">Gestores</a></li>
+              <li><a href="{% url 'plan_edit' pk=plano.id %}" class="edit-class">Editar</a></li>
               {% endif %}
               {% elif user|getattribute:"gestor" %}
               {% is_plan_gestor user plano.id as is_gestor %}
               {% if is_gestor %}
               {% get_plan_pk_by_gestor user as plan %}
               {% if plan %}
-              <li> <a href="{% url 'plan_edit' pk=plan.id %}">Editar</a></li>
+              <li class="edit-class"> <a href="{% url 'plan_edit' pk=plan.id %}">Editar</a></li>
               {% endif %}
               {% endif %}
               {% endif %}

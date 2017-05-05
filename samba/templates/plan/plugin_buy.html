@@ -36,7 +36,10 @@
         {% else %}
         {{ form.plano }}
         {% endif %}
-        <input type="submit" value="{% if plugin.preco %}Comprar{% else %}Adicionar ao plano{% endif %}">
+        <input type="submit" value="{% if plugin.preco %}Comprar{% else %}Adicionar ao projeto{% endif %}">
+        <div class="mt-5">
+          <a class="btn btn-lg btn-yellow" href="{% url 'plugin_list' %}"> Voltar </a>
+        </div>
       </form>
     </div>
   </div>

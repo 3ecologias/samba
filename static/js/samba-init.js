@@ -21,12 +21,12 @@ $( document ).ready(function() {
   });
 
   $('.carousel').carousel({
-    interval: 6000,
+    interval: 10000,
     pause: "false"
   });
 
   $('.navbar-nav a').on('click', function(){
-    $('.navbar-toggle').click() //bootstrap 3.x by Richard
+    $('.navbar-collapse').collapse('hide'); //bootstrap 3.x by 3Ecologias
   });
 
 });
@@ -36,3 +36,31 @@ $(window).on('load', (function() {
 		// Animate loader off screen
 		$(".se-pre-con").fadeOut("slow");;
 	}));
+
+  //jQuery to collapse the navbar on scroll
+  $(window).scroll(function() {
+      if ($(".navbar").offset().top > 50) {
+          $(".navbar-fixed-top").addClass("top-nav-collapse");
+      } else {
+          $(".navbar-fixed-top").removeClass("top-nav-collapse");
+      }
+  });
+
+  //jQuery for page scrolling feature - requires jQuery Easing plugin
+  $(function() {
+      $(document).on('click', 'a.page-scroll', function(event) {
+          var $anchor = $(this);
+          $('html, body').stop().animate({
+              scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500, 'easeInOutExpo');
+          event.preventDefault();
+      });
+  });
+
+  // Active Links in Projects
+  var selector = '.navbar-right li';
+
+  $(selector).on('click', function(){
+      $(selector).removeClass('active');
+      $(this).addClass('active');
+  });

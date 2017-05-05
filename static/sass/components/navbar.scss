@@ -15,6 +15,11 @@
   font-weight: bold;
   text-decoration: none;
   transition: background .3s;
+  -webkit-transition: background .3s;
+  -moz-transition: background .3s;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+
   padding: 0 16px;
 
   &:hover {
@@ -31,4 +36,5 @@
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border: none;
+    overflow: hidden;
 }

@@ -49,6 +49,9 @@
               {% endfor %}
             </tbody>
           </table>
+          <div class="mt-10">
+            <a class="btn btn-lg btn-yellow" href="{% url 'plan_view' pk=plano.id %}"> Voltar </a>
+          </div>
         </div>
         {% else %}
         <div class="indicators__empty">

@@ -18,7 +18,7 @@
       <div class="col-sm-4 planList__plan">
         <a class="" href="{% url 'plan_view' pk=plano.id %}">
           <h3 class="planList__planCity">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h3>
-          <div class="planList__planYear">elaborado em {{ plano.ano }}</div>
+          <div class="planList__planYear">ano base {{ plano.ano }}</div>
         </a>
       </div>
       {% empty %}
