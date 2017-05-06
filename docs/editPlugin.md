@@ -12,3 +12,7 @@ Para editar um ou varios plugins já adicionados ao projeto e preencher os dados
 Depois de ter salvado os dados, eles aparecerão numa tabela juntando todos os plugins e os valores associados.
 
 ![](_images/passo15.png)
+
+* * *
+
+[Voltar](index)
