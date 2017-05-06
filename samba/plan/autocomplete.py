@@ -36,7 +36,7 @@ class Select2PtWidgetMixin(Select2WidgetMixin):
 
     def build_attrs(self, *args, **kwargs):
         attrs = super(Select2PtWidgetMixin, self).build_attrs(*args, **kwargs)
-        attrs.setdefault('data-locale', 'ru')
+        attrs.setdefault('data-locale', 'pt-BR')
         return attrs
 
 class Select2Pt(Select2PtWidgetMixin, Select):
