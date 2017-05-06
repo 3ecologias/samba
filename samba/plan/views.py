@@ -33,6 +33,8 @@ def plan_create_check(dono):
         return True
     elif dono.tipo_conta == 'enterprise' and num_planos < 10:
         return True
+    elif dono.tipo_conta == 'ultimate' and num_planos < 20:
+        return True
     else:
         return False
 
@@ -135,7 +137,7 @@ def plan_report(request, pk):
                 continue
             indicadores[indicador.sigla] = indicador.valor
             descricao[indicador.sigla] = indicador.descricao
-            
+
     return render(request, 'plan/plan_report.html', {
         'user': request.user,
         'plano': plano,
@@ -196,7 +198,7 @@ def gestor_create(request, pk):
 
         if form.is_valid():
             gestor_user = form.save(commit=False)
-            gestor_user.username = gestor_user.username+plano.municipio.nome
+            gestor_user.username = gestor_user.username
             gestor_user.save()
             gestor= Gestor.objects.create(
                 user=gestor_user,

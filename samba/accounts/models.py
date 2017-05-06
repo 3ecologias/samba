@@ -8,7 +8,7 @@ class Dono(models.Model):
         verbose_name = _('Cliente')
         verbose_name_plural= _('Clientes')
 
-    TIPO_PLANO = ((_('basico'), _('Básico')), ('premium', 'Premium'), ('enterprise', 'Enterprise'))
+    TIPO_PLANO = ((_('basico'), _('Básico')), ('premium', 'Premium'), ('enterprise', 'Enterprise'), ('ultimate', 'Ultimate'))
 
     # usuario associado ao perfil
     user = models.OneToOneField(User, models.CASCADE, verbose_name=_("Usuário do sistema"), related_name='dono')
