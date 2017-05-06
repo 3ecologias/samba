@@ -19,3 +19,7 @@ Preencher o formulario seguinte com as informações requeridas e salvar.
 Depois de ter salvado o formulário aparece novamente a página dos gestores existentes.
 
 ![](./_images/passo9.png)
+
+* * *
+
+[Voltar](index)
