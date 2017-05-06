@@ -16,3 +16,7 @@ Na loja de plugins você pode escolher o que quer adicionar ao projeto. Por exem
 Ao escolher o plugin, você deverá selecionar o projeto no qual quer adicionar-lo.
 
 ![](_images/passo12.png)
+
+* * *
+
+[Voltar](index)
