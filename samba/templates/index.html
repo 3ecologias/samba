@@ -95,6 +95,7 @@ var planalto_ba = [-40.4905647, -14.6702913];
 var pocoes_ba = [-40.5533835, -14.5646739];
 var boanova_ba = [-40.2097746, -14.3655932];
 var coaraci_ba = [-39.6885132, -14.6774616];
+var recife_pe = [-34.8889, -8.0628];
 var map = new mapboxgl.Map({
   container: 'map',
   center: [-50.498024, -14.756375],
@@ -145,6 +146,9 @@ var p_boanova_ba = new mapboxgl.Popup({offset: 25})
 var p_coaraci_ba = new mapboxgl.Popup({offset: 25})
 .setHTML('<h4>Coaraci/BA</h4> <br> <p><a href="#">aguarde os detalhes</a></p>');
 
+var p_recife_pe = new mapboxgl.Popup({offset: 25})
+.setHTML('<h4>Recife/PE</h4> <br> <p><a href="/planos/3">veja os detalhes</a></p>');
+
 // create DOM element for the marker
 var el = document.createElement('div');
 var el1 = document.createElement('div');
@@ -159,6 +163,7 @@ var el9 = document.createElement('div');
 var el10 = document.createElement('div');
 var el11 = document.createElement('div');
 var el12 = document.createElement('div');
+var el13 = document.createElement('div');
 el.id = 'marker';
 el1.id = 'marker';
 el2.id = 'marker';
@@ -172,6 +177,8 @@ el9.id = 'marker';
 el10.id = 'marker';
 el11.id = 'marker';
 el12.id = 'marker';
+el13.id = 'marker';
+
 // create the marker
 new mapboxgl.Marker(el, {offset:[-25, -25]})
 .setLngLat(juazeiro_ba)
@@ -236,6 +243,11 @@ new mapboxgl.Marker(el11, {offset:[-25, -25]})
 new mapboxgl.Marker(el12, {offset:[-25, -25]})
 .setLngLat(coaraci_ba)
 .setPopup(p_coaraci_ba) // sets a popup on this marker
+.addTo(map);
+
+new mapboxgl.Marker(el13, {offset:[-25, -25]})
+.setLngLat(recife_pe)
+.setPopup(p_recife_pe) // sets a popup on this marker
 .addTo(map);
 
 map.addControl(new mapboxgl.NavigationControl());
