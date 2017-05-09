@@ -2,8 +2,6 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
-
 # Manual do usuário
 
 ## Apresentação
@@ -18,10 +16,12 @@ Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobr
 
 [Como criar um novo projeto?](projeto)
 
-[Como adicionar um novo gestor para o projeto?](addGestor)
+[Como adicionar um novo gestor no projeto?](addGestor)
 
 [Como adicionar um plugin ao projeto?](addPlugin)
 
 [Como editar um plugin?](editPlugin)
 
 [Como acessar ao relatorio do projeto?](goToAnalise)
+
+[Como obter um suporte técnico?](suporteTecnico)
