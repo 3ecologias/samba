@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Atualização de dados do Gestor - {{plano.municipio.nome}}{% endblock %}
+
+{% block body %}
+  <header class="header">
+    {% include '_navbar.html' with user=user %}
+
+    <div class="header__contents mt-10 pd-5">
+      <h2 class="header__title">Atualizar dados do gestor {{gestor.user.get_full_name}}</h2>
+    </div>
+  </header>
+
+  <main class="main">
+    <form class="main__form" method="POST">
+      {% csrf_token %}
+
+      {% for field in form %}
+      {% if field.name != 'password' %}
+        {{ field.label_tag }}
+        {{ field.help_text}}
+        {{ field }}
+      {% endif %}
+        {% if field.errors %}
+          <div class="main__formError">
+            {{ field.errors }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <input type="submit" value="Salvar">
+    </form>
+  </main>
+{% endblock %}

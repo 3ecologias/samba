@@ -407,17 +407,17 @@ class QualidadeServicosPrestados(Plugin):
         }),
         ('QT8', {
             'nome': 'São empregadas técnicas de monitorização das unidades de tratamento de água, quais?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['', 'Sim', 'Não'],
             'exige_descricao' : True,
         }),
         ('QT9', {
             'nome': 'São empregadas técnicas de monitorização das unidades de tratamento de esgoto, quais?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['', 'Sim', 'Não'],
             'exige_descricao' : True,
         }),
         ('QT10', {
             'nome': 'As unidades de tratamento possuem licenças ambientais e outorga de uso dos recursos hídricos em vigência?',
-            'escolhas': ['Outorga', 'Licença ambiental'],
+            'escolhas': ['', 'Outorga', 'Licença ambiental'],
         }),
         ('QT11', {
             'nome': 'Qual a regularidade na manutenção do sistema de abastecimento de água?',
@@ -434,12 +434,12 @@ class QualidadeServicosPrestados(Plugin):
         ('QT14', {
             'nome': 'Observação de normas técnicas para abastecimento de água',
             'definicao':'As atividades operacionais-técnicas dos serviços observam as normas, resoluções referentes às suas especificidades?',
-            'escolhas': ['Sim', 'Não', 'Parcialmente'],
+            'escolhas': ['', 'Sim', 'Não', 'Parcialmente'],
         }),
         ('QT15', {
             'nome': 'Observação de normas técnicas para o tratamento e disposição final do esgoto ',
             'definicao':'As atividades operacionais-técnicas dos serviços observam as normas, resoluções referentes às suas especificidades?',
-            'escolhas': ['Sim', 'Não','Parcialmente'],
+            'escolhas': ['', 'Sim', 'Não','Parcialmente'],
         }),
         ('QM1', {
             'nome': 'Participação das economias residenciais de água no total das economias de água',

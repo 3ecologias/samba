@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from .forms import ContactUs, SignUp
+from django.contrib.auth.models import User
 
 from urllib.request import urlopen
 from urllib.parse import urlencode

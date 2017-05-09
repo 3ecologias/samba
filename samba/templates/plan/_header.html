@@ -1,22 +1,50 @@
 {% load static %}
+{% load has_attr %}
+{% load plan_tags %}
+
+
+
 <header class="header">
   {% include '_navbar.html' with user=user %}
 
-  <div class="header__contents">
-    <h2 class="header__title">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h2>
-    <div class="header__meta">Elaborado em {{ plano.ano }}</div>
-
-    <nav class="header__tabs">
-      <div class="header__tabsGroup">
-        <a class="header__tab {% if current == 'report' %}is-current{% endif %}" href="{% url 'plan_report' pk=plano.id %}">Análise</a>
-        <a class="header__tab {% if current == 'view' %}is-current{% endif %}" href="{% url 'plan_view' pk=plano.id %}">Indicadores</a>
+  <div class="container">
+    <nav class="navbar navbar-default navbar-fixed-bottom" id="subnav">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle navbar-toggle-header collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">
+            <h3>{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} / {{ plano.ano }}</h3>
+          </span>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'plan_view' pk=plano.id %}">Indicadores</a></li>
+            <li><a href="{% url 'plan_report' pk=plano.id %}">Análise</a><li>
+              {% if user.is_authenticated %}
+              {% if user|getattribute:"dono" %}
+              {% is_plan_owner user plano.id as is_owner %}
+              {% if is_owner %}
+              <li><a href="{% url 'gestor_list' pk=plano.id %}">Gestores</a></li>
+              <li><a href="{% url 'plan_edit' pk=plano.id %}" class="edit-class">Editar</a></li>
+              {% endif %}
+              {% elif user|getattribute:"gestor" %}
+              {% is_plan_gestor user plano.id as is_gestor %}
+              {% if is_gestor %}
+              {% get_plan_pk_by_gestor user as plan %}
+              {% if plan %}
+              <li class="edit-class"> <a href="{% url 'plan_edit' pk=plan.id %}">Editar</a></li>
+              {% endif %}
+              {% endif %}
+              {% endif %}
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
       </div>
 
-      {% if user.is_authenticated and plano.dono == user %}
-      <div class="header__tabsGroup">
-        <a class="header__tab {% if current == 'edit' %}is-current{% endif %}" href="{% url 'plan_edit' pk=plano.id %}">Editar</a>
-      </div>
-      {% endif %}
-    </nav>
-  </div>
-</header>
+    </header>

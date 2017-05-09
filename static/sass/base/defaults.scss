@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+  font-size: 1em;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
@@ -116,8 +116,8 @@ input[type='submit'] {
   cursor: pointer;
   padding: .75rem 1.5rem;
   border-radius: 4px;
-  background: $samba-blue;
-  color: white;
+  background: $samba-yellow;
+  color: 000;
   border: transparent;
   transition: background;
 
@@ -168,6 +168,10 @@ table {
   margin-top: 10vh;
 }
 
+.mt-1{
+  margin-top: 1vh;
+}
+
 .mt-15{
   margin-top: 15vh;
 }
@@ -180,6 +184,10 @@ table {
 
 .mb-2{
   margin-bottom: 2vh;
+}
+
+.mb-1{
+  margin-bottom: 1vh;
 }
 
 .pt-10 {
@@ -196,4 +204,9 @@ table {
 }
 .pb-2 {
   padding-bottom: 2vh;
+}
+
+.btn-yellow {
+  background-color: $samba-yellow;
+  color: #000;
 }
