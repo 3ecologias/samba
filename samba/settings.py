@@ -79,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -171,7 +172,7 @@ DEFAULT_FROM_EMAIL = env('SAMBA_EMAIL_ADDR')
 LOGIN_URL = '/entrar'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
+#
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 # MEDIA_URL = '/static/media/'
 
@@ -184,7 +185,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 #media files
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = '/media/'
 

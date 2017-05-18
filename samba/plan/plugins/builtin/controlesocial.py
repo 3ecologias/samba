@@ -10,6 +10,7 @@ Conjunto de indicadores que avalia se há estas instâncias de participação, c
 representatividade destes fóruns, seu funcionamento regular, atividades realizadas
 que garantam a participação e o controle social, dentre outros.
 '''
+    icone_loja = '/icons/controlesocial.svg'
     indicadores = [
         ('A10', {
             'nome': 'O Conselho Municipal de Saneamento Básico foi constituído?',

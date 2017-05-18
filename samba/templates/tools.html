@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
+
+{% block title %}Loja de Aplicativos - Samba{% endblock %}
+
+{% block body %}
+  <header class="header">
+    {% include '_navbar.html' with user=user %}
+  </header>
+  <div class="container mt-10 pt-5">
+    <div class="row">
+    <h2 class="header__title">Lista de ferramentas da plataforma</h2>
+    <p class="header__meta">Explore e descubra funcionalidades do Samba</p>
+  </div>
+  </div>
+  <main class="main">
+    <div class="pluginList">
+      {% for plugin in plugins %}
+      <div class="pluginList__plugin">
+        {% if plugin.icone_loja %}
+          <img class="pluginList__pluginIcon" src="{{ MEDIA_URL }}{{ plugin.icone_loja }}" alt="Ícone do plugin {{ plugin.nome }}">
+        {% endif %}
+
+        <div class="pluginList__pluginInfo">
+          <h3 class="pluginList__pluginName">{{ plugin.nome }}</h3>
+          <p class="pluginList__pluginDescription">{{ plugin.descricao }}</p>
+        </div>
+      </div>
+      {% empty %}
+        <div class="pluginList__empty">
+          Ainda não temos nenhum aplicativo na loja.
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}
