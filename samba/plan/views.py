@@ -65,12 +65,19 @@ def plan_create(request):
 def plan_view(request, pk):
     plano = get_object_or_404(Plano, pk=pk)
     plugins = get_plano_plugins(plano)
+    previous_plans = Plano.objects.filter(municipio__nome=plano.municipio.nome, ano__lte=plano.ano)
+    previous_plans = previous_plans.exclude(ano=plano.ano)
+    posterior_plans = Plano.objects.filter(municipio__nome=plano.municipio.nome, ano__gte=plano.ano)
+    posterior_plans = posterior_plans.exclude(ano=plano.ano)
+
 
     return render(request, 'plan/plan_view.html', {
         'user': request.user,
         'plano': plano,
         'gestores': plano.gestores_set.all(),
-        'plugins': plugins
+        'plugins': plugins,
+        'previous_plans': previous_plans,
+        'posterior_plans': posterior_plans,
     })
 
 

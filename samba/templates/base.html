@@ -23,10 +23,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+  <link rel="stylesheet" type="text/css" href="{% static 'side-comments-master/release/side-comments.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'side-comments-master/release/themes/default-theme.css' %}">
+
+
 
   <!-- our sheets -->
   {% compress css %}
-  <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/style.scss' %}" />
+    <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/style.scss' %}" />
   {% endcompress %}
 </head>
 <body>
@@ -39,13 +43,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"> </script>
+<script src="{% static 'side-comments-master/release/side-comments.js' %}" ></script>
+<!-- side comments -->
+<script type="text/javascript">
+  // First require it.
+  var SideComments = require('side-comments');
+  // Then, create a new SideComments instance, passing in the wrapper element and the optional the current user and any existing comments.
+  sideComments = new SideComments('#commentable-area', {}, {});
+</script>
 
 
 
 <!-- our js -->
 {% compress js %}
-<script src="{% static 'js/javascripts/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/samba-init.js' %}"></script>
+  <script src="{% static 'js/javascripts/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/samba-init.js' %}"></script>
 {% endcompress %}
 {% block extrascripts %}
 {% endblock %}

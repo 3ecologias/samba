@@ -4,10 +4,14 @@ from samba.plan.plugins import Plugin
 class SustentabilidadeFinanceira(Plugin):
     nome = 'Sustentabilidade Financeira'
     descricao = '''
-A sustentabilidade econômico-financeira dos serviços públicos de saneamento básico
-deve ser assegurada, sempre que possível, mediante remuneração
-pela cobrança dos serviços.
+    A sustentabilidade econômico-financeira dos serviços públicos de saneamento básico
+    deve ser assegurada, sempre que possível, mediante remuneração
+    pela cobrança dos serviços.
     '''
+    icone_loja = 'icons/256x256/Colorido/sustentabilidade_financeira.svg'
+
+    icone_sidebar = 'icons/16x16/Colorido/sustentabilidade_financeira.svg'
+
     indicadores = [
         ('NR1', {
             'nome': 'Receita Operacional Direta',

@@ -15,46 +15,46 @@
     <div class="report col-sm-7 col-xs-12 pb-5">
       <div class="tab-content clearfix mt-5">
         {% for plugin in plugins %}
-        {% if plugin.indicadores %}
-        <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
-          <h2>{{ plugin.nome }}</h2>
-          <p>{{ plugin.descricao }}</p>
-          <table class="indicators__items">
-            <thead>
-              <tr>
-                <th>Sigla</th>
-                <th>Indicador</th>
-                <th>Valor</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for indicador in plugin.indicadores %}
-              <tr>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.sigla }} </a>
-                </td>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.nome }} </a>
-                </td>
-                <td>
-                  {% if indicador.valor %}
-                  {{ indicador.valor }}
-                  {% if indicador.unidade %}
-                  {{ indicador.unidade }}
-                  {% endif %}
-                  {% if indicador.descricao%}
-                  <br> <b>Descrição :</b> {{ indicador.descricao }}
-                  {% endif %}
-                  {% else %}
-                  n/a
-                  {% endif %}
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% endif %}
+          {% if plugin.indicadores %}
+          <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
+            <h2>{{ plugin.nome }}</h2>
+            <p>{{ plugin.descricao }}</p>
+            <table class="indicators__items">
+              <thead>
+                <tr>
+                  <th>Sigla</th>
+                  <th>Indicador</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for indicador in plugin.indicadores %}
+                <tr>
+                  <td>
+                    <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.sigla }} </a>
+                  </td>
+                  <td>
+                    <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.nome }} </a>
+                  </td>
+                  <td>
+                    {% if indicador.valor %}
+                      {{ indicador.valor }}
+                      {% if indicador.unidade %}
+                        {{ indicador.unidade }}
+                          {% endif %}
+                        {% if indicador.descricao%}
+                          <br> <b>Descrição :</b> {{ indicador.descricao }}
+                      {% endif %}
+                    {% else %}
+                        n/a
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
         {% empty %}
         <div class="indicators__empty">
           <h2>O projeto não possui nenhum conjunto de indicadores.</h2>
