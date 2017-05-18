@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.views import defaults as default_views
 from django.views.static import serve
 
@@ -9,7 +10,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
-    url(r'^signup$', views.SignUp.as_view(), name='signup'),
+    url(r'^tools$', views.ToolsView.as_view(), name='tools'),
     url(r'', include(accounts_urls)),
     url(r'', include(plan_urls)),
 ]
