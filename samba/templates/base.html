@@ -23,10 +23,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="{% static 'side-comments-master/release/side-comments.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'side-comments-master/release/themes/default-theme.css' %}">
-
-
 
   <!-- our sheets -->
   {% compress css %}
@@ -43,16 +39,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"> </script>
-<script src="{% static 'side-comments-master/release/side-comments.js' %}" ></script>
-<!-- side comments -->
-<script type="text/javascript">
-  // First require it.
-  var SideComments = require('side-comments');
-  // Then, create a new SideComments instance, passing in the wrapper element and the optional the current user and any existing comments.
-  sideComments = new SideComments('#commentable-area', {}, {});
-</script>
-
-
+<script async defer src="https://factlink.com/lib/dist/factlink_loader.min.js"></script>
+<script async src="//genius.codes"></script>
 
 <!-- our js -->
 {% compress js %}

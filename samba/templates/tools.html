@@ -20,7 +20,7 @@
       {% for plugin in plugins %}
       <div class="pluginList__plugin">
         {% if plugin.icone_loja %}
-          <img class="pluginList__pluginIcon" src="{{ STATIC_URL }}{{ plugin.icone_loja }}" alt="Ícone do plugin {{ plugin.nome }}">
+          <img class="pluginList__pluginIcon" src="{{ MEDIA_URL }}{{ plugin.icone_loja }}" alt="Ícone do plugin {{ plugin.nome }}">
         {% endif %}
 
         <div class="pluginList__pluginInfo">

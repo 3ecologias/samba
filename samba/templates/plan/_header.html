@@ -18,25 +18,44 @@
           </button>
           <span class="navbar-brand">
             <h3>
-
-              {% for previous_plan in previous_plans %}
-              <a href="{% url 'plan_view' previous_plan.id %}">
-                {{ previous_plan.ano }}
-              </a>
-              {% endfor %}
-              {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} / {{ plano.ano }}</a>
-              {% for posterior_plan in posterior_plans %}
-              <a href="{% url 'plan_view' posterior_plan.id %}">
-                {{ posterior_plan.ano }}
-              </a>
-              {% endfor %}
+              {{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</a>
             </h3>
           </span>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav navbar-right">
+            <li class="dropup">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{plano.ano}}<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                {% if previous_plans %}
+                  {% for previous_plan in previous_plans %}
+                    <li><a href="{% if current == 'view' %}
+                        {% url 'plan_view' pk=previous_plan.id %}
+                      {% elif current == 'report' %}
+                        {% url 'plan_report' pk=previous_plan.id %}
+                      {% endif %}">
+                      {{previous_plan.ano}}</a>
+                    </li>
+                  {% endfor %}
+                  <li role="separator" class="divider"></li>
+                {% endif %}
+                <li class="edit-class"><a href="#">{{plano.ano}}</a></li>
+                {%if posterior_plans %}
+                  <li role="separator" class="divider"></li>
+                  {% for posterior_plan in posterior_plans %}
+                    <li><a href="{% if current == 'view' %}
+                        {% url 'plan_view' pk=posterior_plan.id %}
+                      {% elif current == 'report' %}
+                        {% url 'plan_report' pk=posterior_plan.id %}
+                      {% endif %}">
+                      {{posterior_plan.ano}}</a>
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </li>
             <li><a href="{% url 'plan_view' pk=plano.id %}" class="{% if current == 'view' %} edit-class {% endif %}">Indicadores</a></li>
-            <li><a href="{% url 'plan_report' pk=plano.id %}" class="{% if current == 'report' %} edit-class {% endif %}">Análise</a><li>
+            <li><a href="{% url 'plan_report' pk=plano.id %}" class="{% if current == 'report' %} edit-class {% endif %}">Análise</a></li>
               {% if user.is_authenticated %}
                 {% if user|getattribute:"dono" %}
                   {% is_plan_owner user plano.id as is_owner %}

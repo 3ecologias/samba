@@ -132,6 +132,11 @@ def plan_report(request, pk):
     plugins = get_plano_plugins(plano)
     indicadores = {}
     descricao = {}
+    previous_plans = Plano.objects.filter(municipio__nome=plano.municipio.nome, ano__lte=plano.ano)
+    previous_plans = previous_plans.exclude(ano=plano.ano)
+    posterior_plans = Plano.objects.filter(municipio__nome=plano.municipio.nome, ano__gte=plano.ano)
+    posterior_plans = posterior_plans.exclude(ano=plano.ano)
+
 
     # Transforma a lista de indicadores de todos os plugins
     # em um dicionário com os valores dos indicadores por sigla
@@ -149,7 +154,9 @@ def plan_report(request, pk):
         'user': request.user,
         'plano': plano,
         'indicadores': indicadores,
-        'descricao': descricao
+        'descricao': descricao,
+        'previous_plans': previous_plans,
+        'posterior_plans': posterior_plans,
     })
 
 
