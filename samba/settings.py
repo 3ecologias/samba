@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'samba.accounts',
     'samba.geo',
     'samba.plan',
+    'annotator',
 ]
 
 # Ativar django admin no modo DEBUG

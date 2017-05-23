@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^tools$', views.ToolsView.as_view(), name='tools'),
     url(r'', include(accounts_urls)),
     url(r'', include(plan_urls)),
+    url(r'', include("annotator.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # URLs para testarmos as páginas de 404 e compania

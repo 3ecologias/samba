@@ -39,8 +39,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"> </script>
-<script async defer src="https://factlink.com/lib/dist/factlink_loader.min.js"></script>
-<script async src="//genius.codes"></script>
+<!--<script async src="//genius.codes"></script>-->
+
+<!--Annotator-->
+
+<script src="http://assets.annotateit.org/annotator/v1.2.10/annotator-full.min.js"></script>
+<link rel="stylesheet" href="http://assets.annotateit.org/annotator/v1.2.10/annotator.min.css">
+<script src="{% static 'annotator/annotator.init.js'%}"></script>
 
 <!-- our js -->
 {% compress js %}
