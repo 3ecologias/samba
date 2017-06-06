@@ -12,6 +12,8 @@ Portanto, trata-se de uma ferramenta de apoio gerencial fundamental, não apenas
 Para tal, foi definido um conjunto de indicadores que contemplaram diferentes segmentos da realidade, a saber: a infraestrutura implantada, os aspectos socioeconômicos e culturais, bem como a qualidade dos serviços ofertados e da solução empregada. Todos esses indicadores estão apresentados de forma detalhada no Produto H.
 Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobre as intervenções necessárias para melhoria dos serviços, além de ser importante ferramenta para o controle social, já que estas informações deverão ser disponibilizadas na rede mundial de computadores para acesso e conhecimento da sociedade.
 * * *
+## [Saber mais sobre o sistema do SAMBA](sistema)
+* * *
 ## Passo a passo temático
 
 [Como criar um novo projeto?](projeto)
