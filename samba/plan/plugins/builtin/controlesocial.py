@@ -10,6 +10,8 @@ Conjunto de indicadores que avalia se há estas instâncias de participação, c
 representatividade destes fóruns, seu funcionamento regular, atividades realizadas
 que garantam a participação e o controle social, dentre outros.
 '''
+    icone_loja = 'icons/256x256/Colorido/participacao_e_controle_social.svg'
+    icone_sidebar = 'icons/16x16/Colorido/participacao_e_controle_social.svg'
     indicadores = [
         ('A10', {
             'nome': 'O Conselho Municipal de Saneamento Básico foi constituído?',
@@ -35,11 +37,11 @@ que garantam a participação e o controle social, dentre outros.
             'nome': 'Tecnologia Adotada - Manejo de Águas Pluviais - Soluções de Prevenção',
             'definicao': 'Verificar se há soluções sustentáveis de drenagem como: bacia de amortecimento, pavimentação permeável, coleta de água de chuva, preservação dos leitos naturais dos rios, manutenção da cobertura vegetal e ou outros.',
             'escolhas': [
-                'Comitê de Bacia Hidrográfica : Comitê de Bacia Hidrográfica',
-                'Conselho Gestor de Unidade de Conservação : Conselho Gestor de Unidade de Conservação',
-                'Conselho Municipal de Meio Ambiente : Conselho Municipal de Meio Ambiente',
-                'Comissão interinstitucional de Educação Ambiental : Comissão interinstitucional de Educação Ambiental',
-                'Outro tipo de conselho ou colegiado ambiental : Outro tipo de conselho ou colegiado ambiental'
+                'Comitê de Bacia Hidrográfica',
+                'Conselho Gestor de Unidade de Conservação',
+                'Conselho Municipal de Meio Ambiente',
+                'Comissão interinstitucional de Educação Ambiental',
+                'Outro tipo de conselho ou colegiado ambiental'
             ],
             'multipla_escolha': True
         }),

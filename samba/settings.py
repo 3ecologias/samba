@@ -19,6 +19,9 @@ DEBUG = env.bool('SAMBA_DEBUG')
 ALLOWED_HOSTS = env.list('SAMBA_ALLOWED_HOSTS')
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -31,6 +34,7 @@ INSTALLED_APPS = [
     'samba.accounts',
     'samba.geo',
     'samba.plan',
+    'annotator',
 ]
 
 # Ativar django admin no modo DEBUG
@@ -76,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
             ],
         },
     },
@@ -108,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'America/Recife'
 
@@ -168,7 +173,7 @@ DEFAULT_FROM_EMAIL = env('SAMBA_EMAIL_ADDR')
 LOGIN_URL = '/entrar'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
+#
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
 # MEDIA_URL = '/static/media/'
 

@@ -1,33 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Novo Plano - Samba{% endblock %}
+{% block title %}Novo Projeto - Samba{% endblock %}
 
 {% block body %}
-  <header class="header">
-    {% include '_navbar.html' with user=user %}
+<header class="header">
+  {% include '_navbar.html' with user=user %}
+</header>
 
-    <div class="header__contents">
-      <h2 class="header__title">Novo plano</h2>
-    </div>
-  </header>
+<div class="container mt-10 pt-5">
+  <div class="row">
+    <h2 class="header__title">Novo Projeto</h2>
+    <div class="main col-sm-8 col-xs-12">
+      <form class="main__form" method="POST">
+        {% csrf_token %}
 
-  <main class="main">
-    <form class="main__form" method="POST">
-      {% csrf_token %}
-
-      {% for field in form %}
+        {% for field in form %}
         {{ field.label_tag }}
-        {{ field }}
+        {{ field }}<br>
 
         {% if field.errors %}
-          <div class="main__formError">
-            {{ field.errors }}
-          </div>
+        <div class="main__formError">
+          {{ field.errors }}
+        </div>
         {% endif %}
-      {% endfor %}
+        {% endfor %}
 
-      <input type="submit" value="Salvar">
-    </form>
-  </main>
+        <input type="submit" value="Salvar">
+        <div class="mt-10">
+          <a class="btn btn-lg btn-yellow" href="{% url 'plan_list' %}"> Voltar </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+{{form.media}}
 {% endblock %}

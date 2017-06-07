@@ -8,6 +8,8 @@ class UniversalizacaoDoAcesso(Plugin):
     Conjunto de indicadores que permitem traçar um
     panorama da cobertura dos serviços de saneamento.
     '''
+    icone_loja = 'icons/256x256/Colorido/universalizacao_do_acesso.svg'
+    icone_sidebar = 'icons/16x16/Colorido/universalizacao_do_acesso.svg'
     indicadores = [
         ('PT1', {
             'nome': 'População Total do município',

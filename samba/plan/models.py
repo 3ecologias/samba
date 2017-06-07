@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils import timezone
+from samba.accounts.models import Dono
 
 from samba.geo.models import Municipio
 
@@ -16,7 +17,7 @@ class Plano(models.Model):
         verbose_name_plural = _('planos')
 
     # O dono do plano, por enquanto usa User do django auth
-    dono = models.ForeignKey(User, verbose_name=_('dono'))
+    dono = models.ForeignKey(Dono, verbose_name=_('dono'), related_name='planos', null=True)
 
     # O município do plano
     municipio = models.ForeignKey(
@@ -25,6 +26,7 @@ class Plano(models.Model):
 
     # O ano do plano
     ano = models.IntegerField(_('ano'), default=timezone.now().year)
+
 
     def __str__(self):
         return '{} - {} ({})'.format(
@@ -76,3 +78,20 @@ class Aquisicao(models.Model):
 
     def __str__(self):
         return self.plugin
+
+class Gestor(models.Model):
+
+    class Meta:
+        verbose_name = _('Gestor')
+        verbose_name_plural = _('Gestores')
+
+    #sub-donos do projeto. Podem editar os campos.
+    plano = models.ForeignKey(Plano,  verbose_name=_('gestores'), related_name='gestores_set', on_delete=models.CASCADE)
+
+    # usuario associado ao gestor
+    user = models.OneToOneField(User, verbose_name=_("Usuário no sistema"), related_name='gestor', on_delete=models.CASCADE,)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.first_name

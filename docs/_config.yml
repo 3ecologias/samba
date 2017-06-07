@@ -1,0 +1,5 @@
+theme: jekyll-theme-cayman
+baseurl: /samba
+published: false
+name: SambaManual
+include: [_images]

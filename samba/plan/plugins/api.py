@@ -176,6 +176,10 @@ class _PluginInstance(object):
             indicadores.append(indicador)
 
         return indicadores
+        
+    @property
+    def icone_sidebar(self):
+        return getattr(self._plugin, 'icone_sidebar')
 
     def __str__(self):
         return '{} ({})'.format(self.plugin.nome, self.plano.municipio)

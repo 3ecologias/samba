@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load has_attr %}
+{% block title %}{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
+
+{% block body %}
+{% include 'plan/_header.html' with current='gestor' user=user plano=plano %}
+<div class="container">
+  <div class="row">
+    <div class="report pt-5 pb-5 col-sm-12">
+      <div class="tab-content clearfix mt-5">
+        <div class="tab-pane active">
+          <form method="post">
+            {% csrf_token %}
+            <p>Tem certeza que deseja remover este gestor?</p>
+            <input type="submit" name="sim" value="Sim">
+            <input type="submit" name="sim" value="Não">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- mapbox js -->
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
+var mapreport = new mapboxgl.Map({
+    container: 'mapreport',
+    center: town,
+    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+    minZoom: 12,
+    maxZoom: 15,
+    hash: true,
+    scrollZoom: true
+});
+</script>
+<!-- end mapbox js -->
+{% endblock %}

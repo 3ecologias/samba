@@ -40,13 +40,15 @@ def password_reset_done(request):
     )
 
 
-def password_reset_confirm(request):
+def password_reset_confirm(request, uidb64=None, token=None):
     """
     Página para redefinir a senha de uma conta, acessível apenas
     quando o usuário solicitou isso.
     """
     return auth_views.password_reset_confirm(
         request,
+        uidb64=uidb64, 
+        token=token,
         template_name='accounts/password_reset_confirm.html'
     )
 

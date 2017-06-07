@@ -3,7 +3,7 @@
 {% load staticfiles %}
 {% block body %}
 <header class="header is-home">
-  {% include '_navbar.html' with transparent=False %}
+  {% include '_navbar_price.html' with transparent=False %}
 </header>
 <div class="map">
     <div id="map"></div>
@@ -25,7 +25,7 @@ var map = new mapboxgl.Map({
   style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
   minZoom: 4,
   maxZoom: 20,
-  hash: true,
+  hash: false,
   scrollZoom: false,
 });
 

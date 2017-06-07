@@ -53,7 +53,7 @@
 </section>
 <section class="contact" id="contact">
   <div class="container">
-    <div class="row pb-10 pt-10">
+    <div class="row detail-text pb-10 pt-10">
       <div class="col-sm-5 col-sm-offset-1 mb-5">
         <h1>Diagnóstico completo</h1>
         <p>Um apurado panorama acerca do saneamento básico da cidade é possível por meio do levantamento dos indicadores, gerando um relatório completo que irá orientar a implementação das políticas e investimentos para o setor.</p>
@@ -82,7 +82,6 @@
 <!-- mapbox js -->
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
-var urucuca = [-39.28444, -14.59306];
 var map = new mapboxgl.Map({
   container: 'map',
   center: [-50.498024, -14.756375],
@@ -92,20 +91,20 @@ var map = new mapboxgl.Map({
   hash: false,
   scrollZoom: false,
 });
+{% if plans %}
+  {% for plan in plans %}
+    var city = [{{plan.municipio.lng|stringformat:"f"}}, {{plan.municipio.lat|stringformat:"f"}}];
+    var p_city = new mapboxgl.Popup({offset: 25})
+    .setHTML('<h4>{{plan.municipio.nome}}/{{plan.municipio.UF.sigla}}</h4> <br> <p><a href='+"{% url 'plan_view' plan.pk %}"+'>Veja os detalhes</a></p>');
+    var el = document.createElement('div');
+    el.id = 'marker';
+    new mapboxgl.Marker(el, {offset:[-25, -25]})
+    .setLngLat(city)
+    .setPopup(p_city) // sets a popup on this marker
+    .addTo(map);
+  {% endfor %}
+{% endif %}
 
-// create the popup
-var popup = new mapboxgl.Popup({offset: 25})
-.setHTML('<h4>Uruçuca/BA</h4> <br> <p><a href="/planos/2">veja os detalhes</a></p>');
-
-// create DOM element for the marker
-var el = document.createElement('div');
-el.id = 'marker';
-
-// create the marker
-new mapboxgl.Marker(el, {offset:[-25, -25]})
-.setLngLat(urucuca)
-.setPopup(popup) // sets a popup on this marker
-.addTo(map);
 
 map.addControl(new mapboxgl.NavigationControl());
 </script>

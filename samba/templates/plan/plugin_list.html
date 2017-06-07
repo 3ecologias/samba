@@ -8,19 +8,19 @@
 {% block body %}
   <header class="header">
     {% include '_navbar.html' with user=user %}
-
-    <div class="header__contents">
-      <h2 class="header__title">Amplie seu projeto</h2>
-      <p class="header__meta">Explore e descubra aplicativos que extendem as funcionalidades do Samba</p>
-    </div>
   </header>
-
+  <div class="container mt-10 pt-5">
+    <div class="row">
+    <h2 class="header__title">Amplie seu projeto</h2>
+    <p class="header__meta">Explore e descubra aplicativos que extendem as funcionalidades do Samba</p>
+  </div>
+  </div>
   <main class="main">
     <div class="pluginList">
       {% for plugin in plugins %}
         <a class="pluginList__plugin" href="{% url 'plugin_buy' slug=plugin.slug %}">
           {% if plugin.icone_loja %}
-            <img class="pluginList__pluginIcon" src="{{ MEDIA_PREFIX }}{{ plugin.icone_loja }}" alt="Ícone do plugin {{ plugin.nome }}">
+            <img class="pluginList__pluginIcon" src="{{ STATIC_URL }}{{ plugin.icone_loja }}" alt="Ícone do plugin {{ plugin.nome }}">
           {% endif %}
 
           <div class="pluginList__pluginInfo">
