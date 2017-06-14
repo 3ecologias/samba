@@ -9,7 +9,7 @@ layout: default
 O Sistema de Informação para auxílio à tomada de decisão aqui apresentado tem como função permitir o acompanhamento e a avaliação da implantação do Plano Municipal de Saneamento Básico (PMSB) no município. Assim, trata-se de um sistema digital capaz de armazenar dados e processá-los com o objetivo de produzir informações.
 O papel primordial desse sistema é monitorar a situação real do saneamento municipal, possibilitando a intervenção no ambiente e auxiliando o processo de tomada de decisões.
 Portanto, trata-se de uma ferramenta de apoio gerencial fundamental, não apenas no momento de elaboração do plano, mas principalmente em sua implantação e avaliação.
-Para tal, foi definido um conjunto de indicadores que contemplaram diferentes segmentos da realidade, a saber: a infraestrutura implantada, os aspectos socioeconômicos e culturais, bem como a qualidade dos serviços ofertados e da solução empregada. Todos esses indicadores estão apresentados de forma detalhada no Produto H.
+Para tal, foi definido um conjunto de indicadores que contemplaram diferentes segmentos da realidade, a saber: a infraestrutura implantada, os aspectos socioeconômicos e culturais, bem como a qualidade dos serviços ofertados e da solução empregada. Todos esses indicadores estão apresentados de forma detalhada no Relatório de Indicadores.
 Este monitoramento auxiliará o processo de tomada de decisão dos gestores sobre as intervenções necessárias para melhoria dos serviços, além de ser importante ferramenta para o controle social, já que estas informações deverão ser disponibilizadas na rede mundial de computadores para acesso e conhecimento da sociedade.
 * * *
 ## [Saber mais sobre o sistema do SAMBA](sistema)
