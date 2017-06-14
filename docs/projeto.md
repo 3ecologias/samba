@@ -8,7 +8,7 @@ Para criar um novo projeto e consultar os que já foram criados é necessario fa
 
 ![](./_images/passo2.png)
 
-Ir na aba **Projetos** do Menu preto e appertar o botão **Novo Projeto**.
+Ir na aba **Projetos** do Menu preto e apertar o botão **Novo Projeto**.
 
 ![](_images/passo3.png)
 
