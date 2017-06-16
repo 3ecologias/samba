@@ -10,7 +10,11 @@ def porcentagem(margem, total):
         if valor_margem is None or valor_total is None:
             return None
 
-        return (valor_margem * 100) / valor_total
+        if valor_margem > 0 and valor_total > 0:
+
+            return (valor_margem * 100) / valor_total
+        else:
+            return None
 
     return calcular
 
