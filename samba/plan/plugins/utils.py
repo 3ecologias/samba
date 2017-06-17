@@ -50,8 +50,8 @@ def divisao(numerator, denominator):
             return None
 
         if valor_margem > 0 and valor_total > 0:
-            return (valor_margem * 1000) / valor_total
-        else:
             return (valor_numerator * 1000) / valor_denominator
+        else:
+            return None
 
     return calcular
