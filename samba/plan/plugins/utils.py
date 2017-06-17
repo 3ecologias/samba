@@ -20,7 +20,7 @@ def porcentagem(margem, total):
 
 def pormil(margem, total):
     """
-    Retorna uma função que calcula a por mil de
+    Retorna uma função que calcula por mil de
     dois indicadores em um plano.
     """
     def calcular(indicador):
@@ -30,7 +30,10 @@ def pormil(margem, total):
         if valor_margem is None or valor_total is None:
             return None
 
-        return (valor_margem * 1000) / valor_total
+        if valor_margem > 0 and valor_total > 0:
+            return (valor_margem * 1000) / valor_total
+        else:
+            return None
 
     return calcular
 
@@ -46,6 +49,9 @@ def divisao(numerator, denominator):
         if valor_numerator is None or valor_denominator is None:
             return None
 
-        return (valor_numerator * 1000) / valor_denominator
+        if valor_margem > 0 and valor_total > 0:
+            return (valor_margem * 1000) / valor_total
+        else:
+            return (valor_numerator * 1000) / valor_denominator
 
     return calcular
