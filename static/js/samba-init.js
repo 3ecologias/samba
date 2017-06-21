@@ -50,8 +50,9 @@ $(window).on('load', (function() {
   $(function() {
       $(document).on('click', 'a.page-scroll', function(event) {
           var $anchor = $(this);
+          var navbar_height = $('#main-nav').height();
           $('html, body').stop().animate({
-              scrollTop: $($anchor.attr('href')).offset().top
+              scrollTop: $($anchor.attr('href')).offset().top - navbar_height
           }, 1500, 'easeInOutExpo');
           event.preventDefault();
       });
