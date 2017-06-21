@@ -9,8 +9,8 @@ class QualidadeServicosPrestados(Plugin):
     descricao = '''
     Conjunto de indicadores dessa categoria que permitem analisar as condições de qualidade na prestação dos serviços de saneamento.
     '''
-    icone_loja = 'icons/256x256/Colorido/qualidade_dos_servicos_prestados.svg'
-    icone_sidebar = 'icons/16x16/Colorido/qualidade_dos_servicos_prestados.svg'
+    icone_loja = 'static/icons/256x256/Colorido/qualidade_dos_servicos_prestados.svg'
+    icone_sidebar = 'static/icons/16x16/Colorido/qualidade_dos_servicos_prestados.svg'
     indicadores = [
         ('SQ1', {
             'nome': 'Quantidade de amostras em conformidade - Cloro residual',

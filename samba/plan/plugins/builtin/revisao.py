@@ -12,8 +12,8 @@ quando da revisão do plano, as estratégias de condução da gestão do serviç
 e avaliando a eficiência, eficácia e eficiência das ações propostas nas versões anteriores do plano.
 
     '''
-    icone_loja = 'icons/256x256/Colorido/revisao_do_plano_municipal.svg'
-    icone_sidebar = 'icons/16x16/Colorido/revisao_do_plano_municipal.svg'
+    icone_loja = 'static/icons/256x256/Colorido/revisao_do_plano_municipal.svg'
+    icone_sidebar = 'static/icons/16x16/Colorido/revisao_do_plano_municipal.svg'
     indicadores = [
         ('RP1', {
             'nome': 'Quando foi elaborada a primeira versão do PMSB?',

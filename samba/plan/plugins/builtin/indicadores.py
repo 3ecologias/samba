@@ -9,9 +9,9 @@ class IndicadoresdeEficiencia(Plugin):
 A análise de eficiência, os indicadores dão maior foco aos dispêndios
 de recursos energéticos, humanos e financeiros.
     '''
-    icone_loja = 'icons/256x256/Colorido/indicadores_de_eficiencia.svg'
+    icone_loja = 'static/icons/256x256/Colorido/indicadores_de_eficiencia.svg'
 
-    icone_sidebar = 'icons/16x16/Colorido/indicadores_de_eficiencia.svg'
+    icone_sidebar = 'static/icons/16x16/Colorido/indicadores_de_eficiencia.svg'
     
     indicadores = [
         ('FC1', {
