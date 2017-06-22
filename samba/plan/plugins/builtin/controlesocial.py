@@ -15,23 +15,23 @@ que garantam a participação e o controle social, dentre outros.
     indicadores = [
         ('A10', {
             'nome': 'O Conselho Municipal de Saneamento Básico foi constituído?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['','Sim', 'Não'],
         }),
         ('AA10', {
             'nome': 'Há paridade neste conselho?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['','Sim', 'Não'],
         }),
         ('AAA10', {
             'nome': 'Há regularidade mínima das reuniões (a cada dois meses)?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['','Sim', 'Não'],
         }),
         ('AAAA10', {
             'nome': 'Existe alguma outra instância que garanta a participação e o controle social para acompanhamento dos serviços públicos de saneamento básico?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['','Sim', 'Não'],
         }),
         ('B10', {
             'nome': 'Existem outras instâncias de cunho participativo que acompanhamento além do Conselho?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['','Sim', 'Não'],
         }),
         ('BB10', {
             'nome': 'Tecnologia Adotada - Manejo de Águas Pluviais - Soluções de Prevenção',
