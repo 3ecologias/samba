@@ -28,6 +28,7 @@ que garantam a participação e o controle social, dentre outros.
         ('AAAA10', {
             'nome': 'Existe alguma outra instância que garanta a participação e o controle social para acompanhamento dos serviços públicos de saneamento básico?',
             'escolhas': ['','Sim', 'Não'],
+            'exige_descricao' : True,
         }),
         ('B10', {
             'nome': 'Existem outras instâncias de cunho participativo que acompanhamento além do Conselho?',
