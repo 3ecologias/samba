@@ -351,10 +351,10 @@ class QualidadeServicosPrestados(Plugin):
             'nome': 'Regularidade na coleta de Resíduos Sólidos',
             'definicao': 'Com qual frequência ocorre a coleta de resíduos sólidos?',
             'escolhas': [
-                'Diariamente : Diariamente',
-                'Semanalmente : Semanalmente',
-                'Quinzenalmente : Quinzenalmente',
-                'Outro : Outro'
+                'Diariamente',
+                'Semanalmente',
+                'Quinzenalmente',
+                'Outro'
             ],
             'multipla_escolha': True
         }),
