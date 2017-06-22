@@ -15,11 +15,11 @@ Esse conjunto de indicadores permite à entidade fiscalizadora realizar sua fun�
     indicadores = [
         ('FRS1', {
             'nome': 'Já foi instituído o ente regulador e fiscalizador dos serviços de saneamento básico?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['', 'Sim', 'Não'],
         }),
         ('FRS2', {
             'nome': 'Como a regulação e a fiscalização estão sendo executadas pelo titular?',
-            'escolhas': ['Diretamente', 'Indiretamente'],
+            'escolhas': ['', 'Diretamente', 'Indiretamente'],
         }),
         ('FRS3', {
             'nome': 'Qual a natureza jurídica do ente regulador e fiscalizador?',
@@ -39,7 +39,7 @@ Esse conjunto de indicadores permite à entidade fiscalizadora realizar sua fun�
         }),
         ('FRS7', {
             'nome': 'As atividades do ente regulador e fiscalizador já estão sendo desenvolvidas?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['', 'Sim', 'Não'],
         }),
         ('FRS8', {
             'nome': 'Descrever as atividades realizadas pelo ente regulador e fiscalizador em caso afirmativo.',
