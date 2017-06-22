@@ -25,7 +25,7 @@ class QualidadeServicosPrestados(Plugin):
             'fonte' : 'Coleta e análise da água',
         }),
         ('SQ3', {
-            'nome': 'Quantidade de amostras fora do padrão',
+            'nome': 'Quantidade de amostras fora do padrão - Cloro residual',
             'definicao': 'Quantidade de amostras com Cloro fora do padrão coletadas na(s) saída(s) da(s) unidade(s) de tratamento e no sistema de distribuição de água (reservatórios e redes).',
             'unidade' : 'amostras/ano',
             'fonte' : 'Coleta e análise da água',
