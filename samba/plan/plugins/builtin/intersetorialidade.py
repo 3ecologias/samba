@@ -16,7 +16,7 @@ município e sua evolução ao longo do desenvolvimento do PMSB.
     indicadores = [
         ('A7', {
             'nome': 'Existem planos, programas, e/ou projetos desenvolvidos por outros setores administrativos no campo do saneamento básico?',
-            'escolhas': ['Sim', 'Não'],
+            'escolhas': ['', 'Sim', 'Não'],
         }),
         ('AA7', {
             'nome': 'Citar quais planos, programas e/ou projetos e a que setores administrativos estão vinculados (saúde, meio ambiente, recursos hídricos, desenvolvimento urbano, habitação e educação)',
