@@ -3,10 +3,6 @@ django-environ==0.4.0
 django-mathfilters==0.4.0
 Pillow==3.4.1
 six==1.10.0
-django-compressor
-django-libsass
-sendgrid-django
-django-autocomplete-light
 annotator==0.14.2
 Django==1.10.1
 django-appconf==1.0.2
