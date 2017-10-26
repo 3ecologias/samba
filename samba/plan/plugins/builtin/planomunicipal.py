@@ -6,8 +6,8 @@ class PlanoMunicipal(Plugin):
     descricao = '''
 Conjunto de indicadores que permitem traçar um panorama da realização do PMSB de seu município.
     '''
-    icone_loja = 'static/icons/256x256/Colorido/implementacao_do_plano_municipal.svg'
-    icone_sidebar = 'static/icons/16x16/Colorido/implementacao_do_plano_municipal.svg'
+    icone_loja = 'icons/256x256/Colorido/implementacao_do_plano_municipal.svg'
+    icone_sidebar = 'icons/16x16/Colorido/implementacao_do_plano_municipal.svg'
     indicadores = [
         ('CA1', {
             'nome': 'Total de ações emergenciais de abastecimento de água',
