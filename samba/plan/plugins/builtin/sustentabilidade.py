@@ -8,9 +8,9 @@ class SustentabilidadeFinanceira(Plugin):
     deve ser assegurada, sempre que possível, mediante remuneração
     pela cobrança dos serviços.
     '''
-    icone_loja = 'icons/256x256/Colorido/sustentabilidade_financeira.svg'
+    icone_loja = '/static/icons/256x256/Colorido/sustentabilidade_financeira.svg'
 
-    icone_sidebar = 'icons/16x16/Colorido/sustentabilidade_financeira.svg'
+    icone_sidebar = '/static/icons/16x16/Colorido/sustentabilidade_financeira.svg'
 
     indicadores = [
         ('NR1', {

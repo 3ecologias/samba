@@ -11,8 +11,8 @@ articulação das políticas de saneamento com as outras políticas desenvolvida
 através da articulação existente entre os setores da administração pública do
 município e sua evolução ao longo do desenvolvimento do PMSB.
     '''
-    icone_loja = 'icons/256x256/Colorido/intersetorialidade.svg'
-    icone_sidebar = 'icons/16x16/Colorido/intersetorialidade.svg'
+    icone_loja = '/static/icons/256x256/Colorido/intersetorialidade.svg'
+    icone_sidebar = '/static/icons/16x16/Colorido/intersetorialidade.svg'
     indicadores = [
         ('A7', {
             'nome': 'Existem planos, programas, e/ou projetos desenvolvidos por outros setores administrativos no campo do saneamento básico?',
