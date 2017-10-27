@@ -10,8 +10,8 @@ Esse conjunto de indicadores permite à entidade fiscalizadora realizar sua fun�
  se as normas e procedimentos estabelecidos pela regulação estão sendo realizados
  pelo prestador.
     '''
-    icone_loja = 'static/icons/256x256/Colorido/fiscalizacao_e_regulacao_dos_servicos.svg'
-    icone_sidebar = 'static/icons/16x16/Colorido/fiscalizacao_e_regulacao_dos_servicos.svg'
+    icone_loja = 'icons/256x256/Colorido/fiscalizacao_e_regulacao_dos_servicos.svg'
+    icone_sidebar = 'icons/16x16/Colorido/fiscalizacao_e_regulacao_dos_servicos.svg'
     indicadores = [
         ('FRS1', {
             'nome': 'Já foi instituído o ente regulador e fiscalizador dos serviços de saneamento básico?',

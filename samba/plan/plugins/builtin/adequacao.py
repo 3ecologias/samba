@@ -6,8 +6,8 @@ class Adequacao(Plugin):
     Conjunto de indicadores que a permitem avaliar
     a adequação à saúde pública e ao ambiente.
     '''
-    icone_loja = 'static/icons/256x256/Colorido/adequacao.svg'
-    icone_sidebar = 'static/icons/16x16/Colorido/adequacao.svg'
+    icone_loja = 'icons/256x256/Colorido/adequacao.svg'
+    icone_sidebar = 'icons/16x16/Colorido/adequacao.svg'
     indicadores = [
         ('AE1', {
             'nome': 'Quantidade de casos registrados de esquistossomose',
