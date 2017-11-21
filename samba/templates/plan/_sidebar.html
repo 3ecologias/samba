@@ -7,7 +7,7 @@
     <li class="{% if forloop.first %} active pt-5{% endif %}">
       <a href="#{{ plugin.slug }}" class="sidebar__item" data-toggle="tab">
         {% if plugin.icone_sidebar %}
-          <img class="sidebar__itemIcon" src="{{ STATIC_URL }}{{ plugin.icone_sidebar }}">
+          <img class="sidebar__itemIcon" src="{{ plugin.icone_sidebar }}">
         {% endif %}
         <span class="sidebar__itemTitle">{{ plugin.nome }}</span>
       </a>

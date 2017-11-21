@@ -7,8 +7,8 @@ class TecnologiaApropiada(Plugin):
     Conjunto de indicadores que a permitem avaliar a
     solução tratada de acordo com a realidade local.
     '''
-    icone_loja = 'static/icons/256x256/Colorido/tecnologia_apropriada.svg'
-    icone_sidebar = 'static/icons/16x16/Colorido/tecnologia_apropriada.svg'
+    icone_loja = '/static/icons/256x256/Colorido/tecnologia_apropriada.svg'
+    icone_sidebar = '/static/icons/16x16/Colorido/tecnologia_apropriada.svg'
     indicadores = [
         ('TA1', {
             'nome': 'Tecnologia Adotada - Abastecimento de Água',

@@ -4,80 +4,85 @@
 {% block title %}{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
 
 {% block body %}
-{% include 'plan/_header.html' with current='gestor' user=user plano=plano %}
-<div class="container">
-  <div class="row">
-    <div class="report pt-5 pb-5 col-sm-12">
-      <div class="tab-content clearfix mt-5">
-        <div class="tab-pane active" id="{{ plugin.slug }}">
-        {% if gestores %}
-          <h2>Lista de gestores</h2>
-          <p>Lista de informações relacionadas aos gestores do município</p>
-          <table class="indicators__items" style="width:100%;">
-            <thead>
-              <tr>
-                <th>Nome de usuário (Login) </th>
-                <th>Email </th>
-                <th>Primeiro Nome </th>
-                <th>Último Nome </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for gestor in gestores %}
-              <tr>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{gestor.username}}"> {{gestor.user.username}} </a>
-                </td>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{gestor.email}}"> {{gestor.user.email}} </a>
-                </td>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{gestor.first_name}}"> {{gestor.user.first_name}} </a>
-                </td>
-                <td>
-                  <a href="#" data-toogle="tooltip" title="{{gestor.last_name}}"> {{gestor.user.last_name}} </a>
-                </td>
-                <td>
-                  <a href="{% url 'gestor_edit' pk=plano.id gestor_pk=gestor.id %}" data-toogle="tooltip" title="Editar">Editar</a>
-                </td>
-                <form method="post">
-                  <td>
-                    <a href="{% url 'gestor_delete' pk=plano.id gestor_pk=gestor.id %}" data-toogle="tooltip" title="Editar">Apagar</a>
-                  </td>
-                </form>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <div class="mt-10">
-            <a class="btn btn-lg btn-yellow" href="{% url 'plan_view' pk=plano.id %}"> Voltar </a>
-          </div>
+    {% include 'plan/_header.html' with current='gestor' user=user plano=plano %}
+    <div class="container">
+        <div class="row">
+            <div class="report pt-5 pb-5 col-sm-12">
+                <div class="tab-content clearfix mt-5">
+                    <div class="tab-pane active" id="{{ plugin.slug }}">
+                        {% if gestores %}
+                            <h2>Lista de gestores</h2>
+                            <p>Lista de informações relacionadas aos gestores do município</p>
+                            <table class="indicators__items" style="width:100%;">
+                                <thead>
+                                <tr>
+                                    <th>Nome de usuário (Login) </th>
+                                    <th>Email </th>
+                                    <th>Primeiro Nome </th>
+                                    <th>Último Nome </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for gestor in gestores %}
+                                    <tr>
+                                        <td>
+                                            <a href="#" data-toogle="tooltip" title="{{gestor.username}}"> {{gestor.user.username}} </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toogle="tooltip" title="{{gestor.email}}"> {{gestor.user.email}} </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toogle="tooltip" title="{{gestor.first_name}}"> {{gestor.user.first_name}} </a>
+                                        </td>
+                                        <td>
+                                            <a href="#" data-toogle="tooltip" title="{{gestor.last_name}}"> {{gestor.user.last_name}} </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'gestor_edit' pk=plano.id gestor_pk=gestor.id %}" data-toogle="tooltip" title="Editar">Editar</a>
+                                        </td>
+                                        <form method="post">
+                                            <td>
+                                                <a href="{% url 'gestor_delete' pk=plano.id gestor_pk=gestor.id %}" data-toogle="tooltip" title="Editar">Apagar</a>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="mt-10">
+                                <a class="btn btn-lg btn-yellow" href="{% url 'plan_view' pk=plano.id %}"> Voltar </a>
+                            </div>
+                            <div class="indicators__empty">
+                                {% if user.is_authenticated and user|getattribute:"dono" %}
+                                    <h3><a href="{% url 'gestor_create' pk=plano.id %}">Adicionar um novo gestor</a></h3>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="indicators__empty">
+                                <h2>Não há gestores registrados.</h2>
+                                {% if user.is_authenticated and user|getattribute:"dono" %}
+                                    <h3><a href="{% url 'gestor_create' pk=plano.id %}">Adicione um novo gestor</a></h3>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% else %}
-        <div class="indicators__empty">
-          <h2>Não há gestores registrados.</h2>
-          {% if user.is_authenticated and user|getattribute:"dono" %}
-            <h3><a href="{% url 'gestor_create' pk=plano.id %}">Adicione um novo gestor</a></h3>
-          {% endif %}
-        </div>
-        {% endif %}
-      </div>
     </div>
-  </div>
-</div>
-<!-- mapbox js -->
-<script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
-var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
-var mapreport = new mapboxgl.Map({
-    container: 'mapreport',
-    center: town,
-    style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
-    minZoom: 12,
-    maxZoom: 15,
-    hash: true,
-    scrollZoom: true
-});
-</script>
-<!-- end mapbox js -->
+    <!-- mapbox js -->
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+        var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
+        var mapreport = new mapboxgl.Map({
+            container: 'mapreport',
+            center: town,
+            style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+            minZoom: 12,
+            maxZoom: 15,
+            hash: true,
+            scrollZoom: true
+        });
+    </script>
+    <!-- end mapbox js -->
 {% endblock %}
