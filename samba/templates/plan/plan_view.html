@@ -1,86 +1,126 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load has_attr %}
+{% load plan_tags %}
+
+
 {% block title %}{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }} - Samba{% endblock %}
 
 {% block body %}
-{% include 'plan/_header.html' with current='view' user=user plano=plano %}
-<div class="mapreport">
-  <div id="mapreport"></div>
-</div>
-<div class="container pt-5 mt-15 pb-10 ">
-  <div class="row">
-    <div class="report col-sm-3 pb-5">
-      {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
+    {% include 'plan/_header.html' with current='view' user=user plano=plano %}
+    <div class="mapreport">
+        <div id="mapreport"></div>
     </div>
-    <div class="report col-sm-7 col-xs-12 pb-5">
-      <div class="tab-content clearfix mt-5">
-        {% for plugin in plugins %}
-          {% if plugin.indicadores %}
-          <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
-            <h2>{{ plugin.nome }}</h2>
-            <p>{{ plugin.descricao }}</p>
-            <table class="indicators__items">
-              <thead>
-                <tr>
-                  <th>Sigla</th>
-                  <th>Indicador</th>
-                  <th>Valor</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for indicador in plugin.indicadores %}
-                <tr>
-                  <td>
-                    <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.sigla }} </a>
-                  </td>
-                  <td>
-                    <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.nome }} </a>
-                  </td>
-                  <td>
-                    {% if indicador.valor %}
-                      {{ indicador.valor }}
-                      {% if indicador.unidade %}
-                        {{ indicador.unidade }}
-                          {% endif %}
-                        {% if indicador.descricao%}
-                          <br> <b>Descrição :</b> {{ indicador.descricao }}
-                      {% endif %}
-                    {% else %}
-                        n/a
-                    {% endif %}
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          {% endif %}
-        {% empty %}
-        <div class="indicators__empty">
-          <h2>O projeto não possui nenhum conjunto de indicadores.</h2>
-          {% if user.is_authenticated %}
-          <h3><a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.</h3>
-          {% endif %}
-        </div>
+    <div class="container pt-5 mt-15 pb-10 ">
+        <div class="row">
+            <div class="report col-sm-3 pb-5">
+                {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
+            </div>
+            <div class="report col-sm-7 col-xs-12 pb-5">
+                <div class="tab-content clearfix mt-5">
+                    {% for plugin in plugins %}
+                        {% if plugin.indicadores %}
+                            <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
+                                <div class="col-md-8">
+                                    <h2>{{ plugin.nome }}</h2>
+                                </div>
+                                {% if user.is_authenticated %}
+                                    {% if user|getattribute:"dono" %}
+                                        {% is_plan_owner user plano.id as is_owner %}
+                                        {% if is_owner %}
+                                            <div class="col-md-4">
+                                                <button type="button" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#plugin-{{ plugin.slug }}">
+                                                    Apagar grupo de dados
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="col-md-12">
+                                    <p>{{ plugin.descricao }}</p>
+                                </div>
+                                <table class="indicators__items">
+                                    <thead>
+                                    <tr>
+                                        <th>Sigla</th>
+                                        <th>Indicador</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for indicador in plugin.indicadores %}
+                                        <tr>
+                                            <td>
+                                                <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.sigla }} </a>
+                                            </td>
+                                            <td>
+                                                <a href="#" data-toogle="tooltip" title="{{ indicador.definicao }}"> {{ indicador.nome }} </a>
+                                            </td>
+                                            <td>
+                                                {% if indicador.valor %}
+                                                    {{ indicador.valor }}
+                                                    {% if indicador.unidade %}
+                                                        {{ indicador.unidade }}
+                                                    {% endif %}
+                                                    {% if indicador.descricao%}
+                                                        <br> <b>Descrição :</b> {{ indicador.descricao }}
+                                                    {% endif %}
+                                                {% else %}
+                                                    n/a
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% endif %}
+                    {% empty %}
+                        <div class="indicators__empty">
+                            <h2>O projeto não possui nenhum conjunto de indicadores.</h2>
+                            {% if user.is_authenticated %}
+                                <h3><a href="{% url 'plugin_list' %}">Visite a loja de plugins</a> para adicionar um.</h3>
+                            {% endif %}
+                        </div>
 
-        {% endfor %}
-      </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-<!-- mapbox js -->
-<script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
-var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
-var mapreport = new mapboxgl.Map({
-  container: 'mapreport',
-  center: town,
-  style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
-  minZoom: 12,
-  maxZoom: 15,
-  hash: true,
-  scrollZoom: true
-});
-</script>
-<!-- end mapbox js -->
+    {% for plugin in plugins %}
+        <!-- Modal -->
+        <div class="modal fade" id="plugin-{{ plugin.slug }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Apagar</h4>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja apagar o plugin {{ plugin.nome }} e todas as suas informações?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <a href="{% url 'plugin_delete' plugin.slug %}" class="btn btn-danger">Apagar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <!-- mapbox js -->
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiM2Vjb2xvZ2lhcyIsImEiOiJjajBpajduNjcwMGc4MndwcW9pY2ljYmt4In0.Hqi-m8UXDmVl7Otod2o_HA';
+        var town = [{{ plano.municipio.lng|stringformat:"f" }}, {{ plano.municipio.lat|stringformat:"f" }}];
+        var mapreport = new mapboxgl.Map({
+            container: 'mapreport',
+            center: town,
+            style: 'mapbox://styles/3ecologias/cj1xpr5uf00232rkx9qbjknu6',
+            minZoom: 12,
+            maxZoom: 15,
+            hash: true,
+            scrollZoom: true
+        });
+    </script>
+    <!-- end mapbox js -->
 {% endblock %}

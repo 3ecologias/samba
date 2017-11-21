@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseForbidden
 
-from .models import Plano, Indicador, Gestor
+from .models import Plano, Gestor, Aquisicao, Indicador
 from samba.accounts.models import Dono
 from .plugins import get_plugin_or_404, get_all_plugins, get_plano_plugins
 from .forms import PlanoForm, AquisicaoForm, GestorForm, GestorEditForm
@@ -15,6 +15,7 @@ def plan_list(request):
       'user': request.user,
       'planos': Plano.objects.filter(dono=request.user.dono)
     })
+
 
 @login_required
 def plan_upgrade(request):
@@ -37,6 +38,7 @@ def plan_create_check(dono):
         return True
     else:
         return False
+
 
 @login_required
 def plan_create(request):
@@ -124,7 +126,10 @@ def plan_edit(request, pk):
 
 @login_required
 def plan_delete(request, pk):
-    pass
+    plano = get_object_or_404(Plano, pk=pk, dono=request.user.dono)
+    plano.delete()
+
+    return redirect('plan_list')
 
 
 def plan_report(request, pk):
@@ -194,6 +199,24 @@ def plugin_buy(request, slug):
         'plugin': plugin
     })
 
+
+@login_required
+def plugin_delete(request, slug):
+    plugin = get_plugin_or_404(slug)
+    plano = get_object_or_404(Plano, dono=request.user.dono,
+                              aquisicao__plugin=slug)
+    aquisicao = get_object_or_404(Aquisicao, plano=plano, plugin=slug)
+    aquisicao.delete()
+
+    for indicador in plugin.indicadores:
+        try:
+            Indicador.objects.get(sigla=indicador[0], plano=plano).delete()
+        except Indicador.DoesNotExist:
+            pass
+
+    return redirect('plan_view', pk=plano.pk)
+
+
 @login_required
 def gestor_list(request, pk):
     plano = get_object_or_404(Plano, pk=pk)
@@ -202,6 +225,7 @@ def gestor_list(request, pk):
         'plano': plano,
         'gestores': plano.gestores_set.all(),
     })
+
 
 @login_required
 def gestor_create(request, pk):
@@ -227,33 +251,6 @@ def gestor_create(request, pk):
         'form': form,
     })
 
-@login_required
-def gestor_edit(request, pk, gestor_pk):
-    plano = get_object_or_404(Plano, pk=pk)
-    gestor = get_object_or_404(Gestor, pk=gestor_pk)
-
-    if plano.dono.user != request.user:
-        # Não permitido, nao e o dono do projeto
-        return HttpResponseForbidden()
-
-    if request.method == 'POST':
-        form = GestorEditForm(data=request.POST, instance=gestor.user)
-
-        if form.is_valid():
-            gestor_user = form.save()
-            gestor.user = gestor_user
-            gestor.save()
-            return redirect('gestor_list', pk=plano.id)
-    else:
-        form = GestorEditForm(instance=gestor.user)
-
-
-    return render(request, 'plan/gestor_edit.html', {
-        'user': request.user,
-        'plano': plano,
-        'gestor': gestor,
-        'form': form,
-    })
 
 @login_required
 def gestor_edit(request, pk, gestor_pk):
@@ -275,6 +272,33 @@ def gestor_edit(request, pk, gestor_pk):
     else:
         form = GestorEditForm(instance=gestor.user)
 
+    return render(request, 'plan/gestor_edit.html', {
+        'user': request.user,
+        'plano': plano,
+        'gestor': gestor,
+        'form': form,
+    })
+
+
+@login_required
+def gestor_edit(request, pk, gestor_pk):
+    plano = get_object_or_404(Plano, pk=pk)
+    gestor = get_object_or_404(Gestor, pk=gestor_pk)
+
+    if plano.dono.user != request.user:
+        # Não permitido, nao e o dono do projeto
+        return HttpResponseForbidden()
+
+    if request.method == 'POST':
+        form = GestorEditForm(data=request.POST, instance=gestor.user)
+
+        if form.is_valid():
+            gestor_user = form.save()
+            gestor.user = gestor_user
+            gestor.save()
+            return redirect('gestor_list', pk=plano.id)
+    else:
+        form = GestorEditForm(instance=gestor.user)
 
     return render(request, 'plan/gestor_edit.html', {
         'user': request.user,
@@ -282,6 +306,7 @@ def gestor_edit(request, pk, gestor_pk):
         'gestor': gestor,
         'form': form,
     })
+
 
 @login_required
 def gestor_delete(request, pk, gestor_pk):

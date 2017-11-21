@@ -10,6 +10,7 @@ class AquisicaoInline(admin.TabularInline):
 class IndicadorInline(admin.StackedInline):
     model = Indicador
 
+
 class GestoresInline(admin.TabularInline):
     model = Gestor
 

@@ -21,7 +21,7 @@
                         <h3 class="planList__planCity">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h3>
                         <div class="planList__planYear">ano base {{ plano.ano }}</div>
                         {% if plano.aquisicao_set.all %}
-                            <div class="planList__planYear mt-5">
+                            <div class="planList__planYear mt-5 col-sm-12">
                                 <h4>Indicadores:</h4>
                                 {% for aquisicao in plano.aquisicao_set.all %}
                                     <li>{{ aquisicao.plugin|to_readable_name }}</li>
@@ -29,7 +29,7 @@
                             </div>
                         {% endif %}
                         {% if plano.gestores_set.all %}
-                            <div class="planList__planYear mt-5">
+                            <div class="planList__planYear mt-5 col-sm-12">
                                 <h4>Gestores:</h4>
                                 {% for gestor in plano.gestores_set.all %}
                                     <li>{{ gestor.user.get_full_name }}</li>
@@ -37,11 +37,18 @@
                             </div>
                         {% endif %}
                     </a>
+                    <!-- Button trigger modal -->
+                    <div class="col-sm-12 mt-5">
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#plano{{ plano.id }}">
+                            Apagar plano
+                        </button>
+                    </div>
                 </div>
                 {% if forloop.counter|divisibleby:"3" %}
                     </div>
                     <div class="row">
                 {% endif %}
+
             {% empty %}
                 <div class="planList__empty">
                     Nenhum projeto de saneamento encontrado.
@@ -49,4 +56,24 @@
             {% endfor %}
             </div>
     </main>
+    {% for plano in planos %}
+        <!-- Modal -->
+        <div class="modal fade" id="plano{{ plano.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Apagar</h4>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza que deseja apagar o plano de {{ plano.municipio.nome }} do ano {{ plano.ano }} e todos os seus gestores?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <a href="{% url 'plan_delete' plano.id %}" class="btn btn-danger">Apagar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

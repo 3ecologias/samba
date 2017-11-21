@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.utils import timezone
-from samba.accounts.models import Dono
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
+from samba.accounts.models import Dono
 from samba.geo.models import Municipio
 
 
@@ -96,3 +98,8 @@ class Gestor(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+
+@receiver(post_delete, sender=Gestor)
+def delete_related_user(sender, instance, **kwargs):
+    instance.user.delete()

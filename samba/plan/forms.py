@@ -22,12 +22,14 @@ class AquisicaoForm(ModelForm):
         model = Aquisicao
         fields = ['plano']
 
+
 class GestorForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ("username","email","first_name", "last_name")
         help_texts = {
             'username': _("Crie um usuário com nomeSobrenome. ex: mariaSilva")
         }
+
 
 class GestorEditForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):

@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^gestores/(?P<pk>[0-9]+)/editar/(?P<gestor_pk>[0-9]+)$', views.gestor_edit, name='gestor_edit'),
     url(r'^gestores/(?P<pk>[0-9]+)/apagar/(?P<gestor_pk>[0-9]+)$', views.gestor_delete, name='gestor_delete'),
     url(r'^loja$', views.plugin_list, name='plugin_list'),
-    url(r'^loja/(?P<slug>[a-z\-]+)$', views.plugin_buy, name='plugin_buy'),
+    url(r'^loja/comprar/(?P<slug>[a-z\-]+)$', views.plugin_buy, name='plugin_buy'),
+    url(r'^loja/remover/(?P<slug>[a-z\-]+)$', views.plugin_delete, name='plugin_delete'),
 
     url(r'^municipio-autocomplete/$', MunicipioAutocomplete.as_view(), name='municipio_autocomplete')
 ]
