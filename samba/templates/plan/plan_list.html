@@ -1,31 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load plugin_tags %}
 {% block title %}Projetos de saneamento - Samba{% endblock %}
 
 {% block body %}
-  <header class="header">
-    {% include '_navbar.html' with user=user %}
-    <div class="container mt-15 pt-5">
-        <h2 class="pull-left">Projetos de saneamento</h2>
-      <div class= "pull-right">
-        <a href="{% url 'plan_create' %}"><button  class="btn btn-lg btn-yellow">Novo projeto</button></a>
-      </div>
-    </div>
-  </header>
-  <main class="container mt-10">
-    <div class="row">
-      {% for plano in planos %}
-      <div class="col-sm-4 planList__plan">
-        <a class="" href="{% url 'plan_view' pk=plano.id %}">
-          <h3 class="planList__planCity">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h3>
-          <div class="planList__planYear">ano base {{ plano.ano }}</div>
-        </a>
-      </div>
-      {% empty %}
-        <div class="planList__empty">
-          Nenhum projeto de saneamento encontrado.
+    <header class="header">
+        {% include '_navbar.html' with user=user %}
+        <div class="container mt-15 pt-5">
+            <h2 class="pull-left">Projetos de saneamento</h2>
+            <div class= "pull-right">
+                <a href="{% url 'plan_create' %}"><button  class="btn btn-lg btn-yellow">Novo projeto</button></a>
+            </div>
         </div>
-      {% endfor %}
-    </div>
-  </main>
+    </header>
+    <main class="container mt-10">
+        <div class="row">
+            {% for plano in planos %}
+                <div class="col-sm-4 planList__plan">
+                    <a class="" href="{% url 'plan_view' pk=plano.id %}">
+                        <h3 class="planList__planCity">{{ plano.municipio.nome }} - {{ plano.municipio.UF.sigla }}</h3>
+                        <div class="planList__planYear">ano base {{ plano.ano }}</div>
+                        {% if plano.aquisicao_set.all %}
+                            <div class="planList__planYear mt-5">
+                                <h4>Indicadores:</h4>
+                                {% for aquisicao in plano.aquisicao_set.all %}
+                                    <li>{{ aquisicao.plugin|to_readable_name }}</li>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if plano.gestores_set.all %}
+                            <div class="planList__planYear mt-5">
+                                <h4>Gestores:</h4>
+                                {% for gestor in plano.gestores_set.all %}
+                                    <li>{{ gestor.user.get_full_name }}</li>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:"3" %}
+                    </div>
+                    <div class="row">
+                {% endif %}
+            {% empty %}
+                <div class="planList__empty">
+                    Nenhum projeto de saneamento encontrado.
+                </div>
+            {% endfor %}
+            </div>
+    </main>
 {% endblock %}

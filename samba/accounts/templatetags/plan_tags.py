@@ -1,8 +1,8 @@
 from django import template
 from samba.plan.models import Gestor, Plano
-from samba.accounts.models import Dono
 
 register = template.Library()
+
 
 @register.assignment_tag
 def get_plan_pk_by_gestor(user):
@@ -15,6 +15,7 @@ def get_plan_pk_by_gestor(user):
 
     return False
 
+
 @register.assignment_tag
 def is_plan_owner(user, pk):
 
@@ -22,6 +23,7 @@ def is_plan_owner(user, pk):
     is_owner = True if plano.dono.user==user else False
 
     return is_owner
+
 
 @register.assignment_tag
 def is_plan_gestor(user, pk):

@@ -27,7 +27,6 @@ class Plano(models.Model):
     # O ano do plano
     ano = models.IntegerField(_('ano'), default=timezone.now().year)
 
-
     def __str__(self):
         return '{} - {} ({})'.format(
             self.municipio.nome, self.municipio.UF.sigla, self.ano
@@ -79,17 +78,19 @@ class Aquisicao(models.Model):
     def __str__(self):
         return self.plugin
 
+
 class Gestor(models.Model):
 
     class Meta:
         verbose_name = _('Gestor')
         verbose_name_plural = _('Gestores')
 
-    #sub-donos do projeto. Podem editar os campos.
+    # sub-donos do projeto. Podem editar os campos.
     plano = models.ForeignKey(Plano,  verbose_name=_('gestores'), related_name='gestores_set', on_delete=models.CASCADE)
 
     # usuario associado ao gestor
-    user = models.OneToOneField(User, verbose_name=_("Usuário no sistema"), related_name='gestor', on_delete=models.CASCADE,)
+    user = models.OneToOneField(User, verbose_name=_("Usuário no sistema"), related_name='gestor',
+                                on_delete=models.CASCADE)
 
     updated_at = models.DateTimeField(auto_now=True)
 
