@@ -142,12 +142,18 @@ table {
   border-collapse: collapse;
 }
 
+.video-fluid{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 // Efeito na imagem
 .blue-glass {
   background: $samba-blue-glass;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #00C9FF, $samba-blue-glass);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #00C9FF, $samba-blue-glass); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to top, rgba(0,201,255,0.76), $samba-blue-glass);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, rgba(0,201,255,0.76), $samba-blue-glass); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width: 100%;
   height: 100%;
   position: absolute;
