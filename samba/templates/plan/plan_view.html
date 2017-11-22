@@ -21,6 +21,10 @@
                     {% for plugin in plugins %}
                         {% if plugin.indicadores %}
                             <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
+                                <div class="min-max-btn">
+                                  <a href="#">X</a>
+                                  <a href="#">O</a>
+                                </div>
                                 <div class="col-md-8">
                                     <h2>{{ plugin.nome }}</h2>
                                 </div>
