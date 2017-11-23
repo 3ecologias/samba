@@ -30,6 +30,7 @@
   {% compress css %}
     <link rel="stylesheet" type="text/x-sass" href="{% static 'sass/style.scss' %}" />
   {% endcompress %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <div class="se-pre-con"></div>
@@ -53,6 +54,7 @@
 {% compress js %}
   <script src="{% static 'js/javascripts/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/samba-init.js' %}"></script>
+  <script src="{% static 'js/master.js' %}"></script>
 {% endcompress %}
 {% block extrascripts %}
 {% endblock %}

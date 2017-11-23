@@ -13,18 +13,24 @@
     </div>
     <div class="container pt-5 mt-15 pb-10 ">
         <div class="row">
+          <div class="col-md-offset-7 col-md-3 pr-0">
+            <div class="report pull-right">
+              <a id="minimize" class="p-h-10" href="#"><i class="fa fa-window-minimize" aria-hidden="true"></i> Minimizar </a>
+              <a id="maximize" class="p-h-10" href="#"><i class="fa fa-window-maximize" aria-hidden="true"></i> Maximizar</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
             <div class="report col-sm-3 pb-5">
                 {% include 'plan/_sidebar.html' with plan=plan plugins=plugins %}
             </div>
-            <div class="report col-sm-7 col-xs-12 pb-5">
+            <div id="tabela" class="report col-sm-7 col-xs-12 pb-5">
                 <div class="tab-content clearfix mt-5">
                     {% for plugin in plugins %}
                         {% if plugin.indicadores %}
                             <div class="tab-pane {% if forloop.first %} active{% endif %}" id="{{ plugin.slug }}">
-                                <div class="min-max-btn">
-                                  <a href="#">X</a>
-                                  <a href="#">O</a>
-                                </div>
+
                                 <div class="col-md-8">
                                     <h2>{{ plugin.nome }}</h2>
                                 </div>
