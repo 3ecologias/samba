@@ -21,6 +21,9 @@
 
 .hero__main {
   font-size: 3em;
+  @media(max-width: 768px){
+    font-size: 2em;
+  }
 }
 
 .hero__text {
